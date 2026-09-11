@@ -1,8 +1,10 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Slabo+13px&display=swap');*/
+
 ul.navigatie {
     list-style-type: none;
     margin: 0;
     padding: 5 rem;
-    background-color: #d1c9b6;
+    background-color: #b08a62;
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -11,9 +13,61 @@ ul.navigatie {
 
 ul.navigatie li a {
     display: block;
-    color:white;
+    color: whitesmoke;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 1.5rem;
+    border-width: 0px 0px 2px 2px;
+    border-style: solid;
+    border-color: #3b2a1a;
+    padding-top: 20px;
+
+}
+/*
+#intro_title {
+    font-family: "Slabo 13px", serif;
+    font-size: medium;
+}
+*/
+.title{
+    letter-spacing: 0.05em; 
+}
+.sub{
+    font-weight: lighter;
+    font-style: oblique;
+    border-bottom: 2px dashed #3b2a1a;
+    padding-bottom: 10px;
+}
+.text {
+    font-family: monospace;
+    font-size: medium;
+    text-align: justify;
+    padding: 10px;
+    min-width: 450px;
+    max-width: 650px;
+    border-width: 2px 2px 2px 2px;
+    border-style: solid;
+    background-color: #D9c3a5;
+    border-color: #b08a62;
+    border-radius: 1em 2em 1em 2em / 2em 1em 2em 1em
+}
+
+img.large {
+    width: 500px;
+    height: 500px;
+}
+img.medium {
+    width: 250px;
+    height: 250px;
+}
+img.small {
+    width: 100px;
+    height: 100px;
+}
+
+img.align-right {
+    float: right;
+    margin-left: 10px;
+    margin-right: 10px;
 }
