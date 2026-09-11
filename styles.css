@@ -1,0 +1,19 @@
+ul.navigatie {
+    list-style-type: none;
+    margin: 0;
+    padding: 5 rem;
+    background-color: #d1c9b6;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+}
+
+ul.navigatie li a {
+    display: block;
+    color:white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
