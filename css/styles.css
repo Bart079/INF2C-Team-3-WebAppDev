@@ -5,11 +5,10 @@
   box-sizing: border-box;
 }
 
-
 ul.navigatie {
     list-style-type: none;
     margin: 0;
-    padding: 5 rem;
+    padding: 2rem;
     background-color: #b08a62;
     display: flex;
     justify-content: center;
@@ -18,7 +17,7 @@ ul.navigatie {
 }
 
 ul.navigatie li a {
-    display: block;
+    display: flex;
     color: whitesmoke;
     text-align: center;
     padding: 14px 16px;
@@ -30,6 +29,13 @@ ul.navigatie li a {
     padding-top: 20px;
 
 }
+
+li.nav_title {
+    position: absolute;
+    left: 5rem;
+
+}
+
 /*
 #intro_title {
     font-family: "Slabo 13px", serif;
