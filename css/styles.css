@@ -1,4 +1,10 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Slabo+13px&display=swap');*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 
 ul.navigatie {
     list-style-type: none;
