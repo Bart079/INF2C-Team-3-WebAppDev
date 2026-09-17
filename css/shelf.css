@@ -6,3 +6,8 @@ h1 {
     height: 100px;
     width: 100px;
 }
+
+.card-container {
+    border: 2px solid brown;
+    border-radius: 10px;
+}
