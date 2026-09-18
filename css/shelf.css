@@ -30,4 +30,17 @@ h2 {
     background-color: #ffc98f77;
 }
 
+.all-notes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.note-container {
+    border: 2px solid brown;
+    background-color: #ffc98f77;
+}
+
+
+
 
