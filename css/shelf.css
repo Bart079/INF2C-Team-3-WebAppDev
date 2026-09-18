@@ -1,13 +1,33 @@
-h1 {
-    color: red;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.bean-images {
+h1 {
+    color: #b08a62
+}
+
+h2 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.coffee-bean-bag {
     height: 100px;
     width: 100px;
 }
 
+.all-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    
+}
 .card-container {
     border: 2px solid brown;
     border-radius: 10px;
+    background-color: #ffc98f77;
 }
+
+
