@@ -1,9 +1,19 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Slabo+13px&display=swap');*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ul.navigatie li:first-child {
+    position: absolute;
+    left: 2rem;
+}
 
 ul.navigatie {
     list-style-type: none;
     margin: 0;
-    padding: 5 rem;
+    padding: 2rem;
     background-color: #b08a62;
     display: flex;
     justify-content: center;
@@ -12,18 +22,15 @@ ul.navigatie {
 }
 
 ul.navigatie li a {
-    display: block;
+    display: flex;
     color: whitesmoke;
-    text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 1.5rem;
-    border-width: 0px 0px 2px 2px;
-    border-style: solid;
-    border-color: #3b2a1a;
     padding-top: 20px;
 
 }
+
 /*
 #intro_title {
     font-family: "Slabo 13px", serif;
