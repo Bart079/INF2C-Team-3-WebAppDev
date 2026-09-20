@@ -2,5 +2,6 @@
 
 # Used sources
 
-https://www.w3schools.com/html/html_links.asp
-https://www.w3schools.com/html/html_images.asp
+https://www.w3schools.com/html/html_links.asp <br>
+https://www.w3schools.com/html/html_images.asp <br>
+https://www.youtube.com/watch?v=S6t4w146cjE <br>

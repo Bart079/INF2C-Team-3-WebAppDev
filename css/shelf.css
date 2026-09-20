@@ -4,6 +4,33 @@
   box-sizing: border-box;
 }
 
+/* START NAV */
+ul.navigatie {
+    list-style-type: none;
+    margin: 0;
+    padding: 5 rem;
+    background-color: #b08a62;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+}
+
+ul.navigatie li a {
+    display: block;
+    color: whitesmoke;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 1.5rem;
+    border-width: 0px 0px 2px 2px;
+    border-style: solid;
+    border-color: #3b2a1a;
+    padding-top: 20px;
+
+}
+/* END NAV */
+
 h1 {
     color: #b08a62
 }
@@ -39,6 +66,31 @@ h2 {
 .note-container {
     border: 2px solid brown;
     background-color: #ffc98f77;
+    box-shadow: 5px 5px 8px #3b2a1a;
+    font-family: 'Lucida handwriting'
+}
+
+.all-offers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+.offer-container {
+    border: 2px solid brown;
+    border-radius: 10px;
+    background-color: #ffc98f77;
+    /* to place text inside the image */
+    position: relative;
+}
+
+.discount-text {
+    position: absolute;
+    right: 60px;
+    top: 35%;
+    color: black;
+    font-size: 40px;
+    
+
 }
 
 
