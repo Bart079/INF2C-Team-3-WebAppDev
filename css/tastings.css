@@ -4,3 +4,8 @@
   box-sizing: border-box;
 }
 
+img.row_of_coffee_cups {
+    float: right;
+    width: 20rem;
+    height: auto;
+}

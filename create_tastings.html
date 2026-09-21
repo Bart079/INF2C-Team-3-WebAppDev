@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Different Tastings</title>
+    <link rel="stylesheet" href="css/styles.css"/> 
+    <link rel="stylesheet" href="css/tastings.css"/> 
+    <title>Create a tasting</title>
 </head>
 <body>
     <ul class="navigatie">
@@ -17,6 +19,27 @@
         Welcome, we are exited for you to create a tasting.
         Please fill in the details below to create your tasting.
     </p>
-    <!--- hier moet een formulier kommen met alle benodigde info-->
+    <form> <!--- moet nog ooit doorgestuurd worden om te verwerken, maar dat is voor later -->
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname"><br><br>
+        <label for="lname">Last name:</label>
+        <input type="text" id="lname" name="lname"><br><br><!--- je zou dit denk in automatche kunnen doen met de login info van de user, maar dat is voor later -->
+        <label for="date_and_time">Date and Time:</label>
+        <input type="datetime-local" id="tastingtime" name="tastingtime"><br><br>
+        <label for="capacity">Capacity of the room:</label>
+        <input type="number" id="capacity" name="capacity"><br><br>
+        <label for="amount_of_beans">Amount of Beans:</label>
+        <input type="number" id="amount_of_beans" name="amount_of_beans"><br><br><!--- later moet de aan de hand van dit dynamish een dropdown list komen dat je de details kan invullen--->
+        <input type="submit" value="Submit">
+    </form>
+    <!--- hier moet een formulier kommen met alle benodigde info:
+    datum check
+    tijd check
+    capaciteit check
+    hoeveelheid line up van beans check
+    uivouwen moet later
+    en positie van de beans   moet ook later
+
+    -->
 </body>
 </html>

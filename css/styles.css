@@ -18,6 +18,8 @@ ul.navigatie {
     display: flex;
     justify-content: center;
     gap: 1rem;
+    flex-wrap: wrap;
+
 
 }
 
@@ -29,6 +31,29 @@ ul.navigatie li a {
     font-size: 1.5rem;
     padding-top: 20px;
 
+}
+
+@media (max-width: 820px) {
+
+    ul.navigatie {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    ul.navigatie li:first-child {
+        position: static;
+        width: 100%;
+    }
+
+    ul.navigatie li:first-child a {
+        justify-content: center;
+    }
+
+    ul.navigatie li a {
+        font-size: 1.2rem;
+        padding: 10px 12px;
+    }
 }
 
 /*
