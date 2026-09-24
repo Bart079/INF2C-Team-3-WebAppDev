@@ -9,3 +9,17 @@ img.row_of_coffee_cups {
     width: 20rem;
     height: auto;
 }
+
+
+table.upcoming_tastings{
+    width: 50%;
+    border-collapse: collapse;
+    background-color: #b08a62;
+    color: white;
+}
+
+table.upcoming_tastings tr, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
