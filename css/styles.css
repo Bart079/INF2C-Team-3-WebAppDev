@@ -14,7 +14,7 @@ ul.navigatie {
     list-style-type: none;
     margin: 0;
     padding: 2rem;
-    background-color: #b08a62;
+    background-color: #b38d65;
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -84,6 +84,7 @@ ul.navigatie li a {
     border-color: #b08a62;
     border-radius: 1em 2em 1em 2em / 2em 1em 2em 1em
 }
+
 
 img.large {
     width: 500px;
