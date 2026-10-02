@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router";
-import { Layout } from "./components/Layout";
+import { NavBar } from "./components/NavBar";
 import { HomePage } from "./pages/HomePage";
 import { GrindersScalesPage } from "./features/grindersScales/grindersScales";
 import { OrdersPage } from "./features/orders/groupOrders";
@@ -9,7 +9,7 @@ import { TastingsPage } from "./features/tastings/tastings";
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<NavBar />}>
         <Route index element={<HomePage />} />
         <Route path="orders" element={<OrdersPage />} />
         <Route path="grindersScales" element={<GrindersScalesPage />} />

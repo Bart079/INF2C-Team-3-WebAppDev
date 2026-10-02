@@ -1,0 +1,46 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+nav { /* navigatie bar */
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #b38d65;
+    color: white;
+    padding: 1rem;
+}
+
+nav a { /* navigatie voor de pagina links */
+    display: flex;
+    text-decoration: none;
+    color: white;
+    padding: 14px 16px;
+    font-size: 1.5rem;
+    padding-top: 20px;
+    transition: 0.3s;
+}
+
+nav a:first-child { /* eerste link in de navigatie dus zetsel */
+    position: absolute;
+    left: 2rem;
+}
+
+@media (max-width: 820px) { /* als het breed of smaller is dan px*/
+    nav a:first-child {
+        position: static;
+        width: 100%;
+        justify-content: center;
+        font-size: 1.2rem;
+        padding: 10px 12px;
+    }
+}
+
+nav a:not(:first-child):hover { /* als je met de muis over de link gaat veranderd van kleur, behalve de eerste (zetsel) */
+    background-color: #a67c52;
+    color: white;
+}
