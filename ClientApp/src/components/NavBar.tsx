@@ -1,6 +1,7 @@
 import { Link, Outlet } from "react-router";
+import "../css/NavBar.css";
 
-export function Layout() {
+export function NavBar() {
   return (
     <div className="page">
       <header>
