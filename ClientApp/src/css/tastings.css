@@ -12,13 +12,14 @@ img.row_of_coffee_cups {
 
 
 table.upcoming_tastings{
-    width: 50%;
+    width: 100%;
+    max-width: 40rem;
     border-collapse: collapse;
     background-color: #b08a62;
     color: white;
 }
 
-table.upcoming_tastings tr, td {
+table.upcoming_tastings td {
     border: 1px solid black;
     padding: 10px;
     text-align: left;
