@@ -3,11 +3,11 @@ import "../../css/group_Orders.css";
 export function OrdersPage() {
   return (
     <>
-      {/* Korte uitleg over group orders */}
+      {/* intro group orders */}
       <section className="orders_intro">
         <h1 className="title">Orders</h1>
         <h3 className="sub">
-          Order coffee together with the Zetsel community
+          Order coffee together with the Zetsel App
         </h3>
 
         <p className="text">
@@ -49,7 +49,7 @@ export function OrdersPage() {
             <h3>Another Coffee Bean</h3>
 
             <p>
-              <strong>Started by:</strong> Adam
+              <strong>Started by:</strong> Jade
             </p>
             <p>
               <strong>Minimum:</strong> 500 g
