@@ -6,7 +6,7 @@ import { OrdersPage } from "./features/orders/groupOrders";
 import { ShelfPage } from "./features/shelf/shelf";
 import { TastingsPage } from "./features/tastings/tastings";
 import { CreateTastingPage } from "./features/tastings/create_tastings";
-
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 export default function App() {
   return (
@@ -18,6 +18,7 @@ export default function App() {
         <Route path="shelf" element={<ShelfPage />} />
         <Route path="tastings" element={<TastingsPage />} />
         <Route path="create-tastings" element={<CreateTastingPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
