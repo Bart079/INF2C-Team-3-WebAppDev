@@ -17,7 +17,6 @@ export function NavBar() {
         <Outlet />
       </main>
       <footer>
-        <p>Zetsel</p>
       </footer>
     </div>
   );

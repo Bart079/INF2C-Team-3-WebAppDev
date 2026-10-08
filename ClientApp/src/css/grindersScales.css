@@ -17,11 +17,54 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    width: 800px;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    color:  whitesmoke;
 }
-.container div {
-    background-color: #f1f1f1;
-    padding: 10px;
+.container > div {
+    background-color: #b38d65;
+    padding: 20px;
     font-size: 16px;
+    min-height:150px;
 }
-
+@media (max-width: 820px) { /*pagina en de containers als t scherm kleiner wordt */
+    .container {
+        grid-template-columns: 1fr; /* 4 containers in 1 kolom */
+    }
+    .pagina {
+        flex-direction: column; /* onder elkaar inplaats van naast elkaar */
+    }
+}
+/* groep afbeeldingen */
+.images {
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+}
+/* 1 bruine blok per image */
+.image {
+    width: 320px;
+    height: 320px;
+    background-color: #3b2a1a;
+    border-radius: 15px;
+}
+/* image zelf */
+.image img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    display: block;
+}
+/* zorgt voor image en containers space */
+.pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
