@@ -44,10 +44,19 @@ export function TastingsPage() {
     }
 
     return (
+        
         <div >
-            <h1>Tastings</h1>
-            <p className="text">Welcome to the Tastings page!</p>
+            <section className="tasting_intro">
+                <h1 className="title">Tastings</h1>
+                <h3 className="sub">
+                Join us for an amazing coffee tasting experience
+                </h3>
 
+                <p className="text">
+                Here you can find upcoming tastings.
+                </p>
+            </section>
+            
             <img
                 className="row_of_coffee_cups"
                 src={coffeeCupsImage}

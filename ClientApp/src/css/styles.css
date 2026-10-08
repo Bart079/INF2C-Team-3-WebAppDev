@@ -22,7 +22,9 @@ ul.navigatie {
 
 
 }
-
+p{
+    color: black;
+}
 ul.navigatie li a {
     display: flex;
     color: whitesmoke;
