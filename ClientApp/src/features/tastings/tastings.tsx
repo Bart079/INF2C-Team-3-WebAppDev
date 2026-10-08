@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import type { Tasting } from "../../types/tasting";
 import { UpcomingTastings } from "../../components/UpcomingTastings";
 
@@ -66,7 +67,7 @@ export function TastingsPage() {
 
             <p>
                 If you want to host a tasting, click{" "}
-                <a href="create_tastings.html">here</a>
+                <Link to="/create-tastings">here</Link>
             </p>
 
             <UpcomingTastings tastings={tastings} />
