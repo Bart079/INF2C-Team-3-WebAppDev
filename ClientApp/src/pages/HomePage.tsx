@@ -1,4 +1,4 @@
-import CoffeeBeanBag from "../assets/coffee-bean-bag.png";
+import Coffee_bevrages from "../assets/coffee-beverages.jpg";
 
 export function HomePage() {
   return (
@@ -10,8 +10,8 @@ export function HomePage() {
         <p>dit is normale tekst Lorem ipsum dolor sit amet consectetur adipisicing elit. Et architecto temporibus maiores vel aliquid ullam quos aliquam? Nostrum similique exercitationem alias! Consequatur corporis dolor officiis incidunt fugiat ipsum maxime ea.</p>
         <img
                 className="align-right medium"
-                src={CoffeeBeanBag}
-                alt="Coffee bean bag"
+                src={Coffee_bevrages}
+                alt="Coffee beverages"
             />
     </div>
   );
