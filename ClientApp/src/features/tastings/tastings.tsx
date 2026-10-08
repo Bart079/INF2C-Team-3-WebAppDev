@@ -44,9 +44,9 @@ export function TastingsPage() {
     }
 
     return (
-        <div>
+        <div >
             <h1>Tastings</h1>
-            <p>Welcome to the Tastings page!</p>
+            <p className="text">Welcome to the Tastings page!</p>
 
             <img
                 className="row_of_coffee_cups"
@@ -54,18 +54,18 @@ export function TastingsPage() {
                 alt="row of coffee cups"
             />
 
-            <p>
+            <p className="text">
                 There are a lot of amazing types of beans!
                 We love to share beautiful beans and different types of
                 roasts with you.
             </p>
 
-            <p>
+            <p className="text">
                 We are excited for you to join one of our tastings.
                 The tastings fill up fast.
             </p>
 
-            <p>
+            <p className="text">
                 If you want to host a tasting, click{" "}
                 <Link to="/create-tastings">here</Link>
             </p>
