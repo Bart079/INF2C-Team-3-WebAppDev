@@ -14,7 +14,7 @@ export function CreateTastingPage() {
     return (
         <div>
             <h1>Create a tasting</h1>
-            <p>
+            <p className="text">
                 Welcome, we are excited for you to create a tasting.
                 Please fill in the details below to create your tasting.
             </p>
