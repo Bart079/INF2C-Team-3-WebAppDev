@@ -95,4 +95,34 @@ h2 {
 
 
 
+.shelf_intro {
+    margin-bottom: 40px;
+}
 
+.my_bags,
+.add_bag,
+.my_notes {
+    margin-bottom: 40px;
+}
+
+.bag_list,
+.note_list {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.bag,
+.note {
+    width: 300px;
+    padding: 20px;
+    border: 2px solid #b08a62;
+    border-radius: 10px;
+    background-color: #d9c3a5;
+}
+
+.bag button,
+.note button,
+.add_bag button {
+    cursor: pointer;
+}
