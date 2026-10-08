@@ -16,8 +16,6 @@ export function NavBar() {
       <main>
         <Outlet />
       </main>
-      <footer>
-      </footer>
     </div>
   );
 }
