@@ -20,6 +20,13 @@ export function ShelfPage() {
 
         <BagList bags={myBags} beans={beans} />
       </section>
+      
+      <section className ="add_bag">
+        <h2>Add a Bag</h2>
+        <p>Record a bag you took home from the club room.</p>
+        <button>Add Bag</button>
+      </section>
+        
 
       <section className="my_notes">
         <h2>Brewing Notes</h2>
