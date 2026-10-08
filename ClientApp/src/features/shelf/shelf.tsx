@@ -1,9 +1,11 @@
 import "../../css/shelf.css";
-import {bags, beans} from "./mockData";
+import {bags, beans, brewingNotes} from "./mockData";
 import {BagList} from "./BagList";
+import {BrewingNotes} from "./BrewingNotes";
 
 export function ShelfPage() {
   const myBags = bags.filter(bag => bag.holderId === 1);
+  const myNotes = brewingNotes.filter((note) => note.writerId === 1);
 
   return (
     <>
@@ -17,6 +19,11 @@ export function ShelfPage() {
         <h2>My Bags</h2>
 
         <BagList bags={myBags} beans={beans} />
+      </section>
+
+      <section className="my_notes">
+        <h2>Brewing Notes</h2>
+        <BrewingNotes notes={myNotes} />
       </section>
     </>
   );
