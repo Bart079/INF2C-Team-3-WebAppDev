@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router";
-import { NavBar } from "./components/NavBar";
+import { Layout } from "./components/Layout";
 import { HomePage } from "./pages/HomePage";
 import { GrindersScalesPage } from "./features/grindersScales/grindersScales";
 import { OrdersPage } from "./features/orders/groupOrders";
@@ -11,7 +11,7 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<NavBar />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="orders" element={<OrdersPage />} />
         <Route path="grindersScales" element={<GrindersScalesPage />} />

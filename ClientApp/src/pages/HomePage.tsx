@@ -3,9 +3,8 @@ import Coffee_bevrages from "../assets/coffee-beverages.jpg";
 export function HomePage() {
   return (
     <div>
-      <p>Pick a page from the menu.</p>
         <h1 >welcome to the Zetsel coffeegroup site</h1>
-        <h3> hier is de tekst voor introductie</h3>
+        <h2> Pick a page from the menu</h2>
         <img
                 className="align-right medium"
                 src={Coffee_bevrages}

@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router";
-import "../css/NavBar.css";
+import "../css/Layout.css";
 
-export function NavBar() {
+export function Layout() {
   return (
     <div className="page">
       <header>
@@ -15,6 +15,8 @@ export function NavBar() {
       </header>
       <main>
         <Outlet />
+        <footer>
+        </footer>
       </main>
     </div>
   );
