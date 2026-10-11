@@ -24,6 +24,10 @@ nav a { /* navigatie voor de pagina links */
     padding-top: 20px;
     transition: 0.3s;
 }
+nav a,
+nav a:hover {
+    text-decoration: none;
+}
 
 nav a:first-child { /* eerste link in de navigatie dus zetsel */
     position: absolute;

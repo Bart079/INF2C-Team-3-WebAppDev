@@ -12,24 +12,24 @@ export function ShelfPage() {
       <section className="shelf_intro">
         <h1 className="title">Shelf</h1>
         <h3 className="sub">Who has what, and since when</h3>
-        <p className="text">Here you can find the coffee bags you have home.</p>
+        <p className="text boxedintro">Here you can find the coffee bags you have home.</p>
       </section>
 
       <section className="my_bags">
-        <h2>My Bags</h2>
+        <h2 className="underlined">My Bags</h2>
 
         <BagList bags={myBags} beans={beans} />
       </section>
       
       <section className ="add_bag">
-        <h2>Add a Bag</h2>
+        <h2 className="underlined">Add a Bag</h2>
         <p>Record a bag you took home from the club room.</p>
         <button>Add Bag</button>
       </section>
         
 
       <section className="my_notes">
-        <h2>Brewing Notes</h2>
+        <h2 className="underlined">Brewing Notes</h2>
         <BrewingNotes notes={myNotes} />
       </section>
     </>

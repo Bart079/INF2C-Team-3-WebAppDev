@@ -52,7 +52,7 @@ export function TastingsPage() {
                 Join us for an amazing coffee tasting experience
                 </h3>
 
-                <p className="text">
+                <p className="text boxedintro">
                 Here you can find upcoming tastings.
                 </p>
             </section>
@@ -63,7 +63,7 @@ export function TastingsPage() {
                 alt="row of coffee cups"
             />
 
-            <p className="text">
+            <p className="text boxedintro">
                 There are a lot of amazing types of beans!
                 We love to share beautiful beans and different types of
                 roasts with you.
