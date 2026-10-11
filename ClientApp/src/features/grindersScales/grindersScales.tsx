@@ -1,6 +1,6 @@
 import "../../css/grindersScales.css";
 import type {Item } from "../../types/Item";
-import {ItemCard } from "./ItemCards";
+import {ItemCard } from "../../components/ItemCards";
 import coffeegrinder from "../../assets/coffeegrinder.jpg";
 import coffeescale from "../../assets/coffeescale.jpg";
 import "../../css/styles.css";
