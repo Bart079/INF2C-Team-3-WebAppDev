@@ -1,6 +1,6 @@
 import "../../css/shelf.css";
 import {bags, beans, brewingNotes} from "./mockData";
-import {BagList} from "./BagList";
+import {BagList} from "../../components/BagList";
 import {BrewingNotes} from "./BrewingNotes";
 
 export function ShelfPage() {
