@@ -1,4 +1,4 @@
-import "../../css/group_Orders.css";
+ import "../../css/group_Orders.css";
 
 export function OrdersPage() {
   return (
@@ -10,7 +10,7 @@ export function OrdersPage() {
           Order coffee together with the Zetsel App
         </h3>
 
-        <p className="text">
+        <p className="text boxedintro">
           Here you can find current orders and see how much coffee has already
           been ordered.
         </p>

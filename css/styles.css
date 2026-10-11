@@ -54,14 +54,10 @@ ul.navigatie li a {
         font-size: 1.2rem;
         padding: 10px 12px;
     }
+
+    
 }
 
-/*
-#intro_title {
-    font-family: "Slabo 13px", serif;
-    font-size: medium;
-}
-*/
 .title{
     letter-spacing: 0.05em; 
 }

@@ -5,6 +5,7 @@ import coffeegrinder from "../../assets/coffeegrinder.jpg";
 import coffeescale from "../../assets/coffeescale.jpg";
 import "../../css/styles.css";
 // npm run dev
+//--host
 
 export function GrindersScalesPage() {
   return (
@@ -55,12 +56,12 @@ export function GrindersScales() {
         Lend your scales and grinders here!
         </h2>
 
-        <p className="text">
-        Lend your scales and grinders here and see what is available to borrow from other members of the Zetsel community. Sometimes we need to calibrate our scales and grinders, they will be available again after a few days.
+        <p className="text boxedintro">
+        See what is available to borrow from other members of the Zetsel community. Sometimes we need to calibrate our scales and grinders, they will be available again after a few days.
         </p>
     </section>
     <div className="pagina">
-      <div className= "container">
+      <div className= "box">
         <div>
           <h2>Available</h2>
           <ItemCard item={item1} />

@@ -15,7 +15,7 @@
 }
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:1fr 1fr;
     gap: 10px;
     width: 100%;
     max-width: 400px;
@@ -69,3 +69,14 @@
     align-items: flex-start;
 }
 
+/*de bruine boxen met tekst for mi available 
+.box {
+    width: 300px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: var(--secondary);
+    margin: 0 auto;
+    justify-content: center;
+}
+*/

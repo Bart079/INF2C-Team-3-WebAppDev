@@ -6,13 +6,6 @@
   letter-spacing: 0.05em;
 }
 
-.sub {
-  font-weight: lighter;
-  font-style: oblique;
-  border-bottom: 2px dashed #3b2a1a;
-  padding-bottom: 10px;
-}
-
 
 .open_orders,
 .create_order,
@@ -26,6 +19,7 @@
   flex-wrap: wrap;
 }
 
+
 .order {
   width: 300px;
   padding: 20px;
@@ -34,7 +28,9 @@
   background-color: #d9c3a5;
 }
 
+/*
 .order button,
 .create_order button {
   cursor: pointer;
 }
+*/
