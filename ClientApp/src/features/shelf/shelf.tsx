@@ -1,7 +1,7 @@
 import "../../css/shelf.css";
 import {bags, beans, brewingNotes} from "./mockData";
-import {BagList} from "./BagList";
-import {BrewingNotes} from "./BrewingNotes";
+import {BagList} from "../../components/BagList";
+import {BrewingNotes} from "../../components/BrewingNotes";
 
 export function ShelfPage() {
   const myBags = bags.filter(bag => bag.holderId === 1);

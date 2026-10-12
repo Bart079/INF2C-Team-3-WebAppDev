@@ -1,4 +1,4 @@
-import type {BrewingNote} from "../../types/BrewingNote";
+import type {BrewingNote} from "../types/BrewingNote";
 
 type BrewingNotesProps = {
     notes: BrewingNote[];

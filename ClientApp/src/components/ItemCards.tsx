@@ -1,5 +1,5 @@
-import type {Item } from "../../types/Item";
-import "../../css/card.css";
+import type {Item } from "../types/Item";
+import "../css/Card.css";
 
 type ItemCardProps = 
 {

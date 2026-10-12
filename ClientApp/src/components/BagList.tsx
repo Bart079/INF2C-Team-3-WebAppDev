@@ -1,5 +1,5 @@
-import type { Bag } from "../../types/Bag";
-import type { Bean } from "../../types/Bean";
+import type { Bag } from "../types/Bag";
+import type { Bean } from "../types/Bean";
 import {BagCard} from "./BagCard";
 
 type BagListProps = {
