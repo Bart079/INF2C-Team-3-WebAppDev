@@ -20,7 +20,7 @@
     "name": "Brewista",
     "kind": "scale",
     "condition": "bad",
-    "status": "calibration"
+    "status": "not available"
 },
 {
     "name": "Acaia Lunar",

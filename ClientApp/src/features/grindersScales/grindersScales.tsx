@@ -67,7 +67,7 @@ export function GrindersScales({items}: { items: Item[] }) {
     );
 
     const calibratedItems = items.filter(
-    item => item.status === "calibration"
+    item => item.status === "not available"
     );
 
 
@@ -88,28 +88,28 @@ export function GrindersScales({items}: { items: Item[] }) {
       <div className="status_groep">
           <h2>Available</h2>
           {availableItems.map(item => (
-          <ItemCard item={item} />
+          <ItemCard key={item.name} item={item} />
           ))}
       </div>
 
         <div className="status_groep">
           <h2>On Hold</h2>
           {onholdItems.map(item => (
-          <ItemCard item={item} />
+          <ItemCard key={item.name} item={item} />
           ))}
         </div>
 
         <div className="status_groep">
           <h2>Request</h2>
           {requestedItems.map(item => (
-          <ItemCard item={item} />
+          <ItemCard key={item.name} item={item} />
           ))}
         </div>
 
         <div className="status_groep">
           <h2>Calibration Needed</h2>
           {calibratedItems.map(item => (
-          <ItemCard item={item} />
+          <ItemCard key={item.name} item={item} />
           ))}
         </div>
       </div>
