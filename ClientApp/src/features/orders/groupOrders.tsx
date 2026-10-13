@@ -1,12 +1,14 @@
-
 import { useEffect, useState } from "react";
 import { OrderCard } from "../../components/OrderCard";
 import type { Order } from "../../types/Order";
 import "../../css/group_Orders.css";
 
 export function OrdersPage() {
+  // State met alle opgehaalde bestellingen
   const [orders, setOrders] = useState<Order[]>([]);
+  // Staat bij of de data nog aan het laden is
   const [loading, setLoading] = useState(true);
+  // Opslaan van een eventuele foutmelding uit de api-call
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
