@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { OrderCard } from "../../components/OrderCard";
 import type { Order } from "../../types/Order";
+import "../../css/styles.css";
 import "../../css/group_Orders.css";
+
 
 export function OrdersPage() {
   // State met alle opgehaalde bestellingen
@@ -61,7 +63,7 @@ export function OrdersPage() {
           <section className="open_orders">
             <h2>Open Orders</h2>
 
-            <div className="order_list">
+            <div className="card_list">
               {openOrders.map((order) => (
                 <OrderCard
                   key={order.id}
@@ -83,7 +85,7 @@ export function OrdersPage() {
           <section className="finished_orders">
             <h2>Previous Orders</h2>
 
-            <div className="order_list">
+            <div className="card_list">
               {finishedOrders.map((order) => (
                 <OrderCard
                   key={order.id}

@@ -1,9 +1,44 @@
 import { useState, type FormEvent } from "react";
 import "../../css/styles.css";
 import "../../css/grindersScales.css";
+import { useEffect} from "react";
+import type {Item } from "../../types/Item";
 
 export function RequestPage() {
     const [submitted, setSubmitted] = useState(false);
+    const [items, setItems] = useState<Item[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function loadItems() {
+            try { /*fetch items */
+                const response = await fetch("/items.json");
+
+                if (!response.ok) { /* failed to fetch data */
+                    throw new Error(`Request failed with status ${response.status}`);
+                }
+
+                const data = await response.json();
+                setItems(data);
+            } catch (err) {
+                console.error(err);
+                setError("Could not load items.");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadItems();
+    }, []);
+
+    if (loading) {
+        return <p>Loading items...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -42,11 +77,9 @@ export function RequestPage() {
                     <h1>Choose an item</h1>
                     <label htmlFor="item">Choose an item:</label>
                     <select id="item" name="item" required>
-                    <option value="Comandante C60">Comandante C60</option>
-                    <option value="Comandante C40">Comandante C40</option>
-                    <option value="Comandante X25">Comandante X25</option>
-                    <option value="Brewista">Brewista</option>
-                    <option value="Acaia Lunar">Acaia Lunar</option>
+                        {items.map(item => (
+                        <option key={item.name} value={item.name}> {item.name} </option>
+                        ))}
                     </select>
                 </div>
 
@@ -54,8 +87,8 @@ export function RequestPage() {
                     <label htmlFor="TimeofRequest">Date and time:</label>
                     <input
                         type="datetime-local"
-                        id="RequestTime"
-                        name="RequestTime"
+                        id="TimeofRequest"
+                        name="TimeofRequest"
                         required
                     />
                 </div>
