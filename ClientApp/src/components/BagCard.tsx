@@ -8,7 +8,7 @@ type BagCardProps = {
 
 export function BagCard({ bag, bean }: BagCardProps) {
     return (
-        <article className="bag">
+        <article className="card">
             <h3>{bean?.name}</h3>
             <p><strong>Roaster: </strong>{bean?.roaster}</p>
             <p><strong>Origin: </strong>{bean?.origin}</p>

@@ -1,4 +1,5 @@
- import "../../css/group_Orders.css";
+import "../../css/group_Orders.css";
+import "../../css/styles.css";
 
 export function OrdersPage() {
   return (
@@ -20,9 +21,9 @@ export function OrdersPage() {
       <section className="open_orders">
         <h2>Open Orders</h2>
 
-        <div className="order_list">
+        <div className="card_list">
           {/* Eerste test voorbeeld */}
-          <article className="order">
+          <article className="card">
             <h3>Example Coffee Bean</h3>
 
             <p>
@@ -45,7 +46,7 @@ export function OrdersPage() {
           </article>
 
           {/* Tweede test voorbeeld */}
-          <article className="order">
+          <article className="card">
             <h3>Another Coffee Bean</h3>
 
             <p>
@@ -85,8 +86,8 @@ export function OrdersPage() {
       <section className="finished_orders">
         <h2>Previous Orders</h2>
 
-        <div className="order_list">
-          <article className="order">
+        <div className="card_list">
+          <article className="card">
             <h3>Example Finished Order</h3>
 
             <p>

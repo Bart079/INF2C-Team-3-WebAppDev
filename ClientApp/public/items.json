@@ -1,0 +1,31 @@
+[{
+    "name": "Comandante C60",
+    "kind": "handgrinder",
+    "condition": "new",
+    "status": "on hold"
+},
+{
+    "name": "Comandante C40",
+    "kind": "handgrinder",
+    "condition": "mint",
+    "status": "available"
+},
+{
+    "name": "Comandante X25",
+    "kind": "handgrinder",
+    "condition": "mint",
+    "status": "available"
+},
+{
+    "name": "Brewista",
+    "kind": "scale",
+    "condition": "bad",
+    "status": "calibration"
+},
+{
+    "name": "Acaia Lunar",
+    "kind": "scale",
+    "condition": "mint",
+    "status": "available"
+}
+]
