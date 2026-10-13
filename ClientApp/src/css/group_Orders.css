@@ -13,21 +13,6 @@
   margin-bottom: 40px;
 }
 
-.order_list {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-
-.order {
-  width: 300px;
-  padding: 20px;
-  border: 2px solid #b08a62;
-  border-radius: 10px;
-  background-color: #d9c3a5;
-}
-
 /*
 .order button,
 .create_order button {

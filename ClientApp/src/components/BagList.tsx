@@ -9,7 +9,7 @@ type BagListProps = {
 
 export function BagList({ bags, beans }: BagListProps) {
   return (
-    <div className="bag_list"> 
+    <div className="card_list"> 
         {bags.map((bag) => (
             <BagCard
                 key={bag.id}

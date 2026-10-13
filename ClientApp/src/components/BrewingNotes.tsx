@@ -6,9 +6,9 @@ type BrewingNotesProps = {
 
 export function BrewingNotes({ notes }: BrewingNotesProps) {
     return (
-        <div className="brewing_notes">
+        <div className="card_list">
             {notes.map((note) => (
-                <article key={note.id} className="brewing_note">
+                <article key={note.id} className="card">
                     <h3>{note.method}</h3>
                     <p><strong>Dose (grams): </strong>{note.doseGrams} g</p>
                     <p><strong>Grind: </strong>{note.grind}</p>

@@ -6,11 +6,9 @@ type UpcomingTastingsProps = {
 
 export function UpcomingTastings({ tastings }: UpcomingTastingsProps) {
   return (
-    <table className="upcoming_tastings">
-      <tbody>
+    <div className="card_list">
         {tastings.map((tasting) => (
-          <tr key={tasting.id}>
-            <td>
+          <article className="card" key={tasting.id}>
               <p>Upcoming Tasting:</p>
               <p>Date: {tasting.date}</p>
               <p>Time: {tasting.time}</p>
@@ -18,10 +16,8 @@ export function UpcomingTastings({ tastings }: UpcomingTastingsProps) {
               <p>Available spots: {tasting.availableSpots}</p>
               <p>Beans: {tasting.beans}</p>
               <button>I want to participate</button>
-            </td>
-          </tr>
+          </article>
         ))}
-      </tbody>
-    </table>
+    </div>
   );
 }
