@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+import { useAuth } from "../auth/AuthContext";
 import type { Tasting, TastingBean, TastingSignup } from "../types/tasting";
 
 type UpcomingTastingsProps = {
@@ -7,6 +9,7 @@ type UpcomingTastingsProps = {
 };
 
 export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsProps) {
+  const { user } = useAuth();
   const beanNames = new Map(beans.map((bean) => [bean.id, bean.name]));
   const now = new Date();
   const upcomingTastings = tastings.filter(
@@ -51,7 +54,13 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
                   .map((item) => beanNames.get(item.beanId) ?? `Unknown bean (${item.beanId})`)
                   .join(", ")}
               </p>
-              <button>I want to participate</button>
+              {user ? (
+                <button>I want to participate</button>
+              ) : (
+                <p>
+                  Om mee te doen, moet je <Link to="/login">inloggen</Link>.
+                </p>
+              )}
           </article>
         ))}
     </div>
