@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import type { Tasting } from "../../types/tasting";
+import type { Tasting, TastingBean, TastingSignup } from "../../types/tasting";
 import { UpcomingTastings } from "../../components/UpcomingTastings";
 
 import "../../css/styles.css";
@@ -9,6 +9,8 @@ import coffeeCupsImage from "../../assets/row_of_coffee_cups.jpg";
 
 export function TastingsPage() {
     const [tastings, setTastings] = useState<Tasting[]>([]);
+    const [beans, setBeans] = useState<TastingBean[]>([]);
+    const [signups, setSignups] = useState<TastingSignup[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     
@@ -16,14 +18,24 @@ export function TastingsPage() {
     useEffect(() => {
         async function loadTastings() {
             try {
-                const response = await fetch("/upcoming_tastings.json");
+                const [tastingsResponse, beansResponse, signupsResponse] = await Promise.all([
+                    fetch("/upcoming_tastings.json"),
+                    fetch("/beans.json"),
+                    fetch("/signups.json"),
+                ]);
 
-                if (!response.ok) {
-                    throw new Error(`Request failed with status ${response.status}`);
+                if (!tastingsResponse.ok || !beansResponse.ok || !signupsResponse.ok) {
+                    throw new Error("Could not load tasting data.");
                 }
 
-                const data = await response.json();
-                setTastings(data);
+                const [tastingsData, beansData, signupsData] = await Promise.all([
+                    tastingsResponse.json(),
+                    beansResponse.json(),
+                    signupsResponse.json(),
+                ]);
+                setTastings(tastingsData);
+                setBeans(beansData);
+                setSignups(signupsData);
             } catch (err) {
                 console.error(err);
                 setError("Could not load tastings.");
@@ -79,7 +91,11 @@ export function TastingsPage() {
                 <Link to="/create-tastings">here</Link>
             </p>
 
-            <UpcomingTastings tastings={tastings} />
+            <UpcomingTastings
+                tastings={tastings}
+                beans={beans}
+                signups={signups}
+            />
         </div>
     );
 }
