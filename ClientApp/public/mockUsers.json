@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "username": "lid1",
+    "password": "demo123",
+    "roles": ["member"]
+  },
+  {
+    "id": 2,
+    "username": "lid2",
+    "password": "demo123",
+    "roles": ["member"]
+  },
+  {
+    "id": 3,
+    "username": "commissielid1",
+    "password": "demo123",
+    "roles": ["member", "committee"]
+  },
+  {
+    "id": 4,
+    "username": "commissielid2",
+    "password": "demo123",
+    "roles": ["member", "committee"]
+  },
+  {
+    "id": 5,
+    "username": "commissielid3",
+    "password": "demo123",
+    "roles": ["member", "committee"]
+  }
+]
