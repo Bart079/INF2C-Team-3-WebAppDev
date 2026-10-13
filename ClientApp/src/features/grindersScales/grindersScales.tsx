@@ -4,51 +4,73 @@ import {ItemCard } from "../../components/ItemCards";
 import coffeegrinder from "../../assets/coffeegrinder.jpg";
 import coffeescale from "../../assets/coffeescale.jpg";
 import "../../css/styles.css";
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
 // npm run dev
 //--host
 
 export function GrindersScalesPage() {
+  const [items, setItems] = useState<Item[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+        async function loadItems() {
+            try { /*fetch items */
+                const response = await fetch("/items.json");
+
+                if (!response.ok) { /* failed to fetch data */
+                    throw new Error(`Request failed with status ${response.status}`);
+                }
+
+                const data = await response.json();
+                setItems(data);
+            } catch (err) {
+                console.error(err);
+                setError("Could not load items.");
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadItems();
+    }, []);
+
+    if (loading) {
+        return <p>Loading items...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
+    }
+
   return (
     <>
     <h1>Grinders and Scales</h1>
-    <GrindersScales />
+    <GrindersScales items={items} />
     </>
   );
 }
+//de 4 blokken available, on hold, request, calibration needed props meegegeven
+export function GrindersScales({items}: { items: Item[] }) {
+    
+    const requestedItems = items.filter(
+    item => item.status === "requested"
+    );
 
-const item1: Item ={
-  name: "Comandante C60",
-  kind: "handgrinder",
-  condition: "new",
-  status: "available"
-}
-const item2: Item ={
-  name: "Comandante C40",
-  kind: "handgrinder",
-  condition: "mint",
-  status: "available"
-}
-const item3: Item ={
-  name: "Comandante X25",
-  kind: "handgrinder",
-  condition: "calibration soon needed",
-  status: "requested"
-}
-const item4: Item ={
-  name: "Brewista",
-  kind: "scale",
-  condition: "new",
-  status: "not available"
-}
-const item5: Item ={
-  name: "Acaia Lunar",
-  kind: "scale",
-  condition: "mint",
-  status: "not available"
-}
+    const onholdItems = items.filter(
+    item => item.status === "on hold"
+    );
 
-//de 4 blokken available, on hold, request, calibration needed  
-export function GrindersScales() {
+    const availableItems = items.filter(
+    item => item.status === "available"
+    );
+
+    const calibratedItems = items.filter(
+    item => item.status === "not available"
+    );
+
+
   return (
     <>
       <section className="grinders_scales_intro">
@@ -59,38 +81,52 @@ export function GrindersScales() {
         <p className="text boxedintro">
         See what is available to borrow from other members of the Zetsel community. Sometimes we need to calibrate our scales and grinders, they will be available again after a few days.
         </p>
+
     </section>
     <div className="pagina">
-      <div className= "box">
-        <div>
+      <div className= "card_list">
+      <div className="status_groep">
           <h2>Available</h2>
-          <ItemCard item={item1} />
-        </div>
+          {availableItems.map(item => (
+          <ItemCard key={item.name} item={item} />
+          ))}
+      </div>
 
-        <div>
+        <div className="status_groep">
           <h2>On Hold</h2>
-          <ItemCard item={item2} />
+          {onholdItems.map(item => (
+          <ItemCard key={item.name} item={item} />
+          ))}
         </div>
 
-        <div>
+        <div className="status_groep">
           <h2>Request</h2>
-          <ItemCard item={item3} />
+          {requestedItems.map(item => (
+          <ItemCard key={item.name} item={item} />
+          ))}
         </div>
 
-        <div>
+        <div className="status_groep">
           <h2>Calibration Needed</h2>
-          <ItemCard item={item4} />
-          <ItemCard item={item5} />
+          {calibratedItems.map(item => (
+          <ItemCard key={item.name} item={item} />
+          ))}
         </div>
       </div>
+      
+      
       <div className="images">
+        <Link className="button-link spacedbutton" to="/requests">
+          Make request
+        </Link>
         <img
-        className="medium coffee_grinder"
+        className="large coffee_grinder"
         src={coffeegrinder}
         alt="coffee grinder"
         />
+
         <img
-          className="medium scale"
+          className="large scale"
           src={coffeescale}
           alt="scale"
         />

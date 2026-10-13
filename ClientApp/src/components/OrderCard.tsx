@@ -7,7 +7,7 @@ type OrderCardProps = {
 
 export function OrderCard({ order }: OrderCardProps) {
   return (
-    <article className="order">
+    <article className="card">
       <h3>{order.bean}</h3>
 
       {order.startedBy && (
