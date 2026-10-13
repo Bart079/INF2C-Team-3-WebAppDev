@@ -1,109 +1,99 @@
+import { useEffect, useState } from "react";
+import { OrderCard } from "../../components/OrderCard";
+import type { Order } from "../../types/Order";
 import "../../css/group_Orders.css";
-import "../../css/styles.css";
 
 export function OrdersPage() {
+  // State met alle opgehaalde bestellingen
+  const [orders, setOrders] = useState<Order[]>([]);
+  // Staat bij of de data nog aan het laden is
+  const [loading, setLoading] = useState(true);
+  // Opslaan van een eventuele foutmelding uit de api-call
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadOrders() {
+      try {
+        const response = await fetch("/group_orders.json");
+
+        if (!response.ok) {
+          throw new Error("Unable to load orders");
+        }
+
+        const data: Order[] = await response.json();
+        setOrders(data);
+      } catch {
+        setError("Unable to load orders");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadOrders();
+  }, []);
+
+  const openOrders = orders.filter(
+    (order) => order.status === "Open"
+  );
+
+  const finishedOrders = orders.filter(
+    (order) => order.status !== "Open"
+  );
+
   return (
     <>
-      {/* intro group orders */}
       <section className="orders_intro">
         <h1 className="title">Orders</h1>
         <h3 className="sub">
           Order coffee together with the Zetsel App
         </h3>
-
         <p className="text boxedintro">
-          Here you can find current orders and see how much coffee has already
-          been ordered.
+          Here you can find current orders and see how
+          much coffee has already been ordered.
         </p>
       </section>
 
-      {/* Open Orders */}
-      <section className="open_orders">
-        <h2>Open Orders</h2>
+      {loading && <p>Loading orders...</p>}
+      {error && <p role="alert">{error}</p>}
 
-        <div className="card_list">
-          {/* Eerste test voorbeeld */}
-          <article className="card">
-            <h3>Example Coffee Bean</h3>
+      {!loading && !error && (
+        <>
+          <section className="open_orders">
+            <h2>Open Orders</h2>
 
-            <p>
-              <strong>Started by:</strong> Bart
-            </p>
-            <p>
-              <strong>Minimum:</strong> 1000 g
-            </p>
-            <p>
-              <strong>Current total:</strong> 650 g
-            </p>
-            <p>
-              <strong>Closing date:</strong> 25 September 2026
-            </p>
-            <p>
-              <strong>Status:</strong> Open
-            </p>
+            <div className="order_list">
+              {openOrders.map((order) => (
+                <OrderCard
+                  key={order.id}
+                  order={order}
+                />
+              ))}
+            </div>
+          </section>
 
-            <button>View Order</button>
-          </article>
-
-          {/* Tweede test voorbeeld */}
-          <article className="card">
-            <h3>Another Coffee Bean</h3>
-
+          <section className="create_order">
+            <h2>Start a Group Order</h2>
             <p>
-              <strong>Started by:</strong> Jade
+              Start a new order for a coffee bean and
+              let other members join your order.
             </p>
-            <p>
-              <strong>Minimum:</strong> 500 g
-            </p>
-            <p>
-              <strong>Current total:</strong> 350 g
-            </p>
-            <p>
-              <strong>Closing date:</strong> 28 September 2026
-            </p>
-            <p>
-              <strong>Status:</strong> Open
-            </p>
+            <button>Start New Order</button>
+          </section>
 
-            <button>View Order</button>
-          </article>
-        </div>
-      </section>
+          <section className="finished_orders">
+            <h2>Previous Orders</h2>
 
-      {/* Create Order */}
-      <section className="create_order">
-        <h2>Start a Group Order</h2>
-
-        <p>
-          Start a new order for a coffee bean and let other members join your
-          order.
-        </p>
-
-        <button>Start New Order</button>
-      </section>
-
-      {/* Finished Orders */}
-      <section className="finished_orders">
-        <h2>Previous Orders</h2>
-
-        <div className="card_list">
-          <article className="card">
-            <h3>Example Finished Order</h3>
-
-            <p>
-              <strong>Minimum:</strong> 1000 g
-            </p>
-            <p>
-              <strong>Total:</strong> 1250 g
-            </p>
-            <p>
-              <strong>Status:</strong> Placed
-            </p>
-
-            <button>View Order</button>
-          </article>
-        </div>
-      </section>
+            <div className="order_list">
+              {finishedOrders.map((order) => (
+                <OrderCard
+                  key={order.id}
+                  order={order}
+                />
+              ))}
+            </div>
+          </section>
+        </>
+      )}
     </>
   );
 }

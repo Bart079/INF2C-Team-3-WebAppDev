@@ -1,0 +1,30 @@
+
+[
+  {
+    "id": 1,
+    "bean": "Example Coffee Bean",
+    "startedBy": "Bart",
+    "minimumGrams": 1000,
+    "totalGrams": 650,
+    "closingDate": "2026-09-25",
+    "status": "Open"
+  },
+  {
+    "id": 2,
+    "bean": "Another Coffee Bean",
+    "startedBy": "Jade",
+    "minimumGrams": 500,
+    "totalGrams": 350,
+    "closingDate": "2026-09-28",
+    "status": "Open"
+  },
+  {
+    "id": 3,
+    "bean": "Example Finished Order",
+    "startedBy": null,
+    "minimumGrams": 1000,
+    "totalGrams": 1250,
+    "closingDate": null,
+    "status": "Placed"
+  }
+]
