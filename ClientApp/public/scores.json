@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "tastingId": 2,
+    "lineupId": 2001,
+    "memberId": 2,
+    "points": 8,
+    "remark": "Smooth taste with a chocolate finish"
+  },
+  {
+    "id": 2,
+    "tastingId": 2,
+    "lineupId": 2002,
+    "memberId": 2,
+    "points": 7,
+    "remark": "Fruity, but slightly too acidic"
+  },
+  {
+    "id": 3,
+    "tastingId": 2,
+    "lineupId": 2003,
+    "memberId": 2,
+    "points": 9,
+    "remark": "Sweet aroma and a balanced flavour"
+  },
+  {
+    "id": 4,
+    "tastingId": 2,
+    "lineupId": 2001,
+    "memberId": 1,
+    "points": 9,
+    "remark": "Sweet aroma with a fruity finish"
+  },
+  {
+    "id": 5,
+    "tastingId": 2,
+    "lineupId": 2001,
+    "memberId": 3,
+    "points": 7,
+    "remark": "Good flavour, but a little bitter"
+  },
+  {
+    "id": 6,
+    "tastingId": 2,
+    "lineupId": 2001,
+    "memberId": 4,
+    "points": 8,
+    "remark": "Well balanced and pleasant"
+  },
+  {
+    "id": 7,
+    "tastingId": 2,
+    "lineupId": 2002,
+    "memberId": 1,
+    "points": 8,
+    "remark": "Fresh and fruity"
+  },
+  {
+    "id": 8,
+    "tastingId": 2,
+    "lineupId": 2002,
+    "memberId": 3,
+    "points": 6,
+    "remark": "Too acidic for my taste"
+  },
+  {
+    "id": 9,
+    "tastingId": 2,
+    "lineupId": 2002,
+    "memberId": 4,
+    "points": 8,
+    "remark": "Nice aroma and a clean finish"
+  },
+  {
+    "id": 10,
+    "tastingId": 2,
+    "lineupId": 2003,
+    "memberId": 1,
+    "points": 9,
+    "remark": "Rich flavour and great aroma"
+  },
+  {
+    "id": 11,
+    "tastingId": 2,
+    "lineupId": 2003,
+    "memberId": 3,
+    "points": 8,
+    "remark": "Smooth and slightly sweet"
+  },
+  {
+    "id": 12,
+    "tastingId": 2,
+    "lineupId": 2003,
+    "memberId": 4,
+    "points": 7,
+    "remark": "Good coffee, but not very distinctive"
+  },
+  {
+    "id": 13,
+    "tastingId": 2,
+    "lineupId": 2001,
+    "memberId": 5,
+    "points": 8,
+    "remark": "A pleasant coffee with a chocolate note"
+  }
+]
