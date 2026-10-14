@@ -8,7 +8,7 @@ import { BrewingNotes } from "../../components/BrewingNotes";
 
 export function ShelfPage() {
   const bags = useFetch<Bag[], Bag[]>("/bags.json", (raw) => raw);
-  const beans = useFetch<Bean[], Bean[]>("/beans.json", (raw) => raw);
+  const beans = useFetch<Bean[], Bean[]>("/shelf_beans.json", (raw) => raw);
   const notes = useFetch<BrewingNote[], BrewingNote[]>("/brewing_notes.json", (raw) => raw);
 
   if (bags.loading || beans.loading || notes.loading) {
