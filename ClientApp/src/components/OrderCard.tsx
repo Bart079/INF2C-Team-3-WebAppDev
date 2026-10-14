@@ -1,11 +1,15 @@
-
+import { Link } from "react-router";
 import type { Order } from "../types/Order";
 
 type OrderCardProps = {
   order: Order;
+  showDetailsButton?: boolean;
 };
 
-export function OrderCard({ order }: OrderCardProps) {
+export function OrderCard({
+  order,
+  showDetailsButton = true
+}: OrderCardProps) {
   return (
     <article className="card">
       <h3>{order.bean}</h3>
@@ -39,7 +43,11 @@ export function OrderCard({ order }: OrderCardProps) {
         {order.status}
       </p>
 
-      <button>View Order</button>
+      {showDetailsButton && (
+        <Link to={`/orders/${order.id}`} className="button-link">
+          View Order
+        </Link>
+      )}
     </article>
   );
 }
