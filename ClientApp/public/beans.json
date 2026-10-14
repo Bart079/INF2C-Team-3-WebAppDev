@@ -1,0 +1,122 @@
+[
+  {
+    "id": 101,
+    "name": "Ethiopia Yirgacheffe",
+    "origin": "Ethiopia",
+    "roastLevel": "light"
+  },
+  {
+    "id": 102,
+    "name": "Colombia Supremo",
+    "origin": "Colombia",
+    "roastLevel": "medium"
+  },
+  {
+    "id": 103,
+    "name": "Kenya AA",
+    "origin": "Kenya",
+    "roastLevel": "medium"
+  },
+  {
+    "id": 104,
+    "name": "Brazil Santos",
+    "origin": "Brazil",
+    "roastLevel": "dark"
+  },
+  {
+    "id": 105,
+    "name": "Guatemala Antigua",
+    "origin": "Guatemala",
+    "roastLevel": "medium"
+  },
+  {
+    "id": 106,
+    "name": "Costa Rica Tarrazú",
+    "origin": "Costa Rica",
+    "roastLevel": "light"
+  },
+  {
+    "id": 107,
+    "name": "Sumatra Mandheling",
+    "origin": "Indonesia",
+    "roastLevel": "dark"
+  },
+  {
+    "id": 108,
+    "name": "Jamaica Blue Mountain",
+    "origin": "Jamaica",
+    "roastLevel": "medium"
+  },
+  {
+    "id": 109,
+    "name": "Peru Organic",
+    "origin": "Peru",
+    "roastLevel": "light"
+  },
+  {
+    "id": 110,
+    "name": "Rwanda Bourbon",
+    "origin": "Rwanda",
+    "roastLevel": "medium"
+  },
+  {
+    "id": 111,
+    "name": "Honduras Marcala",
+    "origin": "Honduras",
+    "roastLevel": "medium"
+  },
+  {
+    "id": 112,
+    "name": "Panama Geisha",
+    "origin": "Panama",
+    "roastLevel": "light"
+  },
+  {
+    "id": 113,
+    "name": "Nicaragua Jinotega",
+    "origin": "Nicaragua",
+    "roastLevel": "medium"
+  },
+  {
+    "id": 114,
+    "name": "Tanzania Peaberry",
+    "origin": "Tanzania",
+    "roastLevel": "medium"
+  },
+  {
+    "id": 115,
+    "name": "India Monsooned Malabar",
+    "origin": "India",
+    "roastLevel": "dark"
+  },
+  {
+    "id": 116,
+    "name": "Mexico Chiapas",
+    "origin": "Mexico",
+    "roastLevel": "medium"
+  },
+  {
+    "id": 117,
+    "name": "El Salvador Pacamara",
+    "origin": "El Salvador",
+    "roastLevel": "light"
+  },
+  {
+    "id": 118,
+    "name": "Ethiopia Sidamo",
+    "origin": "Ethiopia",
+    "roastLevel": "light"
+  },
+  {
+    "id": 119,
+    "name": "Brazil Cerrado",
+    "origin": "Brazil",
+    "roastLevel": "medium"
+  },
+  {
+    "id": 120,
+    "name": "Colombia Huila",
+    "origin": "Colombia",
+    "roastLevel": "dark"
+  }
+]
