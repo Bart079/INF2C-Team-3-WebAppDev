@@ -23,3 +23,9 @@ export type TastingBean = {
   id: number;
   name: string;
 };
+
+export type HostedTastingCardProps = {
+  tasting: Tasting;
+  beans: TastingBean[];
+  signups: TastingSignup[];
+};
