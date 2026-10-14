@@ -59,10 +59,6 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
                 )
                 .join(", ")}
             </p>
-            <p>
-            <Link to={`/tastings/${tasting.id}`} className="button-link">
-              Details
-            </Link></p>
             {committee && !tasting.cancelled && (
               <>
                 {tasting.keyStatus !== "available" && (
@@ -72,12 +68,18 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
               </>
             )}
             {user ? (
-              <button type="button">I want to participate</button>
+              <button type="button">I want to participate </button>
             ) : (
               <p>
                 To participate, you need to <Link to="/login">log in</Link>.
               </p>
             )}
+            <br />
+             <br />
+
+            <Link to={`/tastings/${tasting.id}`} className="button-link">
+              Details
+            </Link>
           </article>
         );
       })}
