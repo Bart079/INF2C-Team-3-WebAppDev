@@ -8,6 +8,7 @@ import { OrderDetailPage } from "./features/orders/OrderDetailPage";
 import { CreateOrderPage } from "./features/orders/CreateOrderPage";
 import { ShelfPage } from "./features/shelf/shelf";
 import { TastingsPage } from "./features/tastings/tastings";
+import { TastingsDetailPage } from "./features/tastings/TastingsDetailPage";
 import { CreateTastingPage } from "./features/tastings/create_tastings";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { LoginPage } from "./auth/LoginPage";
@@ -35,6 +36,7 @@ export default function App() {
         />        
         <Route path="shelf" element={<ShelfPage />} />
         <Route path="tastings" element={<TastingsPage />} />
+        <Route path="tastings/:id" element={<TastingsDetailPage />} />
         <Route
           path="create-tastings"
           element={
