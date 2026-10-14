@@ -10,7 +10,7 @@ import { CreateTastingPage } from "./features/tastings/create_tastings";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { LoginPage } from "./auth/LoginPage";
 import { ProtectedRoute } from "./auth/ProtectedRoute";
-
+import { MyHostedTastingsPage } from "./features/tastings/my-hosted-tastings";
 export default function App() {
   return (
     <Routes>
@@ -30,6 +30,14 @@ export default function App() {
           }
         />        
         <Route path="login" element={<LoginPage />} />
+        <Route
+          path="my-hosted-tastings"
+          element={
+            <ProtectedRoute>
+              <MyHostedTastingsPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

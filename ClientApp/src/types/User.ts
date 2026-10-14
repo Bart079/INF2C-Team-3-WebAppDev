@@ -1,6 +1,8 @@
 export type User = {
   id: number;
   username: string;
-  password: string;
   roles: string[];
+};
+export type UserCredentials = User & {
+  password: string;
 };

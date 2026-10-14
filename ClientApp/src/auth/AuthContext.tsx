@@ -1,8 +1,5 @@
 import { createContext, useState, type ReactNode , useContext } from "react";
-import type { User as MockUser } from "../types/User";
-type User = {
-  username: string;
-};
+import type { User, UserCredentials } from "../types/User";
 
 type AuthContextValue = {
   user: User | null;
@@ -36,7 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     throw new Error(`Could not load users: ${response.status}`);
   }
 
-  const members: MockUser[] = await response.json();
+  const members: UserCredentials[] = await response.json();
   const member = members.find(
     (item) => item.username === username && item.password === password,
   );

@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import type { Tasting, TastingBean, TastingSignup } from "../../types/tasting";
 import { UpcomingTastings } from "../../components/UpcomingTastings";
-
+import { hasRole } from "../../auth/roles";
+import { useAuth } from "../../auth/AuthContext";
 import "../../css/styles.css";
 import "../../css/tastings.css";
 import coffeeCupsImage from "../../assets/row_of_coffee_cups.jpg";
+
 
 export function TastingsPage() {
     const [tastings, setTastings] = useState<Tasting[]>([]);
@@ -13,6 +15,9 @@ export function TastingsPage() {
     const [signups, setSignups] = useState<TastingSignup[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const { user } = useAuth();
+    const isHost = hasRole(user, "host");
+    const committee = hasRole(user, "committee");
     
 
     useEffect(() => {
@@ -63,6 +68,12 @@ export function TastingsPage() {
                 <h3 className="sub">
                 Join us for an amazing coffee tasting experience
                 </h3>
+                {isHost && (
+                <Link to="/my-hosted-tastings">My Hosted Tastings</Link>
+                )}
+                {committee && (
+                <Link to="/tastings_without_room">Tastings Without Room</Link>
+                )}
 
                 <p className="text boxedintro">
                 Here you can find upcoming tastings.
