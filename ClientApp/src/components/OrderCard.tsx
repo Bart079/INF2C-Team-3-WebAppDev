@@ -1,19 +1,26 @@
+import { Link } from "react-router";
+import type { OrderCard } from "../types/OrderCard";
 
-import type { Order } from "../types/Order";
-
-type OrderCardProps = {
-  order: Order;
-};
-
-export function OrderCard({ order }: OrderCardProps) {
+export function OrderCard({
+  order,
+  showDetailsButton = true,
+  detailed = false
+}: OrderCard) {
   return (
-    <article className="card">
+    <article className={detailed ? "card order_detail_card" : "card"}>
       <h3>{order.bean}</h3>
 
-      {order.startedBy && (
+      {detailed && (
+        <p>
+          <strong>Order ID: </strong>
+          {order.id}
+        </p>
+      )}
+
+      {(order.startedBy || detailed) && (
         <p>
           <strong>Started by: </strong>
-          {order.startedBy}
+          {order.startedBy ?? "Unknown"}
         </p>
       )}
 
@@ -27,10 +34,10 @@ export function OrderCard({ order }: OrderCardProps) {
         {order.totalGrams} g
       </p>
 
-      {order.closingDate && (
+      {(order.closingDate || detailed) && (
         <p>
           <strong>Closing date: </strong>
-          {order.closingDate}
+          {order.closingDate ?? "Not set"}
         </p>
       )}
 
@@ -39,7 +46,30 @@ export function OrderCard({ order }: OrderCardProps) {
         {order.status}
       </p>
 
-      <button>View Order</button>
+      {detailed && (
+        <div className="order_progress">
+          <strong>Order Progress</strong>
+
+          <progress
+            value={Math.min(order.totalGrams, order.minimumGrams)}
+            max={Math.max(order.minimumGrams, 1)}
+          />
+
+          <p>
+            {order.minimumGrams > 0
+              ? Math.round(
+                  (order.totalGrams / order.minimumGrams) * 100
+                )
+              : 0}% of minimum reached
+          </p>
+        </div>
+      )}
+
+      {showDetailsButton && (
+        <Link to={`/orders/${order.id}`} className="button-link">
+          View Order
+        </Link>
+      )}
     </article>
   );
 }

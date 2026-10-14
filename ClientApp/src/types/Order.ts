@@ -1,3 +1,5 @@
+import type { OrderShare } from "./OrderShare";
+
 export type Order = {
   id: number;
   bean: string;
@@ -6,4 +8,5 @@ export type Order = {
   totalGrams: number;
   closingDate: string | null;
   status: string;
+  shares?: OrderShare[];
 };
