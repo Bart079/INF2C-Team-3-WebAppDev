@@ -17,7 +17,6 @@ export function TastingsPage() {
     const [error, setError] = useState("");
     const { user } = useAuth();
     const isHost = hasRole(user, "host");
-    const committee = hasRole(user, "committee");
     
 
     useEffect(() => {
@@ -71,9 +70,7 @@ export function TastingsPage() {
                 {isHost && (
                 <Link to="/my-hosted-tastings">My Hosted Tastings</Link>
                 )}
-                {committee && (
-                <Link to="/tastings_without_room">Tastings Without Room</Link>
-                )}
+                
 
                 <p className="text boxedintro">
                 Here you can find upcoming tastings.
