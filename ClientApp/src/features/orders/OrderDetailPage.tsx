@@ -1,74 +1,48 @@
-
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import type { Order } from "../../types/Order";
+import { useAuth } from "../../auth/AuthContext";
 import { OrderCard } from "../../components/OrderCard";
+import { OrderShareForm } from "../../components/OrderShareForm";
+import { useOrders } from "./OrdersContext";
 import "../../css/group_Orders.css";
-import "../../css/styles.css";
 
 export function OrderDetailPage() {
-  // Haal het ID uit de URL
   const { id } = useParams();
+  const { orders, loading, error, saveShare } = useOrders();
+  const { user } = useAuth();
 
-  const [order, setOrder] = useState<Order | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function loadOrder() {
-      try {
-        setLoading(true);
-        setError(null);
-        setOrder(null);
-
-        const response = await fetch("/group_orders.json");
-
-        if (!response.ok) {
-          throw new Error("Unable to load orders");
-        }
-
-        const data: Order[] = await response.json();
-
-        // Zoek de bestelling die bij het ID hoort
-        const selectedOrder = data.find(
-          (order) => order.id === Number(id)
-        );
-
-        if (!selectedOrder) {
-          setError("Order not found");
-          return;
-        }
-
-        setOrder(selectedOrder);
-      } catch {
-        setError("Unable to load order");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadOrder();
-  }, [id]);
+  const order = orders.find(item => item.id === Number(id));
+  const ownShare = order?.shares?.find(share => share.username === user?.username)?.grams ?? 0;
 
   return (
     <section className="order_details">
       <h1>Order Details</h1>
-
       {loading && <p>Loading order...</p>}
-
       {error && <p role="alert">{error}</p>}
+      {!loading && !error && !order && <p role="alert">Order not found</p>}
 
       {!loading && !error && order && (
-        <OrderCard
-          order={order}
-          showDetailsButton={false}
-          detailed={true}
-        />
+        <div className="order_detail_layout">
+          <OrderCard order={order} showDetailsButton={false} detailed />
+
+          {order.status === "Open" && (
+            user ? (
+              <OrderShareForm
+                key={`${order.id}-${user.username}`}
+                currentGrams={ownShare}
+                onSave={grams => saveShare(order.id, user.username, grams)}
+              />
+            ) : (
+              <aside className="order_share_card">
+                <h2>Join this order</h2>
+                <p>Log in to add or change your share.</p>
+                <Link to="/login" className="button-link">Log in</Link>
+              </aside>
+            )
+          )}
+        </div>
       )}
 
-      <Link to="/orders" className="button-link order_back_link">
-        Back to Orders
-      </Link>
+      <Link to="/orders" className="button-link order_back_link">Back to Orders</Link>
     </section>
   );
 }

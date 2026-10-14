@@ -5,6 +5,7 @@ import { GrindersScalesPage } from "./features/grindersScales/grindersScales";
 import {RequestPage} from "./features/grindersScales/RequestPage";
 import { OrdersPage } from "./features/orders/groupOrders";
 import { OrderDetailPage } from "./features/orders/OrderDetailPage";
+import { CreateOrderPage } from "./features/orders/CreateOrderPage";
 import { ShelfPage } from "./features/shelf/shelf";
 import { TastingsPage } from "./features/tastings/tastings";
 import { CreateTastingPage } from "./features/tastings/create_tastings";
@@ -18,6 +19,7 @@ export default function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="orders" element={<OrdersPage />} />
+        <Route path="orders/new" element={<ProtectedRoute><CreateOrderPage /></ProtectedRoute>} />
         <Route path="orders/:id" element={<OrderDetailPage />} />
         <Route path="grindersScales" element={<GrindersScalesPage />} />
         <Route path="requests" element={<RequestPage/>} />
