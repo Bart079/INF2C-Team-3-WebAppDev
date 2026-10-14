@@ -6,6 +6,7 @@ import coffeescale from "../../assets/coffeescale.jpg";
 import "../../css/styles.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { useAuth } from "../../auth/AuthContext";
 // npm run dev
 //--host
 
@@ -51,9 +52,13 @@ export function GrindersScalesPage() {
     </>
   );
 }
-//de 4 blokken available, on hold, request, calibration needed props meegegeven
+//de 4 blokken available, on hold, request, calibration props meegegeven
 export function GrindersScales({items}: { items: Item[] }) {
-    
+
+    const { user } = useAuth();
+    //const isCommitteeMember = user !== null && user.roles.includes("committee");
+
+
     const requestedItems = items.filter(
     item => item.status === "requested"
     );
@@ -116,9 +121,15 @@ export function GrindersScales({items}: { items: Item[] }) {
       
       
       <div className="images">
-        <Link className="button-link spacedbutton" to="/requests">
-          Make request
-        </Link>
+        {user ? (
+                <Link className="button-link spacedbutton" to="/requests">
+                Make request
+                </Link>
+              ) : (
+                <p>
+                  <Link className="button-link spacedbutton" to="/login">login first to make requests</Link>
+                </p>
+              )}
         <img
         className="large coffee_grinder"
         src={coffeegrinder}

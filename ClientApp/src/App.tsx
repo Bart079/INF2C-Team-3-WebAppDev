@@ -11,6 +11,7 @@ import { CreateTastingPage } from "./features/tastings/create_tastings";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { LoginPage } from "./auth/LoginPage";
 import { ProtectedRoute } from "./auth/ProtectedRoute";
+import { DetailPageGrinders } from "./features/grindersScales/DetailPageGrinders";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="orders" element={<OrdersPage />} />
         <Route path="orders/:id" element={<OrderDetailPage />} />
         <Route path="grindersScales" element={<GrindersScalesPage />} />
+        <Route path="grindersScales/:id" element={<DetailPageGrinders />} />
         <Route path="requests" element={<RequestPage/>} />
         <Route path="shelf" element={<ShelfPage />} />
         <Route path="tastings" element={<TastingsPage />} />

@@ -58,7 +58,7 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
                 <button>I want to participate</button>
               ) : (
                 <p>
-                  Om mee te doen, moet je <Link to="/login">inloggen</Link>.
+                  To participate, you must <Link to="/login">log in</Link>.
                 </p>
               )}
           </article>

@@ -1,8 +1,8 @@
 import { useState, type FormEvent } from "react";
 import "../../css/styles.css";
 import "../../css/grindersScales.css";
-import { useEffect} from "react";
-import type {Item } from "../../types/Item";
+import {useEffect} from "react";
+import type {Item} from "../../types/Item";
 
 export function RequestPage() {
     const [submitted, setSubmitted] = useState(false);
@@ -84,7 +84,8 @@ export function RequestPage() {
                 </div>
 
                 <div>
-                    <label htmlFor="TimeofRequest">Date and time:</label>
+
+                    <label htmlFor="TimeofRequest">Startdate of loaning</label>
                     <input
                         type="datetime-local"
                         id="TimeofRequest"
@@ -92,8 +93,16 @@ export function RequestPage() {
                         required
                     />
                 </div>
+                <div>
+                    <label htmlFor="EndTimeofRequest">Enddate of loaning</label>
+                    <input
+                        type="datetime-local"
+                        id="EndTimeofRequest"
+                        name="EndTimeofRequest"
+                        required
+                    />
+                </div>
 
-                <button type="submit">Create request</button>
             </form>
 
             {submitted && (
