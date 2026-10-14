@@ -55,7 +55,7 @@ const [error, setError] = useState<string | null>(null);
     <section className="status_groep">
         <h1>Item details</h1>
 
-    {loading && <p>Loading order...</p>}
+    {loading && <p>Loading item...</p>}
 
     {error && <p role="alert">{error}</p>}
 

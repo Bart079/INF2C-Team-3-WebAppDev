@@ -22,7 +22,14 @@ export default function App() {
         <Route path="orders/:id" element={<OrderDetailPage />} />
         <Route path="grindersScales" element={<GrindersScalesPage />} />
         <Route path="grindersScales/:id" element={<DetailPageGrinders />} />
-        <Route path="requests" element={<RequestPage/>} />
+        <Route
+          path="requests"
+          element={
+            <ProtectedRoute>
+              <RequestPage />
+            </ProtectedRoute>
+          }
+        />        
         <Route path="shelf" element={<ShelfPage />} />
         <Route path="tastings" element={<TastingsPage />} />
         <Route
