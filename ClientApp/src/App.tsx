@@ -13,6 +13,8 @@ import { CreateTastingPage } from "./features/tastings/create_tastings";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { LoginPage } from "./auth/LoginPage";
 import { ProtectedRoute } from "./auth/ProtectedRoute";
+import { DetailPageGrinders } from "./features/grindersScales/DetailPageGrinders";
+
 import { MyHostedTastingsPage } from "./features/tastings/my-hosted-tastings";
 export default function App() {
   return (
@@ -23,7 +25,15 @@ export default function App() {
         <Route path="orders/new" element={<ProtectedRoute><CreateOrderPage /></ProtectedRoute>} />
         <Route path="orders/:id" element={<OrderDetailPage />} />
         <Route path="grindersScales" element={<GrindersScalesPage />} />
-        <Route path="requests" element={<RequestPage/>} />
+        <Route path="grindersScales/:id" element={<DetailPageGrinders />} />
+        <Route
+          path="requests"
+          element={
+            <ProtectedRoute>
+              <RequestPage />
+            </ProtectedRoute>
+          }
+        />        
         <Route path="shelf" element={<ShelfPage />} />
         <Route path="tastings" element={<TastingsPage />} />
         <Route path="tastings/:id" element={<TastingsDetailPage />} />

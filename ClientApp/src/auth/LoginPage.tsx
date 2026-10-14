@@ -15,15 +15,15 @@ export function LoginPage() {
     if (await login(username, password)) {
       navigate("/");
     } else {
-      setError("Gebruikersnaam of wachtwoord onjuist.");
+      setError("Username or password incorrect.");
     }
   }
 
   return (
     <div>
       <h1>Log in</h1>
-      <p>Log in met je gebruikersnaam en wachtwoord.</p>
-      <p>Als je een account hebt, kun je extra dingen doen zoals meedoen aan een tasting er een organiseren, beans bestellen en nog veel meer.</p>
+      <p>Log in with your username and password.</p>
+      <p>when you have an account you can partake with tastings or organise one, ordering beans etc.</p>
       <form onSubmit={handleSubmit}>
         <input
           value={username}

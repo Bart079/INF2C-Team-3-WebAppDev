@@ -1,16 +1,24 @@
 import { useState, type FormEvent } from "react";
 import "../../css/styles.css";
 import "../../css/grindersScales.css";
-import { useEffect} from "react";
-import type {Item } from "../../types/Item";
+import {useEffect} from "react";
+import type {Item} from "../../types/Item";
+import { useNavigate } from "react-router";
+import { useAuth } from "../../auth/AuthContext";
 
 export function RequestPage() {
     const [submitted, setSubmitted] = useState(false);
     const [items, setItems] = useState<Item[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const { user } = useAuth(); //checkt of er ingelogd is
+    const navigation = useNavigate();
 
-    useEffect(() => {
+    useEffect(() => { //controle van of de user ingelogd is of niet
+        if(!user){ //reageert op of de user veranderd auth heeft user op null als je uitlogt
+            navigation("/"); }
+        },[user, navigation]);
+        useEffect(() => { //doorgaan met de rest als je wel ingelogd bent
         async function loadItems() {
             try { /*fetch items */
                 const response = await fetch("/items.json");
@@ -28,7 +36,7 @@ export function RequestPage() {
                 setLoading(false);
             }
         }
-
+    
         loadItems();
     }, []);
 
@@ -38,6 +46,10 @@ export function RequestPage() {
 
     if (error) {
         return <p>{error}</p>;
+    }
+
+    if (!user){
+        return null;
     }
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -84,7 +96,8 @@ export function RequestPage() {
                 </div>
 
                 <div>
-                    <label htmlFor="TimeofRequest">Date and time:</label>
+
+                    <label htmlFor="TimeofRequest">Startdate of loaning</label>
                     <input
                         type="datetime-local"
                         id="TimeofRequest"
@@ -92,7 +105,15 @@ export function RequestPage() {
                         required
                     />
                 </div>
-
+                <div>
+                    <label htmlFor="EndTimeofRequest">Enddate of loaning</label>
+                    <input
+                        type="datetime-local"
+                        id="EndTimeofRequest"
+                        name="EndTimeofRequest"
+                        required
+                    />
+                </div>
                 <button type="submit">Create request</button>
             </form>
 

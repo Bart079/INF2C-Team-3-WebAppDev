@@ -1,31 +1,57 @@
 [{
-    "name": "Comandante C60",
+    "id": 1,
+    "name": "C60 Baracuda Nautilus Blue",
     "kind": "handgrinder",
-    "condition": "new",
-    "status": "on hold"
+    "condition": "new condition",
+    "status": "on hold",
+    "brand": "Comandante",
+"description": "A manual coffee grinder designed for grinding coffee beans with control over the grind size.",
+    "instructions": "Add the coffee beans and adjust the grind setting before grinding. Turn the handle steadily. Clean the grinder after use and keep it dry.",
+    "image": "/src/assets/comandante c60.jpg"
 },
 {
-    "name": "Comandante C40",
+    "id": 2,
+    "name": "C40 MK4 Nitro Blade",
     "kind": "handgrinder",
-    "condition": "mint",
-    "status": "available"
+    "condition": "mint condition",
+    "status": "requested",
+    "brand": "Comandante",
+    "description": "A compact manual coffee grinder suitable for preparing freshly ground coffee at home or while travelling.",
+    "instructions": "Add the desired amount of coffee beans and select the appropriate grind setting. Grind by turning the handle evenly. Empty the grinder and brush away leftover coffee grounds after use.",
+    "image": "/src/assets/comandante c40.jpg"
+
 },
 {
+    "id": 3,
     "name": "Comandante X25",
     "kind": "handgrinder",
-    "condition": "mint",
-    "status": "available"
+    "condition": "mint condition",
+    "status": "available",
+    "brand": "Comandante",
+    "description": "A manual coffee grinder for preparing coffee with freshly ground beans. The grind setting can be adjusted to suit different brewing methods.",
+    "instructions": "Place the coffee beans in the grinder and check the grind setting before use. Turn the handle steadily and collect the ground coffee. Remove remaining grounds after use and store the grinder in a dry place.",
+    "image": "/src/assets/comandante x25.jpg"
 },
 {
-    "name": "Brewista",
+    "id": 4,
+    "name": "Brewista - Smart Scale III",
     "kind": "scale",
-    "condition": "bad",
-    "status": "not available"
+    "condition": "bad condition",
+    "status": "not available",
+    "brand": "Brewista",
+    "description": "A coffee scale intended to measure coffee or water during preparation. Accurate measurements can help make brewing more consistent.",
+    "instructions": "Place the scale on a stable, level surface. Turn it on and tare the scale before adding ingredients. Keep the scale dry and clean it carefully. Do not use it while calibration is required.",
+    "image": "/src/assets/brewista smartscale.jpg"
 },
 {
-    "name": "Acaia Lunar",
+    "id": 5,
+    "name": "Acaia - Lunar",
     "kind": "scale",
     "condition": "mint",
-    "status": "available"
+    "status": "available",
+    "brand": "Acaia",
+    "description": "A compact coffee scale designed for weighing espresso ingredients and monitoring measurements during coffee preparation.",
+    "instructions": "Place the scale on a stable surface and turn it on. Put your cup or container on the scale and tare it before brewing. Avoid spilling liquids on the scale and clean it according to the manufacturer's guidance.",
+    "image": "/src/assets/acaia-lunar-close-up.jpg"
 }
 ]

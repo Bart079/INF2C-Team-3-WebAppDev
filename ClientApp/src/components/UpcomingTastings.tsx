@@ -21,7 +21,7 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
   );
 
   return (
-    <div className="card_list" style={{ justifyContent: "center" }}>
+    <div className="card_list">
       {upcomingTastings.map((tasting) => {
         const confirmedSignups = signups.filter(
           (signup) =>
