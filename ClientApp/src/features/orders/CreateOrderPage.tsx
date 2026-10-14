@@ -27,8 +27,7 @@ export function CreateOrderPage() {
       String(now.getDate()).padStart(2, "0"),
     ].join("-");
     const selectedDate = new Date(`${closingDate}T12:00:00`);
-
-    // Check the date parts as well, so dates that JavaScript normalizes are rejected.
+    
     const validDate = /^\d{4}-\d{2}-\d{2}$/.test(closingDate)
       && !Number.isNaN(selectedDate.getTime())
       && selectedDate.getFullYear() === Number(closingDate.slice(0, 4))
