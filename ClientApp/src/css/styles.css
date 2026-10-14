@@ -95,13 +95,16 @@ button,
     cursor: pointer;
     font-size: 15px;
     margin-top: 10px;
+    text-decoration: none;
 }
 
-button:hover {
+button:hover,
+.button-link:hover {
     background-color: var(--text);
 }
 
-button:focus-visible {
+button:focus-visible,
+.button-link:focus-visible {
     outline: 2px solid var(--text);
     outline-offset: 3px;
 }
