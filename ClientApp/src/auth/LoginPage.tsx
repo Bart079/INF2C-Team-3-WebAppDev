@@ -22,6 +22,8 @@ export function LoginPage() {
   return (
     <div>
       <h1>Log in</h1>
+      <p>Log in met je gebruikersnaam en wachtwoord.</p>
+      <p>Als je een account hebt, kun je extra dingen doen zoals meedoen aan een tasting er een organiseren, beans bestellen en nog veel meer.</p>
       <form onSubmit={handleSubmit}>
         <input
           value={username}

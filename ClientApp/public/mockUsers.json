@@ -3,7 +3,7 @@
     "id": 1,
     "username": "lid1",
     "password": "demo123",
-    "roles": ["member"]
+    "roles": ["member", "host"]
   },
   {
     "id": 2,

@@ -26,28 +26,10 @@ export function CreateTastingPage() {
             />
 
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="firstName">First name:</label>
-                    <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        required
-                    />
-                </div>
+               
 
                 <div>
-                    <label htmlFor="lastName">Last name:</label>
-                    <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="tastingTime">Date and time:</label>
+                    <label htmlFor="tastingTime">Datum en Tijd:</label>
                     <input
                         type="datetime-local"
                         id="tastingTime"
@@ -57,7 +39,7 @@ export function CreateTastingPage() {
                 </div>
 
                 <div>
-                    <label htmlFor="capacity">Capacity of the room:</label>
+                    <label htmlFor="capacity">Capaciteit van de ruimte:</label>
                     <input
                         type="number"
                         id="capacity"
@@ -68,7 +50,7 @@ export function CreateTastingPage() {
                 </div>
 
                 <div>
-                    <label htmlFor="amountOfBeans">Amount of beans:</label>
+                    <label htmlFor="amountOfBeans">Aantal bonen:</label>
                     <input
                         type="number"
                         id="amountOfBeans"
