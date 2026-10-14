@@ -6,7 +6,6 @@ import { hasRole } from "../../auth/roles";
 import { useAuth } from "../../auth/AuthContext";
 import "../../css/styles.css";
 import "../../css/tastings.css";
-import coffeeCupsImage from "../../assets/row_of_coffee_cups.jpg";
 
 
 export function TastingsPage() {

@@ -21,7 +21,7 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
   );
 
   return (
-    <div className="card_list">
+    <div className="card_list" style={{ justifyContent: "center" }}>
       {upcomingTastings.map((tasting) => {
         const confirmedSignups = signups.filter(
           (signup) =>
@@ -59,6 +59,10 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
                 )
                 .join(", ")}
             </p>
+            <p>
+            <Link to={`/tastings/${tasting.id}`} className="button-link">
+              Details
+            </Link></p>
             {committee && !tasting.cancelled && (
               <>
                 {tasting.keyStatus !== "available" && (
