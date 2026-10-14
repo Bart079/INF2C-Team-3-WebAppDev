@@ -15,7 +15,9 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
   const beanNames = new Map(beans.map((bean) => [bean.id, bean.name]));
   const now = new Date();
   const upcomingTastings = tastings.filter(
-    (tasting) => new Date(`${tasting.date}T${tasting.time}`) >= now,
+    (tasting) =>
+      !tasting.cancelled &&
+      new Date(`${tasting.date}T${tasting.time}`) >= now,
   );
 
   return (

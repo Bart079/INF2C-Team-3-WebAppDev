@@ -68,8 +68,11 @@ export function TastingsPage() {
                 Join us for an amazing coffee tasting experience
                 </h3>
                 {isHost && (
-                <Link to="/my-hosted-tastings">My Hosted Tastings</Link>
+                    <p className="text boxedintro">
+                    <Link to="/my-hosted-tastings">My Hosted Tastings</Link>
+                    </p>
                 )}
+                
                 
 
                 <p className="text boxedintro">
@@ -77,11 +80,6 @@ export function TastingsPage() {
                 </p>
             </section>
             
-            <img
-                className="row_of_coffee_cups"
-                src={coffeeCupsImage}
-                alt="row of coffee cups"
-            />
 
             <p className="text boxedintro">
                 There are a lot of amazing types of beans!

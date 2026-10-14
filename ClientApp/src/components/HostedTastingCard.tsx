@@ -22,7 +22,7 @@ export function HostedTastingCard({
       <h2>Tasting op {tasting.date}</h2>
 
       <p>Tijd: {tasting.time}</p>
-      <p>Status: {tasting.cancelled ? "Geannuleerd" : tasting.keyStatus}</p>
+      <p>Status: {tasting.cancelled ? "Cancelled" : tasting.keyStatus}</p>
       <p>Capaciteit: {tasting.capacity}</p>
       <p>Bevestigde deelnemers: {confirmedCount}</p>
       <p>Wachtlijst: {waitingCount}</p>
