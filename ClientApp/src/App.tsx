@@ -33,7 +33,7 @@ export default function App() {
         <Route
           path="my-hosted-tastings"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute requiredRole="host">
               <MyHostedTastingsPage />
             </ProtectedRoute>
           }
