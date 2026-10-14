@@ -1,0 +1,10 @@
+[
+  { "id": 1, "roaster": "Friedhats", "name": "Kii AA", "origin": "Kenya", "roastLevel": "light", "freshnessWeeks": 6, "createdAt": "2026-08-18T10:00:00Z" },
+  { "id": 2, "roaster": "Bonanza Coffee", "name": "El Paraiso Lychee", "origin": "Colombia", "roastLevel": "light", "freshnessWeeks": 5, "createdAt": "2026-09-23T09:30:00Z" },
+  { "id": 3, "roaster": "Manhattan Coffee Roasters", "name": "Gesha Village Oma Lot 74", "origin": "Ethiopia", "roastLevel": "light", "freshnessWeeks": 8, "createdAt": "2026-06-08T14:15:00Z" },
+  { "id": 4, "roaster": "Lot61", "name": "Santa Barbara", "origin": "Honduras", "roastLevel": "medium", "freshnessWeeks": 6, "createdAt": "2026-08-22T11:45:00Z" },
+  { "id": 5, "roaster": "Coffee Collective", "name": "Daterra Sweet Collection", "origin": "Brazil", "roastLevel": "medium", "freshnessWeeks": 7, "createdAt": "2026-06-27T08:20:00Z" },
+  { "id": 6, "roaster": "Toby's Estate", "name": "Sumatra Lintong", "origin": "Indonesia", "roastLevel": "dark", "freshnessWeeks": 4, "createdAt": "2026-04-28T16:00:00Z" },
+  { "id": 7, "roaster": "Square Mile", "name": "Red Brick Espresso", "origin": "Brazil, Colombia, Ethiopia", "roastLevel": "medium", "freshnessWeeks": 6, "createdAt": "2026-09-28T13:10:00Z" },
+  { "id": 8, "roaster": "La Cabra", "name": "Finca El Diviso Pink Bourbon Anaerobic Natural Extended Fermentation Microlot No. 7 – Huila Highlands Selection", "origin": "Colombia", "roastLevel": "light", "freshnessWeeks": 6, "createdAt": "2026-08-24T15:40:00Z" }
+]

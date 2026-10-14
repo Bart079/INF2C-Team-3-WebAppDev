@@ -1,11 +1,26 @@
 import "../../css/shelf.css";
-import {bags, beans, brewingNotes} from "./mockData";
-import {BagList} from "../../components/BagList";
-import {BrewingNotes} from "../../components/BrewingNotes";
+import { useFetch } from "../../hooks/useFetch";
+import type { Bag } from "../../types/Bag";
+import type { Bean } from "../../types/Bean";
+import type { BrewingNote } from "../../types/BrewingNote";
+import { BagList } from "../../components/BagList";
+import { BrewingNotes } from "../../components/BrewingNotes";
 
 export function ShelfPage() {
-  const myBags = bags.filter(bag => bag.holderId === 1);
-  const myNotes = brewingNotes.filter((note) => note.writerId === 1);
+  const bags = useFetch<Bag[], Bag[]>("/bags.json", (raw) => raw);
+  const beans = useFetch<Bean[], Bean[]>("/beans.json", (raw) => raw);
+  const notes = useFetch<BrewingNote[], BrewingNote[]>("/brewing_notes.json", (raw) => raw);
+
+  if (bags.loading || beans.loading || notes.loading) {
+    return <p>Loading shelf...</p>;
+  }
+
+  if (bags.error || beans.error || notes.error) {
+    return <p>Could not load the shelf.</p>;
+  }
+
+  const myBags = (bags.data ?? []).filter((bag) => bag.holderId === 1);
+  const myNotes = (notes.data ?? []).filter((note) => note.writerId === 1);
 
   return (
     <>
@@ -17,8 +32,7 @@ export function ShelfPage() {
 
       <section className="my_bags">
         <h2 className="underlined">My Bags</h2>
-
-        <BagList bags={myBags} beans={beans} />
+        <BagList bags={myBags} beans={beans.data ?? []} />
       </section>
       
       <section className ="add_bag">

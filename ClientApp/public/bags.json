@@ -1,0 +1,14 @@
+[
+  { "id": 1, "beanId": 1, "holderId": 1, "grams": 250, "arrivalDate": "2026-09-20", "finished": false, "createdAt": "2026-09-20T17:05:00Z" },
+  { "id": 2, "beanId": 3, "holderId": 1, "grams": 100, "arrivalDate": "2026-08-12", "finished": false, "createdAt": "2026-08-12T18:30:00Z" },
+  { "id": 3, "beanId": 6, "holderId": 1, "grams": 250, "arrivalDate": "2026-05-02", "finished": true, "createdAt": "2026-05-02T12:00:00Z" },
+  { "id": 4, "beanId": 7, "holderId": 1, "grams": 1000, "arrivalDate": "2026-09-30", "finished": false, "createdAt": "2026-09-30T16:45:00Z" },
+  { "id": 5, "beanId": 8, "holderId": 1, "grams": 200, "arrivalDate": "2026-08-26", "finished": false, "createdAt": "2026-08-26T19:15:00Z" },
+  { "id": 6, "beanId": 2, "holderId": 2, "grams": 250, "arrivalDate": "2026-09-25", "finished": false, "createdAt": "2026-09-25T10:20:00Z" },
+  { "id": 7, "beanId": 5, "holderId": 2, "grams": 500, "arrivalDate": "2026-07-01", "finished": true, "createdAt": "2026-07-01T09:00:00Z" },
+  { "id": 8, "beanId": 4, "holderId": 2, "grams": 250, "arrivalDate": "2026-08-25", "finished": false, "createdAt": "2026-08-25T14:35:00Z" },
+  { "id": 9, "beanId": 1, "holderId": 3, "grams": 250, "arrivalDate": "2026-08-20", "finished": false, "createdAt": "2026-08-20T11:50:00Z" },
+  { "id": 10, "beanId": 6, "holderId": 3, "grams": 250, "arrivalDate": "2026-09-28", "finished": false, "createdAt": "2026-09-28T17:40:00Z" },
+  { "id": 11, "beanId": 3, "holderId": 4, "grams": 100, "arrivalDate": "2026-06-10", "finished": false, "createdAt": "2026-06-10T13:25:00Z" },
+  { "id": 12, "beanId": 5, "holderId": 4, "grams": 250, "arrivalDate": "2026-10-02", "finished": false, "createdAt": "2026-10-02T18:00:00Z" }
+]
