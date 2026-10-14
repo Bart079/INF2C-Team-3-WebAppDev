@@ -21,7 +21,7 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
   );
 
   return (
-    <div className="card_list" style={{ justifyContent: "center" }}>
+    <div className="card_list">
       {upcomingTastings.map((tasting) => {
         const confirmedSignups = signups.filter(
           (signup) =>
@@ -73,13 +73,13 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
               <p>
                 To participate, you need to <Link to="/login">log in</Link>.
               </p>
-              {user ? (
-                <button>I want to participate</button>
-              ) : (
-                <p>
-                  To participate, you must <Link to="/login">log in</Link>.
-                </p>
-              )}
+            )}
+            <br />
+             <br />
+
+            <Link to={`/tastings/${tasting.id}`} className="button-link">
+              Details
+            </Link>
           </article>
         );
       })}
