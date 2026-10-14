@@ -1,6 +1,9 @@
-// meeste code komt uit de lessen : https://github.com/hogeschool/INFWAD/blob/main/Lessons/3%20-%20Track%201%20-%20React/React%206%20-%20Context%20and%20custom%20hooks.md
+// Bron is  de les: https://github.com/hogeschool/INFWAD/blob/main/Lessons/3%20-%20Track%201%20-%20React/React%206%20-%20Context%20and%20custom%20hooks.md
 
 import { useState, useEffect } from "react";
+
+// Hook: Haalt Json op en geeft data , loading en error terug.
+// TRaw is de ruwe data die opgehaald wordt, TData is de getransformeerde data die teruggegeven wordt.
 
 export function useFetch<TRaw, TData>(
   url: string,
@@ -12,7 +15,7 @@ export function useFetch<TRaw, TData>(
 
   useEffect(() => {
     let ignore = false;
-
+//Voorkomt dat een oud antwoord de nieuwe data overschrijft.
     async function load() {
       setLoading(true);
       setError(null);
