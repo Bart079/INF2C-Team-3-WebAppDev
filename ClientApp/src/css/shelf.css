@@ -1,9 +1,3 @@
-
-h2.underlined {
-    text-align: center;
-    text-decoration: underline;
-}
-
 .coffee-bean-bag {
     height: 100px;
     width: 100px;
@@ -39,6 +33,7 @@ h2.underlined {
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
 }
+
 .offer-container {
     border: 2px solid brown;
     border-radius: 10px;
@@ -53,16 +48,4 @@ h2.underlined {
     top: 35%;
     color: black;
     font-size: 40px;
-    
-
-}
-
-.shelf_intro {
-    margin-bottom: 40px;
-}
-
-.my_bags,
-.add_bag,
-.my_notes {
-    margin-bottom: 40px;
 }

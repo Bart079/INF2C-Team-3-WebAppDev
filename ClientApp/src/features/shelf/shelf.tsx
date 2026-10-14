@@ -1,11 +1,30 @@
 import "../../css/shelf.css";
-import {bags, beans, brewingNotes} from "./mockData";
-import {BagList} from "../../components/BagList";
-import {BrewingNotes} from "../../components/BrewingNotes";
+import { useFetch } from "../../hooks/useFetch";
+import type { Bag } from "../../types/Bag";
+import type { Bean } from "../../types/Bean";
+import type { BrewingNote } from "../../types/BrewingNote";
+import { BagList } from "../../components/BagList";
+import { BrewingNotes } from "../../components/BrewingNotes";
 
+// Shelf page toont de bags en brewing notes van de gebruiker. De gebruiker kan ook een bag toevoegen aan zijn shelf.
 export function ShelfPage() {
-  const myBags = bags.filter(bag => bag.holderId === 1);
-  const myNotes = brewingNotes.filter((note) => note.writerId === 1);
+  // Haal de 3 datasets op met de useFetch hook.
+  const bags = useFetch<Bag[], Bag[]>("/bags.json", (raw) => raw);
+  const beans = useFetch<Bean[], Bean[]>("/shelf_beans.json", (raw) => raw);
+  const notes = useFetch<BrewingNote[], BrewingNote[]>("/brewing_notes.json", (raw) => raw);
+
+// Wachten op alle 3 de bestanden tot ze geladen zijn.
+  if (bags.loading || beans.loading || notes.loading) {
+    return <p>Loading shelf...</p>;
+  }
+// Foutmelding als een van de bestanden niet geladen kan worden.
+  if (bags.error || beans.error || notes.error) {
+    return <p>Could not load the shelf.</p>;
+  }
+
+  // Voorlopig enkel bags en notes van user met id =1 tonen.
+  const myBags = (bags.data ?? []).filter((bag) => bag.holderId === 1);
+  const myNotes = (notes.data ?? []).filter((note) => note.writerId === 1);
 
   return (
     <>
@@ -17,8 +36,7 @@ export function ShelfPage() {
 
       <section className="my_bags">
         <h2 className="underlined">My Bags</h2>
-
-        <BagList bags={myBags} beans={beans} />
+        <BagList bags={myBags} beans={beans.data ?? []} />
       </section>
       
       <section className ="add_bag">
