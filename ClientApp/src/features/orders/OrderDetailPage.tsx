@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router";
 import type { Order } from "../../types/Order";
 import { OrderCard } from "../../components/OrderCard";
 import "../../css/group_Orders.css";
-import "../../css/styles.css"
+import "../../css/styles.css";
 
 export function OrderDetailPage() {
   // Haal het ID uit de URL
@@ -17,6 +17,10 @@ export function OrderDetailPage() {
   useEffect(() => {
     async function loadOrder() {
       try {
+        setLoading(true);
+        setError(null);
+        setOrder(null);
+
         const response = await fetch("/group_orders.json");
 
         if (!response.ok) {
@@ -56,14 +60,15 @@ export function OrderDetailPage() {
 
       {!loading && !error && order && (
         <OrderCard
-            order={order}
-            showDetailsButton={false}
+          order={order}
+          showDetailsButton={false}
+          detailed={true}
         />
-        )}
+      )}
 
-        <Link to="/orders" className="button-link">
+      <Link to="/orders" className="button-link order_back_link">
         Back to Orders
-        </Link>
+      </Link>
     </section>
   );
 }
