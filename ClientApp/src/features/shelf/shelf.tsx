@@ -1,3 +1,5 @@
+import { AddBagForm } from "../../components/AddBagForm";
+import { useState } from "react";
 import "../../css/shelf.css";
 import { useFetch } from "../../hooks/useFetch";
 import type { Bag } from "../../types/Bag";
@@ -11,10 +13,35 @@ import { useAuth } from "../../auth/AuthContext";
 export function ShelfPage() {
   // Haal de ingelogde gebruiker op
   const { user } = useAuth();
+  // Bags die de gebruiker zelg toevoegt (word nog niet opgeslagen, geen backedn)
+  const [addedBags, setAddedBags] = useState<Bag[]>([]);
   // Haal de 3 datasets op met de useFetch hook.
   const bags = useFetch<Bag[], Bag[]>("/bags.json", (raw) => raw);
   const beans = useFetch<Bean[], Bean[]>("/shelf_beans.json", (raw) => raw);
   const notes = useFetch<BrewingNote[], BrewingNote[]>("/brewing_notes.json", (raw) => raw);
+
+  // Bags uit de JSON plus eigen bags
+  const allBags = [...(bags.data ?? []), ...addedBags];
+  const myBags = allBags.filter((bag) => bag.holderId === user?.id);
+  const myNotes = (notes.data ?? []).filter((note) => note.writerId === user?.id);
+
+//Voeg nieuwe bag toe aan shelf van ingelogde gebruiker
+function handleAdd(beanId: number, grams: number, arrivalDate: string){
+ // +1 id bij bestaand id
+ const newId = Math.max(0, ...allBags.map((bag) => bag.id)) + 1;
+
+ const newBag: Bag = {
+  id: newId,
+  beanId,
+  holderId: user?.id ?? 0,
+  grams,
+  arrivalDate,
+  finished: false,
+  createdAt: new Date().toISOString(),
+
+ };
+ setAddedBags([...addedBags, newBag]);
+}
 
 // Wachten op alle 3 de bestanden tot ze geladen zijn.
   if (bags.loading || beans.loading || notes.loading) {
@@ -24,10 +51,6 @@ export function ShelfPage() {
   if (bags.error || beans.error || notes.error) {
     return <p>Could not load the shelf.</p>;
   }
-
-  // Voorlopig enkel bags en notes van user met id =1 tonen.
-  const myBags = (bags.data ?? []).filter((bag) => bag.holderId === user?.id);
-  const myNotes = (notes.data ?? []).filter((note) => note.writerId === user?.id);
 
   return (
     <>
@@ -45,7 +68,7 @@ export function ShelfPage() {
       <section className ="add_bag">
         <h2 className="underlined">Add a Bag</h2>
         <p>Record a bag you took home from the club room.</p>
-        <button>Add Bag</button>
+        <AddBagForm beans={beans.data ?? []} onAdd={handleAdd} />
       </section>
         
 
