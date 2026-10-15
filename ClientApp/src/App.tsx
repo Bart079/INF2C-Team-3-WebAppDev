@@ -34,7 +34,14 @@ export default function App() {
             </ProtectedRoute>
           }
         />        
-        <Route path="shelf" element={<ShelfPage />} />
+        <Route
+          path="shelf"
+          element={
+            <ProtectedRoute>
+              <ShelfPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="tastings" element={<TastingsPage />} />
         <Route path="tastings/:id" element={<TastingsDetailPage />} />
         <Route

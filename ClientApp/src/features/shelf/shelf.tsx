@@ -5,9 +5,12 @@ import type { Bean } from "../../types/Bean";
 import type { BrewingNote } from "../../types/BrewingNote";
 import { BagList } from "../../components/BagList";
 import { BrewingNotes } from "../../components/BrewingNotes";
+import { useAuth } from "../../auth/AuthContext";
 
 // Shelf page toont de bags en brewing notes van de gebruiker. De gebruiker kan ook een bag toevoegen aan zijn shelf.
 export function ShelfPage() {
+  // Haal de ingelogde gebruiker op
+  const { user } = useAuth();
   // Haal de 3 datasets op met de useFetch hook.
   const bags = useFetch<Bag[], Bag[]>("/bags.json", (raw) => raw);
   const beans = useFetch<Bean[], Bean[]>("/shelf_beans.json", (raw) => raw);
@@ -23,8 +26,8 @@ export function ShelfPage() {
   }
 
   // Voorlopig enkel bags en notes van user met id =1 tonen.
-  const myBags = (bags.data ?? []).filter((bag) => bag.holderId === 1);
-  const myNotes = (notes.data ?? []).filter((note) => note.writerId === 1);
+  const myBags = (bags.data ?? []).filter((bag) => bag.holderId === user?.id);
+  const myNotes = (notes.data ?? []).filter((note) => note.writerId === user?.id);
 
   return (
     <>
