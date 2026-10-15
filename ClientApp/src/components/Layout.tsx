@@ -15,7 +15,9 @@ export function Layout() {
           <Link to="/tastings">Tastings</Link>
           <Link to="/grindersScales">Grinders & Scales</Link>
             {user ? (
-              <button onClick={logout}>Log out ({user.username})</button>
+              <button className="button_logout" onClick={logout}>
+                Log out ({user.username})
+              </button>
             ) : (
               <Link to="/login">Log in</Link>
             )}
