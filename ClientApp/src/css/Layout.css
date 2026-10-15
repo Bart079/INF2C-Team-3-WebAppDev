@@ -34,7 +34,7 @@ nav a:first-child { /* eerste link in de navigatie dus zetsel */
     left: 2rem;
 }
 
-@media (max-width: 820px) { /* als het breed of smaller is dan px*/
+@media (max-width: 920px) { /* als het breed of smaller is dan px*/
     nav a:first-child {
         position: static;
         width: 100%;
