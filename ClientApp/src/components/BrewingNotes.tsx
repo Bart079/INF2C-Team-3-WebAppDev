@@ -1,8 +1,5 @@
-import type {BrewingNote} from "../types/BrewingNote";
+import type { BrewingNotesProps } from "../types/BrewingNotesProps";
 
-type BrewingNotesProps = {
-    notes: BrewingNote[];
-};
 
 export function BrewingNotes({ notes }: BrewingNotesProps) {
     return (

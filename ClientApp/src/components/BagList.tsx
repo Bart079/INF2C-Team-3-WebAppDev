@@ -1,11 +1,6 @@
-import type { Bag } from "../types/Bag";
-import type { Bean } from "../types/Bean";
-import {BagCard} from "./BagCard";
 
-type BagListProps = {
-  bags: Bag[];
-  beans: Bean[];
-};
+import {BagCard} from "./BagCard";
+import type {BagListProps} from "../types/BagListProps";
 
 export function BagList({ bags, beans }: BagListProps) {
   return (

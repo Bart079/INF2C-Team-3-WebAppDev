@@ -1,13 +1,10 @@
-import type {Item} from "../types/Item";
 import "../css/Card.css";
 import {Link} from "react-router";
 import { useAuth } from "../auth/AuthContext";
 import { hasRole } from "../auth/roles";
+import type { ItemCardProps } from "../types/ItemCardProps..ts";
 
-type ItemCardProps = 
-{
-  item: Item;
-};
+
 
 export function ItemCard({item}: ItemCardProps) {
   const { user } = useAuth();
