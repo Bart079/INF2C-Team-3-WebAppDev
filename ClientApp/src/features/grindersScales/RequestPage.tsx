@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import type {Item} from "../../types/Item";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../auth/AuthContext";
+import { Link } from "react-router";
 
 export function RequestPage() {
     const [submitted, setSubmitted] = useState(false);
@@ -15,7 +16,7 @@ export function RequestPage() {
     const navigation = useNavigate();
 
     useEffect(() => { //controle van of de user ingelogd is of niet
-        if(!user){ //reageert op of de user veranderd auth heeft user op null als je uitlogt
+        if(!user){ //reageert op of de user veranderd = je logt uit op requestpage => redirect!
             navigation("/"); }
         },[user, navigation]);
         useEffect(() => { //doorgaan met de rest als je wel ingelogd bent
@@ -122,6 +123,8 @@ export function RequestPage() {
                     Form submitted.
                 </p>
             )}
+            <Link className="returnlink_form" to="/grindersScales">return to grinders & scales page</Link>
+            
         </div>
     );
 }
