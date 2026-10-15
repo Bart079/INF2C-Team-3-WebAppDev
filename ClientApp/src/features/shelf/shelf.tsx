@@ -25,29 +25,29 @@ export function ShelfPage() {
   const myBags = allBags.filter((bag) => bag.holderId === user?.id);
   const myNotes = (notes.data ?? []).filter((note) => note.writerId === user?.id);
 
-//Voeg nieuwe bag toe aan shelf van ingelogde gebruiker
-function handleAdd(beanId: number, grams: number, arrivalDate: string){
- // +1 id bij bestaand id
- const newId = Math.max(0, ...allBags.map((bag) => bag.id)) + 1;
+  //Voeg nieuwe bag toe aan shelf van ingelogde gebruiker
+  function handleAdd(beanId: number, grams: number, arrivalDate: string) {
+    // +1 id bij bestaand id
+    const newId = Math.max(0, ...allBags.map((bag) => bag.id)) + 1;
 
- const newBag: Bag = {
-  id: newId,
-  beanId,
-  holderId: user?.id ?? 0,
-  grams,
-  arrivalDate,
-  finished: false,
-  createdAt: new Date().toISOString(),
+    const newBag: Bag = {
+      id: newId,
+      beanId,
+      holderId: user?.id ?? 0,
+      grams,
+      arrivalDate,
+      finished: false,
+      createdAt: new Date().toISOString(),
 
- };
- setAddedBags([...addedBags, newBag]);
-}
+    };
+    setAddedBags([...addedBags, newBag]);
+  }
 
-// Wachten op alle 3 de bestanden tot ze geladen zijn.
+  // Wachten op alle 3 de bestanden tot ze geladen zijn.
   if (bags.loading || beans.loading || notes.loading) {
     return <p>Loading shelf...</p>;
   }
-// Foutmelding als een van de bestanden niet geladen kan worden.
+  // Foutmelding als een van de bestanden niet geladen kan worden.
   if (bags.error || beans.error || notes.error) {
     return <p>Could not load the shelf.</p>;
   }
@@ -64,13 +64,13 @@ function handleAdd(beanId: number, grams: number, arrivalDate: string){
         <h2 className="underlined">My Bags</h2>
         <BagList bags={myBags} beans={beans.data ?? []} />
       </section>
-      
-      <section className ="add_bag">
+
+      <section className="add_bag">
         <h2 className="underlined">Add a Bag</h2>
         <p>Record a bag you took home from the club room.</p>
         <AddBagForm beans={beans.data ?? []} onAdd={handleAdd} />
       </section>
-        
+
 
       <section className="my_notes">
         <h2 className="underlined">Brewing Notes</h2>
