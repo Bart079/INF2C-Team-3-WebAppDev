@@ -1,10 +1,4 @@
-import type { Bag } from "../types/Bag";
-import type { Bean } from "../types/Bean";
-
-type BagCardProps = {
-  bag: Bag;
-  bean: Bean | undefined;
-};
+import type {BagCardProps} from "../types/BagCardProps";
 
 export function BagCard({ bag, bean }: BagCardProps) {
     return (
