@@ -1,3 +1,4 @@
+import { ShelfDetailPage } from "./features/shelf/ShelfDetailPage";
 import { Routes, Route } from "react-router";
 import { Layout } from "./components/Layout";
 import { HomePage } from "./pages/HomePage";
@@ -34,7 +35,22 @@ export default function App() {
             </ProtectedRoute>
           }
         />        
-        <Route path="shelf" element={<ShelfPage />} />
+        <Route
+          path="shelf"
+          element={
+            <ProtectedRoute>
+              <ShelfPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="shelf/:id"
+          element={
+            <ProtectedRoute>
+              <ShelfDetailPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="tastings" element={<TastingsPage />} />
         <Route path="tastings/:id" element={<TastingsDetailPage />} />
         <Route

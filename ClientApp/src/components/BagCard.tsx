@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { Bag } from "../types/Bag";
 import type { Bean } from "../types/Bean";
 
@@ -9,7 +10,9 @@ type BagCardProps = {
 export function BagCard({ bag, bean }: BagCardProps) {
     return (
         <article className="card">
-            <h3>{bean?.name}</h3>
+            <h3>
+                <Link to={`/shelf/${bag.id}`}>{bean?.name}</Link>
+            </h3>
             <p><strong>Roaster: </strong>{bean?.roaster}</p>
             <p><strong>Origin: </strong>{bean?.origin}</p>
             <p><strong>Roast Level: </strong>{bean?.roastLevel}</p>
