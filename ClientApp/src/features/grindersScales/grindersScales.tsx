@@ -7,6 +7,7 @@ import "../../css/styles.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useAuth } from "../../auth/AuthContext";
+
 // npm run dev
 //--host
 
@@ -56,7 +57,6 @@ export function GrindersScalesPage() {
 export function GrindersScales({items}: { items: Item[] }) {
 
     const { user } = useAuth();
-    //const isCommitteeMember = user !== null && user.roles.includes("committee");
 
 
     const requestedItems = items.filter(
@@ -100,7 +100,8 @@ export function GrindersScales({items}: { items: Item[] }) {
         <div className="status_groep">
           <h2>On Hold</h2>
           {onholdItems.map(item => (
-          <ItemCard key={item.name} item={item} />
+          <ItemCard key={item.name} item={item} 
+          />
           ))}
         </div>
 
