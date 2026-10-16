@@ -9,7 +9,7 @@ export function ProtectedRoute({ children, requiredRole }: { children: ReactNode
     return <Navigate to="/login" replace />;
   }
   if (requiredRole && !hasRole(user, requiredRole)) {
-    return <Navigate to="/tastings" replace />;
+    return <Navigate to="/" replace />;
   }
   return children;
 }

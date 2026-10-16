@@ -69,8 +69,12 @@ export function MyHostedTastingsPage() {
     return <p>You need to log in to view your tastings.</p>;
   }
 
+  const now = new Date();
   const myTastings = tastings.filter(
-    (tasting) => tasting.hostId === user.id,
+    (tasting) =>
+      tasting.hostId === user.id &&
+      !tasting.cancelled &&
+      new Date(`${tasting.date}T${tasting.time}`) >= now,
   );
 
   return (

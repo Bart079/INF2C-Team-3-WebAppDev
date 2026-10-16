@@ -13,8 +13,24 @@ nav { /* navigatie bar */
     background-color: #b38d65;
     color: white;
     padding: 1rem;
+
+
+}
+.button_logout {
+    display: flex;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.3s;
+
 }
 
+.button_logout:hover {
+    background-color: #a67c52;
+}
 nav a { /* navigatie voor de pagina links */
     display: flex;
     text-decoration: none;
@@ -23,6 +39,7 @@ nav a { /* navigatie voor de pagina links */
     font-size: 1.5rem;
     padding-top: 20px;
     transition: 0.3s;
+    
 }
 nav a,
 nav a:hover {
