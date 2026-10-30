@@ -10,16 +10,16 @@ public static class SeedData
         using var scope = app.Services.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        if (await context.beans.AnyAsync())
+        if (await context.Beans.AnyAsync())
         {
             return;
         }
 
-        context.beans.AddRange(
-            new Bean { Name = "Ethiopia Yirgacheffe", Roaster = "Hans", Origin = "Ethiopia", Roastlevel = "light", Freshnessweeks = 3 },
-            new Bean { Name = "Colombia Supremo", Roaster = "Herman", Origin = "Colombia", Roastlevel = "medium", Freshnessweeks = 2 },
-            new Bean { Name = "Kenya AA", Roaster = "Anne", Origin = "Kenya", Roastlevel = "medium", Freshnessweeks = 5 },
-            new Bean { Name = "Brazil Santos", Roaster = "Max", Origin = "Brazil", Roastlevel = "light", Freshnessweeks = 3 }
+        context.Beans.AddRange(
+            new Bean { Name = "Ethiopia Yirgacheffe", Roaster = "Hans", Origin = "Ethiopia", RoastLevel = "light", FreshnessWeeks = 3 },
+            new Bean { Name = "Colombia Supremo", Roaster = "Herman", Origin = "Colombia", RoastLevel = "medium", FreshnessWeeks = 2 },
+            new Bean { Name = "Kenya AA", Roaster = "Anne", Origin = "Kenya", RoastLevel = "medium", FreshnessWeeks = 5 },
+            new Bean { Name = "Brazil Santos", Roaster = "Max", Origin = "Brazil", RoastLevel = "light", FreshnessWeeks = 3 }
         );
 
         await context.SaveChangesAsync();

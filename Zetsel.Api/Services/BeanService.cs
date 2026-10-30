@@ -31,7 +31,7 @@ public class BeanService : IBeanService
         Name = bean.Name,
         Roaster = bean.Roaster,
         Origin = bean.Origin,
-        Roastlevel = bean.Roastlevel,
-        Freshnessweeks = bean.Freshnessweeks
+        Roastlevel = bean.RoastLevel,
+        Freshnessweeks = bean.FreshnessWeeks
     };
 }

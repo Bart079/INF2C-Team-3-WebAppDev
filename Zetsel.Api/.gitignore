@@ -480,3 +480,9 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Lokale SQLite-databases (seeddata wordt via SeedData.cs gevuld)
+/Zetsel.db
+/Data/Zetsel.db
+/Data/Zetsel.db-shm
+/Data/Zetsel.db-wal
