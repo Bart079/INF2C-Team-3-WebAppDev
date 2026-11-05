@@ -11,8 +11,8 @@ using Zetsel.Api.Data;
 namespace Zetsel.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20261030103609_UpdateModels")]
-    partial class UpdateModels
+    [Migration("20261105154727_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,6 +114,10 @@ namespace Zetsel.Api.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
