@@ -23,6 +23,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IBeanService, BeanService>();
+builder.Services.AddScoped<IMemberService, MemberService>();
+builder.Services.AddScoped<ITastingService, TastingService>();
+builder.Services.AddScoped<ITastingLineupService, TastingLineupService>();
+builder.Services.AddScoped<ITastingSignupService, TastingSignupService>();
+builder.Services.AddScoped<ITastingScoreService, TastingScoreService>();
 
 var app = builder.Build();
 
