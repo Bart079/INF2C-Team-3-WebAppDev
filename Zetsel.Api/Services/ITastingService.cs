@@ -6,4 +6,5 @@ public interface ITastingService
 {
     Task<List<TastingDto>> GetAllAsync();
     Task<TastingDto?> GetByIdAsync(int id);
+    Task<TastingDto> CreateAsync(CreateTastingDto dto);
 }

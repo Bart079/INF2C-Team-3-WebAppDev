@@ -25,6 +25,23 @@ public class TastingScoreService : ITastingScoreService
         return score is null ? null : ToDto(score);
     }
 
+    public async Task<TastingScoreDto> CreateAsync(CreateTastingScoreDto dto)
+    {
+        var score = new TastingScore
+        {
+            LineupId = dto.LineupId,
+            MemberId = dto.MemberId,
+            Points = dto.Points,
+            Remark = dto.Remark
+        };
+
+        _scores.Add(score);
+        await _scores.SaveChangesAsync();
+
+        return ToDto(score);
+    }
+
+
     private static TastingScoreDto ToDto(TastingScore score) => new()
     {
         Id = score.Id,

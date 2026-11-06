@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:5172
+
+### Get all tasting lineups
+GET {{baseUrl}}/api/TastingLineups
+
+### Get a tasting lineup by ID
+GET {{baseUrl}}/api/TastingLineups/1
+
+### Create a tasting lineup
+POST {{baseUrl}}/api/TastingLineups
+Content-Type: application/json
+
+{
+  "tastingId": 5,
+  "beanId": 2,
+  "position": 5
+}

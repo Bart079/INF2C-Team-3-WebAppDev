@@ -25,6 +25,25 @@ public class TastingSignupService : ITastingSignupService
         return signup is null ? null : ToDto(signup);
     }
 
+    public async Task<TastingSignupDto> CreateAsync(CreateTastingSignupDto dto)
+    {
+        var signup = new TastingSignup
+        {
+            TastingId = dto.TastingId,
+            MemberId = dto.MemberId,
+            Status = dto.Status,
+            SignedUpAt = dto.SignedUpAt
+        };
+
+        _signups.Add(signup);
+        await _signups.SaveChangesAsync();
+
+        return ToDto(signup);
+    }
+
+
+
+
     private static TastingSignupDto ToDto(TastingSignup signup) => new()
     {
         Id = signup.Id,

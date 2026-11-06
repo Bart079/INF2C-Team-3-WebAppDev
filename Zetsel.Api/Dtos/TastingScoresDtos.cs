@@ -8,3 +8,10 @@ public record TastingScoreDto
     public int Points { get; init; }
     public string? Remark { get; init; }
 }
+public record CreateTastingScoreDto
+{
+    public int LineupId { get; init; } 
+    public int MemberId { get; init; }
+    public int Points { get; init; }
+    public string? Remark { get; init; } = string.Empty;
+}

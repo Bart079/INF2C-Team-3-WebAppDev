@@ -7,3 +7,9 @@ public record TastingLineupDto
     public int BeanId { get; init; }
     public int Position { get; init; }
 }
+public record CreateTastingLineupDto
+{
+    public int TastingId { get; init; } 
+    public int BeanId { get; init; }
+    public int Position { get; init; }
+}

@@ -25,6 +25,26 @@ public class TastingService : ITastingService
         return tasting is null ? null : ToDto(tasting);
     }
 
+    public async Task<TastingDto> CreateAsync(CreateTastingDto dto)
+    {
+        var tasting = new Tasting
+        {
+            HostId = dto.HostId,
+            Date = dto.Date,
+            Time = dto.Time,
+            Capacity = dto.Capacity,
+            Cancelled = dto.Cancelled,
+            KeyStatus = dto.KeyStatus
+        };
+
+        _tastings.Add(tasting);
+        await _tastings.SaveChangesAsync();
+
+        return ToDto(tasting);
+    }
+
+
+
     private static TastingDto ToDto(Tasting tasting) => new()
     {
         Id = tasting.Id,

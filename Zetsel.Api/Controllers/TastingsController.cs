@@ -25,4 +25,11 @@ public class TastingsController : ControllerBase
         var tasting = await _tastings.GetByIdAsync(id);
         return tasting is null ? NotFound() : Ok(tasting);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<TastingDto>> Create(CreateTastingDto dto)
+    {
+        var created = await _tastings.CreateAsync(dto);
+        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+    }
 }

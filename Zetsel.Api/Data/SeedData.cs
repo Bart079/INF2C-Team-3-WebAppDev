@@ -180,31 +180,61 @@ public static class SeedData
 
         if (!await context.TastingLineups.AnyAsync())
         {
-            var beanIds = new[] { ethiopia.Id, colombia.Id, kenya.Id, brazil.Id};
-            var lineupSeed = new (int TastingId, int BeanNumber, int Position)[]
+            var lineupSeed = new[]
             {
-                (1, 1, 1), (1, 2, 2), (1, 3, 3), (1, 4, 4),
-                (2, 2, 1), (2, 3, 2), (2, 5, 3),
-                (3, 1, 1), (3, 5, 2), (3, 3, 3), (3, 2, 4), (3, 4, 5),
-                (4, 4, 1), (4, 2, 2), (4, 5, 3),
-                (5, 1, 1), (5, 3, 2), (5, 5, 3), (5, 4, 4),
-                (6, 3, 1), (6, 4, 2), (6, 1, 3), (6, 5, 4),
-                (7, 2, 1), (7, 1, 2), (7, 4, 3), (7, 3, 4), (7, 5, 5),
-                (8, 5, 1), (8, 3, 2), (8, 2, 3),
-                (9, 4, 1), (9, 1, 2), (9, 2, 3), (9, 5, 4),
-                (10, 3, 1), (10, 5, 2), (10, 1, 3), (10, 4, 4), (10, 2, 5),
-                (11, 1, 1), (11, 2, 2), (11, 5, 3),
-                (12, 3, 1), (12, 4, 2), (12, 5, 3), (12, 1, 4),
-                (13, 2, 1), (13, 4, 2), (13, 3, 3),
-                (14, 5, 1), (14, 1, 2), (14, 3, 3), (14, 4, 4)
+                new TastingLineup { TastingId = 1, BeanId = ethiopia.Id, Position = 1 },
+                new TastingLineup { TastingId = 1, BeanId = colombia.Id, Position = 2 },
+                new TastingLineup { TastingId = 1, BeanId = kenya.Id, Position = 3 },
+                new TastingLineup { TastingId = 1, BeanId = brazil.Id, Position = 4 },
+                new TastingLineup { TastingId = 2, BeanId = colombia.Id, Position = 1 },
+                new TastingLineup { TastingId = 2, BeanId = kenya.Id, Position = 2 },
+                new TastingLineup { TastingId = 2, BeanId = ethiopia.Id, Position = 3 },
+                new TastingLineup { TastingId = 3, BeanId = ethiopia.Id, Position = 1 },
+                new TastingLineup { TastingId = 3, BeanId = kenya.Id, Position = 2 },
+                new TastingLineup { TastingId = 3, BeanId = colombia.Id, Position = 3 },
+                new TastingLineup { TastingId = 3, BeanId = brazil.Id, Position = 4 },
+                new TastingLineup { TastingId = 4, BeanId = brazil.Id, Position = 1 },
+                new TastingLineup { TastingId = 4, BeanId = colombia.Id, Position = 2 },
+                new TastingLineup { TastingId = 4, BeanId = ethiopia.Id, Position = 3 },
+                new TastingLineup { TastingId = 5, BeanId = ethiopia.Id, Position = 1 },
+                new TastingLineup { TastingId = 5, BeanId = kenya.Id, Position = 2 },
+                new TastingLineup { TastingId = 5, BeanId = colombia.Id, Position = 3 },
+                new TastingLineup { TastingId = 5, BeanId = brazil.Id, Position = 4 },
+                new TastingLineup { TastingId = 6, BeanId = kenya.Id, Position = 1 },
+                new TastingLineup { TastingId = 6, BeanId = brazil.Id, Position = 2 },
+                new TastingLineup { TastingId = 6, BeanId = ethiopia.Id, Position = 3 },
+                new TastingLineup { TastingId = 7, BeanId = colombia.Id, Position = 1 },
+                new TastingLineup { TastingId = 7, BeanId = ethiopia.Id, Position = 2 },
+                new TastingLineup { TastingId = 7, BeanId = brazil.Id, Position = 3 },
+                new TastingLineup { TastingId = 7, BeanId = kenya.Id, Position = 4 },
+                new TastingLineup { TastingId = 8, BeanId = ethiopia.Id, Position = 1 },
+                new TastingLineup { TastingId = 8, BeanId = kenya.Id, Position = 2 },
+                new TastingLineup { TastingId = 8, BeanId = colombia.Id, Position = 3 },
+                new TastingLineup { TastingId = 9, BeanId = brazil.Id, Position = 1 },
+                new TastingLineup { TastingId = 9, BeanId = ethiopia.Id, Position = 2 },
+                new TastingLineup { TastingId = 9, BeanId = colombia.Id, Position = 3 },
+                new TastingLineup { TastingId = 9, BeanId = kenya.Id, Position = 4 },
+                new TastingLineup { TastingId = 10, BeanId = kenya.Id, Position = 1 },
+                new TastingLineup { TastingId = 10, BeanId = ethiopia.Id, Position = 2 },
+                new TastingLineup { TastingId = 10, BeanId = brazil.Id, Position = 3 },
+                new TastingLineup { TastingId = 10, BeanId = colombia.Id, Position = 4 },
+                new TastingLineup { TastingId = 11, BeanId = ethiopia.Id, Position = 1 },
+                new TastingLineup { TastingId = 11, BeanId = colombia.Id, Position = 2 },
+                new TastingLineup { TastingId = 11, BeanId = kenya.Id, Position = 3 },
+                new TastingLineup { TastingId = 12, BeanId = kenya.Id, Position = 1 },
+                new TastingLineup { TastingId = 12, BeanId = brazil.Id, Position = 2 },
+                new TastingLineup { TastingId = 12, BeanId = colombia.Id, Position = 3 },
+                new TastingLineup { TastingId = 12, BeanId = ethiopia.Id, Position = 4 },
+                new TastingLineup { TastingId = 13, BeanId = colombia.Id, Position = 1 },
+                new TastingLineup { TastingId = 13, BeanId = brazil.Id, Position = 2 },
+                new TastingLineup { TastingId = 13, BeanId = kenya.Id, Position = 3 },
+                new TastingLineup { TastingId = 14, BeanId = colombia.Id, Position = 1 },
+                new TastingLineup { TastingId = 14, BeanId = ethiopia.Id, Position = 2 },
+                new TastingLineup { TastingId = 14, BeanId = kenya.Id, Position = 3 },
+                new TastingLineup { TastingId = 14, BeanId = brazil.Id, Position = 4 }
             };
 
-            context.TastingLineups.AddRange(lineupSeed.Select(lineup => new TastingLineup
-            {
-                TastingId = lineup.TastingId,
-                BeanId = beanIds[lineup.BeanNumber - 1],
-                Position = lineup.Position
-            }));
+            context.TastingLineups.AddRange(lineupSeed);
         }
         await context.SaveChangesAsync();
 
