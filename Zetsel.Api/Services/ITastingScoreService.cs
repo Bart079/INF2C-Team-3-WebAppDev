@@ -1,0 +1,9 @@
+using Zetsel.Api.Dtos;
+
+namespace Zetsel.Api.Services;
+
+public interface ITastingScoreService
+{
+    Task<List<TastingScoreDto>> GetAllAsync();
+    Task<TastingScoreDto?> GetByIdAsync(int id);
+}
