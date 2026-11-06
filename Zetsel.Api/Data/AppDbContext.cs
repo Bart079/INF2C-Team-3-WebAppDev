@@ -35,6 +35,6 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<ItemHold>()
             .HasIndex(hold => hold.ItemId)
             .IsUnique()
-            .HasFilter("\"EndedAt\" IS NULL");
+            .HasFilter("\"EndsAt\" IS NULL");
     }
 }

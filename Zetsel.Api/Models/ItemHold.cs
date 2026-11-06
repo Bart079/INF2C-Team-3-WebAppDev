@@ -10,6 +10,6 @@ public class ItemHold : IEntity
     public int MemberId { get; set; }
     public Member Member { get; set; } = null!;
 
-    public DateTime StartedAt { get; set; } // Opslaan als UTC.
-    public DateTime? EndedAt { get; set; }  // null = nog in bezit.
+    public DateOnly StartedAt { get; set; } // Opslaan als UTC.
+    public DateOnly EndsAt { get; set; }  // Opslaan als UTC. heeft een einddatum
 }

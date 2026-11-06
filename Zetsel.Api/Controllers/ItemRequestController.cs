@@ -1,0 +1,28 @@
+using Zetsel.Api.Dtos;
+using Zetsel.Api.Services;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Zetsel.Api.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class ItemRequestController : ControllerBase
+{
+    private readonly IItemRequestService _itemRequests;
+
+    public ItemRequestController(IItemRequestService itemRequests)
+    {
+        _itemRequests = itemRequests;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<List<ItemRequestDto>>> GetAll()
+        => Ok(await _itemRequests.GetAllAsync());
+
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<ItemRequestDto>> GetById(int id)
+    {
+        var item = await _itemRequests.GetByIdAsync(id);
+        return item is null ? NotFound() : Ok(item);
+    }
+}

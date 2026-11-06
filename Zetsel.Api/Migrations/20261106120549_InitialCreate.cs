@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -6,30 +6,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Zetsel.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateModels : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("""
-                CREATE TABLE "__BeansNew" (
-                    "Id" INTEGER NOT NULL CONSTRAINT "PK_Beans" PRIMARY KEY AUTOINCREMENT,
-                    "Name" TEXT NOT NULL,
-                    "Roaster" TEXT NOT NULL,
-                    "Origin" TEXT NOT NULL,
-                    "RoastLevel" TEXT NOT NULL,
-                    "FreshnessWeeks" INTEGER NOT NULL
-                );
-                """);
-
-            migrationBuilder.Sql("""
-                INSERT INTO "__BeansNew" ("Id", "Name", "Roaster", "Origin", "RoastLevel", "FreshnessWeeks")
-                SELECT "Id", "Name", "Roaster", "Origin", "Roastlevel", "Freshnessweeks"
-                FROM "beans";
-                """);
-
-            migrationBuilder.Sql("DROP TABLE \"beans\";");
-            migrationBuilder.Sql("ALTER TABLE \"__BeansNew\" RENAME TO \"Beans\";");
+            migrationBuilder.CreateTable(
+                name: "Beans",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Roaster = table.Column<string>(type: "TEXT", nullable: false),
+                    Origin = table.Column<string>(type: "TEXT", nullable: false),
+                    RoastLevel = table.Column<string>(type: "TEXT", nullable: false),
+                    FreshnessWeeks = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Beans", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Items",
@@ -40,6 +37,7 @@ namespace Zetsel.Api.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Kind = table.Column<string>(type: "TEXT", nullable: false),
                     Condition = table.Column<string>(type: "TEXT", nullable: false),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
                     Brand = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Instructions = table.Column<string>(type: "TEXT", nullable: true),
@@ -103,8 +101,8 @@ namespace Zetsel.Api.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ItemId = table.Column<int>(type: "INTEGER", nullable: false),
                     MemberId = table.Column<int>(type: "INTEGER", nullable: false),
-                    StartedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EndedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    StartedAt = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    EndsAt = table.Column<DateOnly>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -306,7 +304,7 @@ namespace Zetsel.Api.Migrations
                 table: "ItemHolds",
                 column: "ItemId",
                 unique: true,
-                filter: "\"EndedAt\" IS NULL");
+                filter: "\"EndsAt\" IS NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemHolds_MemberId",
@@ -413,36 +411,13 @@ namespace Zetsel.Api.Migrations
                 name: "TastingLineups");
 
             migrationBuilder.DropTable(
+                name: "Beans");
+
+            migrationBuilder.DropTable(
                 name: "Tastings");
 
             migrationBuilder.DropTable(
                 name: "Members");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Beans_Roaster_Name",
-                table: "Beans");
-
-            // De omgekeerde wijziging moet ook via een tussentabel door SQLite's
-            // hoofdletterongevoelige tabelnamen.
-            migrationBuilder.Sql("""
-                CREATE TABLE "__beans_old" (
-                    "Id" INTEGER NOT NULL CONSTRAINT "PK_beans" PRIMARY KEY AUTOINCREMENT,
-                    "Name" TEXT NOT NULL,
-                    "Roaster" TEXT NOT NULL,
-                    "Origin" TEXT NOT NULL,
-                    "Roastlevel" TEXT NOT NULL,
-                    "Freshnessweeks" INTEGER NOT NULL
-                );
-                """);
-
-            migrationBuilder.Sql("""
-                INSERT INTO "__beans_old" ("Id", "Name", "Roaster", "Origin", "Roastlevel", "Freshnessweeks")
-                SELECT "Id", "Name", "Roaster", "Origin", "RoastLevel", "FreshnessWeeks"
-                FROM "Beans";
-                """);
-
-            migrationBuilder.Sql("DROP TABLE \"Beans\";");
-            migrationBuilder.Sql("ALTER TABLE \"__beans_old\" RENAME TO \"beans\";");
         }
     }
 }

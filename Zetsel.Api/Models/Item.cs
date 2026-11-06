@@ -6,6 +6,7 @@ public class Item : IEntity
     public string Name { get; set; } = string.Empty;
     public string Kind { get; set; } = string.Empty;
     public string Condition { get; set; } = string.Empty;
+    public string Status { get; set; } = string.Empty;
     public string? Brand { get; set; }
     public string? Description { get; set; }
     public string? Instructions { get; set; }
