@@ -3,14 +3,86 @@
 ### GET - Alle Group Orders
 GET {{baseUrl}}/api/grouporders
 
-### GET - Group Order met ID 1
+### GET - Group Order 1
 GET {{baseUrl}}/api/grouporders/1
 
-### GET - Group Order met ID 2
-GET {{baseUrl}}/api/grouporders/2
+### POST - Nieuwe Group Order aanmaken
+# @name createGroupOrder
+POST {{baseUrl}}/api/grouporders
+Content-Type: application/json
 
-### GET - Group Order met ID 3
-GET {{baseUrl}}/api/grouporders/3
+{
+    "beanId": 1,
+    "startedById": 1,
+    "minimumGrams": 1000,
+    "closingDate": "2027-12-01"
+}
 
-### GET - Niet-bestaande Group Order (404)
-GET {{baseUrl}}/api/grouporders/999
+### GET - Zojuist aangemaakte Group Order
+GET {{baseUrl}}/api/grouporders/{{createGroupOrder.response.body.$.id}}
+
+### PUT - Group Order aanpassen
+PUT {{baseUrl}}/api/grouporders/{{createGroupOrder.response.body.$.id}}
+Content-Type: application/json
+
+{
+    "minimumGrams": 1500,
+    "closingDate": "2027-12-15"
+}
+
+### GET - Controleren of PUT is opgeslagen
+GET {{baseUrl}}/api/grouporders/{{createGroupOrder.response.body.$.id}}
+
+### DELETE - Testbestelling verwijderen
+DELETE {{baseUrl}}/api/grouporders/{{createGroupOrder.response.body.$.id}}
+
+### GET - Controleren of bestelling verwijderd is
+GET {{baseUrl}}/api/grouporders/{{createGroupOrder.response.body.$.id}}
+
+### POST - Ongeldige BeanId
+POST {{baseUrl}}/api/grouporders
+Content-Type: application/json
+
+{
+    "beanId": 999,
+    "startedById": 1,
+    "minimumGrams": 1000,
+    "closingDate": "2027-12-01"
+}
+
+### POST - Ongeldige StartedById
+POST {{baseUrl}}/api/grouporders
+Content-Type: application/json
+
+{
+    "beanId": 1,
+    "startedById": 999,
+    "minimumGrams": 1000,
+    "closingDate": "2027-12-01"
+}
+
+### POST - Ongeldige MinimumGrams
+POST {{baseUrl}}/api/grouporders
+Content-Type: application/json
+
+{
+    "beanId": 1,
+    "startedById": 1,
+    "minimumGrams": -100,
+    "closingDate": "2027-12-01"
+}
+
+### PUT - Niet-bestaande Group Order
+PUT {{baseUrl}}/api/grouporders/999
+Content-Type: application/json
+
+{
+    "minimumGrams": 1000,
+    "closingDate": "2027-12-01"
+}
+
+### DELETE - Niet-bestaande Group Order
+DELETE {{baseUrl}}/api/grouporders/999
+
+### DELETE - Group Order met bestaande aandelen
+DELETE {{baseUrl}}/api/grouporders/1
