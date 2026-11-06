@@ -19,3 +19,14 @@ Content-Type: application/json
 
 ### Delete a tasting signup
 DELETE {{baseUrl}}/api/TastingSignups/1
+
+### Update a tasting signup
+PUT {{baseUrl}}/api/TastingSignups/1
+Content-Type: application/json
+
+{
+  "tastingId": 5,
+  "memberId": 1,
+  "status": "confirmed",
+  "signedUpAt": "2026-11-06T12:00:00Z"
+}

@@ -15,3 +15,10 @@ public record CreateTastingSignupDto
     public string Status { get; init; } = string.Empty;
     public DateTime SignedUpAt { get; init; }
 }
+public record UpdateTastingSignupDto
+{
+    public int TastingId { get; init; } 
+    public int MemberId { get; init; }
+    public string Status { get; init; } = string.Empty;
+    public DateTime SignedUpAt { get; init; }
+}

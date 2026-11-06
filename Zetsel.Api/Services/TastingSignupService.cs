@@ -53,7 +53,18 @@ public class TastingSignupService : ITastingSignupService
         return true;
     }
 
+    public async Task<TastingSignupDto?> UpdateAsync(int id, UpdateTastingSignupDto dto)
+    {
+        var signup = await _signups.GetByIdAsync(id);
+        if (signup is null) return null;
 
+        signup.TastingId = dto.TastingId;
+        signup.MemberId = dto.MemberId;
+        signup.Status = dto.Status;
+        signup.SignedUpAt = dto.SignedUpAt;
+        await _signups.SaveChangesAsync();
+        return ToDto(signup);
+    }
 
 
     private static TastingSignupDto ToDto(TastingSignup signup) => new()

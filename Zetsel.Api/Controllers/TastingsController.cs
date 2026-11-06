@@ -39,4 +39,11 @@ public class TastingsController : ControllerBase
         var deleted = await _tastings.DeleteAsync(id);
         return deleted ? NoContent() : NotFound();
     }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<TastingDto>> Update(int id, UpdateTastingDto dto)
+    {
+        var updated = await _tastings.UpdateAsync(id, dto);
+        return updated is null ? NotFound() : Ok(updated);
+    }   
 }

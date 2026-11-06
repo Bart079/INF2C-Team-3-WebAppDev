@@ -18,3 +18,13 @@ Content-Type: application/json
 
 ### Delete a tasting lineup
 DELETE {{baseUrl}}/api/TastingLineups/1
+
+### Update a tasting lineup
+PUT {{baseUrl}}/api/TastingLineups/1
+Content-Type: application/json
+
+{
+  "tastingId": 5,
+  "beanId": 2,
+  "position": 5
+}

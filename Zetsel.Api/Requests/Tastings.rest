@@ -21,3 +21,16 @@ Content-Type: application/json
 
 ### Delete a tasting
 DELETE {{baseUrl}}/api/Tastings/15
+
+### Update a tasting
+PUT {{baseUrl}}/api/Tastings/15
+Content-Type: application/json
+
+{
+  "hostId": 1,
+  "date": "2026-12-27",
+  "time": "19:00:00",
+  "capacity": 8,
+  "cancelled": false,
+  "keyStatus": "available"
+}

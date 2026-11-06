@@ -19,3 +19,14 @@ Content-Type: application/json
 
 ### Delete a tasting score
 DELETE {{baseUrl}}/api/TastingScores/1
+
+### Update a tasting score
+PUT {{baseUrl}}/api/TastingScores/1
+Content-Type: application/json
+
+{
+  "lineupId": 4,
+  "memberId": 1,
+  "points": 8,
+  "remark": "Smooth taste with a chocolate finish"
+}

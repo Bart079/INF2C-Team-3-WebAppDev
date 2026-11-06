@@ -53,9 +53,20 @@ public class TastingService : ITastingService
 
         return true;
     }
+    public async Task<TastingDto?> UpdateAsync(int id, UpdateTastingDto dto)
+    {
+        var tasting = await _tastings.GetByIdAsync(id);
+        if (tasting is null) return null;
 
-
-
+        tasting.HostId = dto.HostId;
+        tasting.Date = dto.Date;
+        tasting.Time = dto.Time;
+        tasting.Capacity = dto.Capacity;
+        tasting.Cancelled = dto.Cancelled;
+        tasting.KeyStatus = dto.KeyStatus;
+        await _tastings.SaveChangesAsync();
+        return ToDto(tasting);
+    }
     private static TastingDto ToDto(Tasting tasting) => new()
     {
         Id = tasting.Id,

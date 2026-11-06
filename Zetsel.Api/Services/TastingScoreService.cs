@@ -53,6 +53,20 @@ public class TastingScoreService : ITastingScoreService
         return true;
     }
 
+    public async Task<TastingScoreDto?> UpdateAsync(int id, UpdateTastingScoreDto dto)
+    {
+        var score = await _scores.GetByIdAsync(id);
+        if (score is null) return null;
+
+        score.LineupId = dto.LineupId;
+        score.MemberId = dto.MemberId;
+        score.Points = dto.Points;
+        score.Remark = dto.Remark;
+        await _scores.SaveChangesAsync();
+        return ToDto(score);
+    }
+
+
 
     private static TastingScoreDto ToDto(TastingScore score) => new()
     {
