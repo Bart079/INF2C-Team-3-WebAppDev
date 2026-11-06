@@ -40,6 +40,17 @@ public class TastingLineupService : ITastingLineupService
         return ToDto(lineup);
     }
 
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var lineup = await _lineups.GetByIdAsync(id);
+        if (lineup is null) return false;
+
+        _lineups.Delete(lineup);
+        await _lineups.SaveChangesAsync();
+
+        return true;
+    }
+
 
     internal static TastingLineupDto ToDto(TastingLineup lineup) => new()
     {

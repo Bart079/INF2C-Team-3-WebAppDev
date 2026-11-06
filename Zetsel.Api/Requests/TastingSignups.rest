@@ -16,3 +16,6 @@ Content-Type: application/json
   "status": "confirmed",
   "signedUpAt": "2026-11-06T12:00:00Z"
 }
+
+### Delete a tasting signup
+DELETE {{baseUrl}}/api/TastingSignups/1

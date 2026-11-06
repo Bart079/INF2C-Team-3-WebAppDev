@@ -42,6 +42,18 @@ public class TastingSignupService : ITastingSignupService
     }
 
 
+     public async Task<bool> DeleteAsync(int id)
+    {
+        var signup = await _signups.GetByIdAsync(id);
+        if (signup is null) return false;
+
+        _signups.Delete(signup);
+        await _signups.SaveChangesAsync();
+
+        return true;
+    }
+
+
 
 
     private static TastingSignupDto ToDto(TastingSignup signup) => new()

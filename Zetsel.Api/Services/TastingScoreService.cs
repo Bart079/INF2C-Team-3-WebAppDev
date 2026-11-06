@@ -42,6 +42,18 @@ public class TastingScoreService : ITastingScoreService
     }
 
 
+     public async Task<bool> DeleteAsync(int id)
+    {
+        var score = await _scores.GetByIdAsync(id);
+        if (score is null) return false;
+
+        _scores.Delete(score);
+        await _scores.SaveChangesAsync();
+
+        return true;
+    }
+
+
     private static TastingScoreDto ToDto(TastingScore score) => new()
     {
         Id = score.Id,

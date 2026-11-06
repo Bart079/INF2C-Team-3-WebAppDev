@@ -43,6 +43,17 @@ public class TastingService : ITastingService
         return ToDto(tasting);
     }
 
+     public async Task<bool> DeleteAsync(int id)
+    {
+        var tasting = await _tastings.GetByIdAsync(id);
+        if (tasting is null) return false;
+
+        _tastings.Delete(tasting);
+        await _tastings.SaveChangesAsync();
+
+        return true;
+    }
+
 
 
     private static TastingDto ToDto(Tasting tasting) => new()

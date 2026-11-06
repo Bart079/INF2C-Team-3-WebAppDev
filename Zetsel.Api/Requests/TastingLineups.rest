@@ -15,3 +15,6 @@ Content-Type: application/json
   "beanId": 2,
   "position": 5
 }
+
+### Delete a tasting lineup
+DELETE {{baseUrl}}/api/TastingLineups/1

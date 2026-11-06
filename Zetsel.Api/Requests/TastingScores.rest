@@ -16,3 +16,6 @@ Content-Type: application/json
   "points": 8,
   "remark": "Smooth taste with a chocolate finish"
 }
+
+### Delete a tasting score
+DELETE {{baseUrl}}/api/TastingScores/1
