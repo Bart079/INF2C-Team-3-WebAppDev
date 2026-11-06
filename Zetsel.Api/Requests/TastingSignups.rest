@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:5172
+
+### Get all tasting signups
+GET {{baseUrl}}/api/TastingSignups
+
+### Get a tasting signup by ID
+GET {{baseUrl}}/api/TastingSignups/1
+
+### Create a tasting signup
+POST {{baseUrl}}/api/TastingSignups
+Content-Type: application/json
+
+{
+  "tastingId": 5,
+  "memberId": 1,
+  "status": "confirmed",
+  "signedUpAt": "2026-11-06T12:00:00Z"
+}
+
+### Delete a tasting signup
+DELETE {{baseUrl}}/api/TastingSignups/1
+
+### Update a tasting signup
+PUT {{baseUrl}}/api/TastingSignups/1
+Content-Type: application/json
+
+{
+  "tastingId": 5,
+  "memberId": 1,
+  "status": "confirmed",
+  "signedUpAt": "2026-11-06T12:00:00Z"
+}

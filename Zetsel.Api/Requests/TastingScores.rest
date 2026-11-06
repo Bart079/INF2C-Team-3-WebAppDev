@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:5172
+
+### Get all tasting scores
+GET {{baseUrl}}/api/TastingScores
+
+### Get a tasting score by ID
+GET {{baseUrl}}/api/TastingScores/1
+
+### Create a tasting score
+POST {{baseUrl}}/api/TastingScores
+Content-Type: application/json
+
+{
+  "lineupId": 4,
+  "memberId": 1,
+  "points": 8,
+  "remark": "Smooth taste with a chocolate finish"
+}
+
+### Delete a tasting score
+DELETE {{baseUrl}}/api/TastingScores/1
+
+### Update a tasting score
+PUT {{baseUrl}}/api/TastingScores/1
+Content-Type: application/json
+
+{
+  "lineupId": 4,
+  "memberId": 1,
+  "points": 8,
+  "remark": "Smooth taste with a chocolate finish"
+}
