@@ -18,8 +18,7 @@ public static class SeedData
                 new Bean { Name = "Ethiopia Yirgacheffe", Roaster = "Hans", Origin = "Ethiopia", RoastLevel = "light", FreshnessWeeks = 3 },
                 new Bean { Name = "Colombia Supremo", Roaster = "Herman", Origin = "Colombia", RoastLevel = "medium", FreshnessWeeks = 2 },
                 new Bean { Name = "Kenya AA", Roaster = "Anne", Origin = "Kenya", RoastLevel = "medium", FreshnessWeeks = 5 },
-                new Bean { Name = "Brazil Santos", Roaster = "Max", Origin = "Brazil", RoastLevel = "light", FreshnessWeeks = 3 },
-                new Bean { Name = "Guatemala Antigua", Roaster = "Guatemala", Origin = "Guatemala", RoastLevel = "medium", FreshnessWeeks = 3 }
+                new Bean { Name = "Brazil Santos", Roaster = "Max", Origin = "Brazil", RoastLevel = "light", FreshnessWeeks = 3 }
             );
 
             await context.SaveChangesAsync();
@@ -70,8 +69,6 @@ public static class SeedData
             .FirstAsync(b => b.Name == "Kenya AA");
         var brazil = await context.Beans
             .FirstAsync(b => b.Name == "Brazil Santos");
-        var guatemala = await context.Beans
-            .FirstAsync(b => b.Name == "Guatemala Antigua");
 
         // 4. GroupOrders
         if (!await context.GroupOrders.AnyAsync())
@@ -183,7 +180,7 @@ public static class SeedData
 
         if (!await context.TastingLineups.AnyAsync())
         {
-            var beanIds = new[] { ethiopia.Id, colombia.Id, kenya.Id, brazil.Id, guatemala.Id };
+            var beanIds = new[] { ethiopia.Id, colombia.Id, kenya.Id, brazil.Id};
             var lineupSeed = new (int TastingId, int BeanNumber, int Position)[]
             {
                 (1, 1, 1), (1, 2, 2), (1, 3, 3), (1, 4, 4),
