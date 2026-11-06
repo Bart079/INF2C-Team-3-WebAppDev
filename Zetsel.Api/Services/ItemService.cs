@@ -6,23 +6,23 @@ namespace Zetsel.Api.Services;
 
 public class ItemService : IItemService
 {
-    private readonly IRepository<Bean> _beans;
+    private readonly IRepository<Item> _items;
 
-    public ItemService(IRepository<Bean> beans)
+    public ItemService(IRepository<Item> items)
     {
-        _beans = beans;
+        _items = items;
     }
 
     public async Task<List<ItemDto>> GetAllAsync()
     {
-        var beans = await _beans.GetAllAsync();
-        return beans.Select(ToDto).ToList();
+        var items = await _items.GetAllAsync();
+        return items.Select(ToDto).ToList();
     }
 
     public async Task<ItemDto?> GetByIdAsync(int id)
     {
-        var bean = await _beans.GetByIdAsync(id);
-        return bean is null ? null : ToDto(bean);
+        var item = await _items.GetByIdAsync(id);
+        return item is null ? null : ToDto(item);
     }
 
     private static ItemDto ToDto(Item item) => new()
