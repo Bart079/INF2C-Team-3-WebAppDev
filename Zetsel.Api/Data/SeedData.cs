@@ -18,7 +18,8 @@ public static class SeedData
                 new Bean { Name = "Ethiopia Yirgacheffe", Roaster = "Hans", Origin = "Ethiopia", RoastLevel = "light", FreshnessWeeks = 3 },
                 new Bean { Name = "Colombia Supremo", Roaster = "Herman", Origin = "Colombia", RoastLevel = "medium", FreshnessWeeks = 2 },
                 new Bean { Name = "Kenya AA", Roaster = "Anne", Origin = "Kenya", RoastLevel = "medium", FreshnessWeeks = 5 },
-                new Bean { Name = "Brazil Santos", Roaster = "Max", Origin = "Brazil", RoastLevel = "light", FreshnessWeeks = 3 }
+                new Bean { Name = "Brazil Santos", Roaster = "Max", Origin = "Brazil", RoastLevel = "light", FreshnessWeeks = 3 },
+                new Bean { Name = "Guatemala Antigua", Roaster = "Guatemala", Origin = "Guatemala", RoastLevel = "medium", FreshnessWeeks = 3 }
             );
 
             await context.SaveChangesAsync();
@@ -67,6 +68,10 @@ public static class SeedData
 
         var kenya = await context.Beans
             .FirstAsync(b => b.Name == "Kenya AA");
+        var brazil = await context.Beans
+            .FirstAsync(b => b.Name == "Brazil Santos");
+        var guatemala = await context.Beans
+            .FirstAsync(b => b.Name == "Guatemala Antigua");
 
         // 4. GroupOrders
         if (!await context.GroupOrders.AnyAsync())
@@ -155,5 +160,94 @@ public static class SeedData
 
             await context.SaveChangesAsync();
         }
+        if (!await context.Tastings.AnyAsync())
+        {
+            context.Tastings.AddRange(
+            new Tasting { Id = 1, HostId = bart.Id, Date = new DateOnly(2026, 10, 18), Time = new TimeOnly(19, 0), Capacity = 4, Cancelled = false, KeyStatus = "available" },
+            new Tasting { Id = 2, HostId = bart.Id, Date = new DateOnly(2026, 10, 4), Time = new TimeOnly(19, 0), Capacity = 5, Cancelled = false, KeyStatus = "available" },
+            new Tasting { Id = 3, HostId = jade.Id, Date = new DateOnly(2026, 10, 25), Time = new TimeOnly(15, 0), Capacity = 8, Cancelled = false, KeyStatus = "awaiting" },
+            new Tasting { Id = 4, HostId = bart.Id, Date = new DateOnly(2026, 11, 1), Time = new TimeOnly(19, 30), Capacity = 6, Cancelled = false, KeyStatus = "available" },
+            new Tasting { Id = 5, HostId = jade.Id, Date = new DateOnly(2026, 11, 8), Time = new TimeOnly(14, 0), Capacity = 10, Cancelled = false, KeyStatus = "available" },
+            new Tasting { Id = 6, HostId = bart.Id, Date = new DateOnly(2026, 11, 15), Time = new TimeOnly(19, 0), Capacity = 3, Cancelled = false, KeyStatus = "awaiting" },
+            new Tasting { Id = 7, HostId = jade.Id, Date = new DateOnly(2026, 11, 22), Time = new TimeOnly(15, 30), Capacity = 12, Cancelled = false, KeyStatus = "available" },
+            new Tasting { Id = 8, HostId = bart.Id, Date = new DateOnly(2026, 12, 6), Time = new TimeOnly(19, 0), Capacity = 8, Cancelled = true, KeyStatus = "unavailable" },
+            new Tasting { Id = 9, HostId = jade.Id, Date = new DateOnly(2026, 12, 13), Time = new TimeOnly(14, 30), Capacity = 6, Cancelled = false, KeyStatus = "available" },
+            new Tasting { Id = 10, HostId = bart.Id, Date = new DateOnly(2026, 12, 20), Time = new TimeOnly(19, 0), Capacity = 10, Cancelled = false, KeyStatus = "awaiting" },
+            new Tasting { Id = 11, HostId = bart.Id, Date = new DateOnly(2026, 10, 20), Time = new TimeOnly(19, 0), Capacity = 8, Cancelled = true, KeyStatus = "unavailable" },
+            new Tasting { Id = 12, HostId = jade.Id, Date = new DateOnly(2026, 11, 5), Time = new TimeOnly(19, 30), Capacity = 6, Cancelled = true, KeyStatus = "available" },
+            new Tasting { Id = 13, HostId = bart.Id, Date = new DateOnly(2026, 12, 1), Time = new TimeOnly(14, 0), Capacity = 10, Cancelled = true, KeyStatus = "unavailable" },
+            new Tasting { Id = 14, HostId = jade.Id, Date = new DateOnly(2027, 1, 10), Time = new TimeOnly(15, 0), Capacity = 5, Cancelled = true, KeyStatus = "available" }
+            );
+        }
+        await context.SaveChangesAsync();
+
+        if (!await context.TastingLineups.AnyAsync())
+        {
+            var beanIds = new[] { ethiopia.Id, colombia.Id, kenya.Id, brazil.Id, guatemala.Id };
+            var lineupSeed = new (int TastingId, int BeanNumber, int Position)[]
+            {
+                (1, 1, 1), (1, 2, 2), (1, 3, 3), (1, 4, 4),
+                (2, 2, 1), (2, 3, 2), (2, 5, 3),
+                (3, 1, 1), (3, 5, 2), (3, 3, 3), (3, 2, 4), (3, 4, 5),
+                (4, 4, 1), (4, 2, 2), (4, 5, 3),
+                (5, 1, 1), (5, 3, 2), (5, 5, 3), (5, 4, 4),
+                (6, 3, 1), (6, 4, 2), (6, 1, 3), (6, 5, 4),
+                (7, 2, 1), (7, 1, 2), (7, 4, 3), (7, 3, 4), (7, 5, 5),
+                (8, 5, 1), (8, 3, 2), (8, 2, 3),
+                (9, 4, 1), (9, 1, 2), (9, 2, 3), (9, 5, 4),
+                (10, 3, 1), (10, 5, 2), (10, 1, 3), (10, 4, 4), (10, 2, 5),
+                (11, 1, 1), (11, 2, 2), (11, 5, 3),
+                (12, 3, 1), (12, 4, 2), (12, 5, 3), (12, 1, 4),
+                (13, 2, 1), (13, 4, 2), (13, 3, 3),
+                (14, 5, 1), (14, 1, 2), (14, 3, 3), (14, 4, 4)
+            };
+
+            context.TastingLineups.AddRange(lineupSeed.Select(lineup => new TastingLineup
+            {
+                TastingId = lineup.TastingId,
+                BeanId = beanIds[lineup.BeanNumber - 1],
+                Position = lineup.Position
+            }));
+        }
+        await context.SaveChangesAsync();
+
+        if (!await context.TastingSignups.AnyAsync())
+        {
+            context.TastingSignups.AddRange(
+            new TastingSignup { TastingId = 1, MemberId = bart.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 10, 10, 12, 0, 0, DateTimeKind.Utc) },
+            new TastingSignup { TastingId = 1, MemberId = jade.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 10, 10, 12, 10, 0, DateTimeKind.Utc) },
+            new TastingSignup { TastingId = 1, MemberId = tabitha.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 10, 10, 12, 20, 0, DateTimeKind.Utc) },
+            new TastingSignup { TastingId = 2, MemberId = jade.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 10, 1, 14, 0, 0, DateTimeKind.Utc) },
+            new TastingSignup { TastingId = 3, MemberId = bart.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 10, 12, 10, 0, 0, DateTimeKind.Utc) },
+            new TastingSignup { TastingId = 3, MemberId = tabitha.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 10, 12, 10, 15, 0, DateTimeKind.Utc) },
+            new TastingSignup { TastingId = 4, MemberId = jade.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 10, 15, 11, 0, 0, DateTimeKind.Utc) },
+            new TastingSignup { TastingId = 4, MemberId = tabitha.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 10, 15, 11, 20, 0, DateTimeKind.Utc) },
+            new TastingSignup { TastingId = 5, MemberId = tabitha.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 10, 20, 9, 0, 0, DateTimeKind.Utc) },
+            new TastingSignup { TastingId = 7, MemberId = jade.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 10, 22, 13, 0, 0, DateTimeKind.Utc) },
+            new TastingSignup { TastingId = 9, MemberId = tabitha.Id, Status = "confirmed", SignedUpAt = new DateTime(2026, 11, 1, 14, 0, 0, DateTimeKind.Utc) }
+            );
+        }
+        await context.SaveChangesAsync();
+
+        if (!await context.TastingScores.AnyAsync())
+        {
+            var scoredLineups = await context.TastingLineups
+                .Where(lineup => lineup.TastingId == 2)
+                .OrderBy(lineup => lineup.Position)
+                .ToListAsync();
+
+            context.TastingScores.AddRange(
+                new TastingScore { LineupId = scoredLineups[0].Id, MemberId = jade.Id, Points = 8, Remark = "Smooth taste with a chocolate finish" },
+                new TastingScore { LineupId = scoredLineups[1].Id, MemberId = jade.Id, Points = 7, Remark = "Fruity, but slightly too acidic" },
+                new TastingScore { LineupId = scoredLineups[2].Id, MemberId = jade.Id, Points = 9, Remark = "Sweet aroma and a balanced flavour" },
+                new TastingScore { LineupId = scoredLineups[0].Id, MemberId = bart.Id, Points = 9, Remark = "Sweet aroma with a fruity finish" },
+                new TastingScore { LineupId = scoredLineups[0].Id, MemberId = tabitha.Id, Points = 7, Remark = "Good flavour, but a little bitter" },
+                new TastingScore { LineupId = scoredLineups[1].Id, MemberId = bart.Id, Points = 8, Remark = "Fresh and fruity" },
+                new TastingScore { LineupId = scoredLineups[1].Id, MemberId = tabitha.Id, Points = 6, Remark = "Too acidic for my taste" },
+                new TastingScore { LineupId = scoredLineups[2].Id, MemberId = bart.Id, Points = 9, Remark = "Rich flavour and great aroma" },
+                new TastingScore { LineupId = scoredLineups[2].Id, MemberId = tabitha.Id, Points = 8, Remark = "Smooth and slightly sweet" }
+            );
+        }
+        await context.SaveChangesAsync();
     }
 }
