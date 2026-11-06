@@ -24,6 +24,41 @@ public class MemberService : IMemberService
         var member = await _members.GetByIdAsync(id);
         return member is null ? null : ToDto(member);
     }
+    public async Task<MemberDto> CreateAsync(CreateMemberDto dto)
+    {
+        var member = new Member
+        {
+            Username = dto.UserName,
+            IsCommittee = dto.IsCommittee
+        };
+
+        _members.Add(member);
+        await _members.SaveChangesAsync();
+
+        return ToDto(member);
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var member = await _members.GetByIdAsync(id);
+        if (member is null) return false;
+
+        _members.Delete(member);
+        await _members.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<MemberDto?> UpdateAsync(int id, UpdateMemberDto dto)
+    {
+        var member = await _members.GetByIdAsync(id);
+        if (member is null) return null;
+
+        member.Username = dto.UserName;
+        member.IsCommittee = dto.IsCommittee;
+        await _members.SaveChangesAsync();
+        return ToDto(member);
+    }
 
     private static MemberDto ToDto(Member member) => new()
     {
