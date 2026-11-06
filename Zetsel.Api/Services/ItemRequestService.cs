@@ -25,6 +25,46 @@ public class ItemRequestService : IItemRequestService
         return itemRequest is null ? null : ToDto(itemRequest);
     }
 
+    public async Task<ItemRequestDto> CreateAsync(CreateItemRequestDto dto)
+    {
+        var itemRequest = new ItemRequest
+        {
+            ItemId = dto.ItemId,
+            MemberId = dto.MemberId,
+            RequestedAt = dto.RequestedAt,
+            Status = dto.Status
+        };
+
+        _itemRequests.Add(itemRequest);
+        await _itemRequests.SaveChangesAsync();
+
+        return ToDto(itemRequest);
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var itemRequest = await _itemRequests.GetByIdAsync(id);
+        if (itemRequest is null) return false;
+
+        _itemRequests.Delete(itemRequest);
+        await _itemRequests.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<ItemRequestDto?> UpdateAsync(int id, UpdateItemRequestDto dto)
+    {
+        var itemRequest = await _itemRequests.GetByIdAsync(id);
+        if (itemRequest is null) return null;
+
+        itemRequest.ItemId = dto.ItemId;
+        itemRequest.MemberId = dto.MemberId;
+        itemRequest.RequestedAt = dto.RequestedAt;
+        itemRequest.Status = dto.Status;
+        await _itemRequests.SaveChangesAsync();
+        return ToDto(itemRequest);
+    }
+
     private static ItemRequestDto ToDto(ItemRequest itemRequest) => new()
     {
         Id = itemRequest.Id,

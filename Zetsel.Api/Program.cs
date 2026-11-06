@@ -30,6 +30,9 @@ builder.Services.AddScoped<ITastingSignupService, TastingSignupService>();
 builder.Services.AddScoped<ITastingScoreService, TastingScoreService>();
 builder.Services.AddScoped<IGroupOrderService, GroupOrderService>();
 builder.Services.AddScoped<IOrderShareService, OrderShareService>();
+builder.Services.AddScoped<IItemService, ItemService>();
+builder.Services.AddScoped<IItemHoldService, ItemHoldService>();
+builder.Services.AddScoped<IItemRequestService, ItemRequestService>();
 
 var app = builder.Build();
 

@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:5172
+
+### Get all item holds
+GET {{baseUrl}}/api/itemhold
+
+### Get one item hold
+GET {{baseUrl}}/api/itemhold/1
+
+### Create an item hold
+POST {{baseUrl}}/api/itemhold
+Content-Type: application/json
+
+{
+  "itemId": 1,
+  "memberId": 1,
+  "startedat": "2023-06-01",
+  "endsat": "2023-06-15"
+}
+
+### Delete an item hold
+DELETE {{baseUrl}}/api/itemhold/4
+
+### Update an item hold
+PUT {{baseUrl}}/api/itemhold/1
+Content-Type: application/json
+
+{
+    "itemId": 1,
+    "memberId": 1,
+    "startedat": "2023-06-01",
+    "endsat": "2023-06-15"
+}
