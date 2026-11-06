@@ -32,4 +32,69 @@ public class OrderSharesController : ControllerBase
 
         return Ok(share);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<OrderShareDto>> Create(
+        CreateOrderShareDto dto)
+    {
+        try
+        {
+            var share = await _shares.CreateAsync(dto);
+
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = share.Id },
+                share);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<OrderShareDto>> Update(
+        int id,
+        UpdateOrderShareDto dto)
+    {
+        try
+        {
+            var share = await _shares.UpdateAsync(id, dto);
+
+            if (share is null)
+                return NotFound();
+
+            return Ok(share);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+            var deleted = await _shares.DeleteAsync(id);
+
+            if (!deleted)
+                return NotFound();
+
+            return NoContent();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
+    }
 }

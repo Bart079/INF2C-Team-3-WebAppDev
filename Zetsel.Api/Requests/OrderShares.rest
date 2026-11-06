@@ -6,8 +6,121 @@ GET {{baseUrl}}/api/ordershares
 ### GET - OrderShare met ID 1
 GET {{baseUrl}}/api/ordershares/1
 
-### GET - OrderShare met ID 2
-GET {{baseUrl}}/api/ordershares/2
 
-### GET - Niet-bestaande OrderShare (404)
-GET {{baseUrl}}/api/ordershares/999
+### 1. Nieuwe testbestelling maken
+# @name createTestOrder
+POST {{baseUrl}}/api/grouporders
+Content-Type: application/json
+
+{
+    "beanId": 1,
+    "startedById": 1,
+    "minimumGrams": 1000,
+    "closingDate": "2027-12-01"
+}
+
+
+### 2. POST - Nieuw aandeel toevoegen
+# @name createShare
+POST {{baseUrl}}/api/ordershares
+Content-Type: application/json
+
+{
+    "orderId": {{createTestOrder.response.body.$.id}},
+    "memberId": 1,
+    "grams": 300
+}
+
+
+### 3. GET - Nieuw aandeel controleren
+GET {{baseUrl}}/api/ordershares/{{createShare.response.body.$.id}}
+
+
+### 4. GET - TotalGrams controleren
+GET {{baseUrl}}/api/grouporders/{{createTestOrder.response.body.$.id}}
+
+
+### 5. PUT - Aandeel wijzigen
+PUT {{baseUrl}}/api/ordershares/{{createShare.response.body.$.id}}
+Content-Type: application/json
+
+{
+    "grams": 500
+}
+
+
+### 6. GET - TotalGrams opnieuw controleren
+GET {{baseUrl}}/api/grouporders/{{createTestOrder.response.body.$.id}}
+
+
+### 7. POST - Dubbel aandeel proberen
+POST {{baseUrl}}/api/ordershares
+Content-Type: application/json
+
+{
+    "orderId": {{createTestOrder.response.body.$.id}},
+    "memberId": 1,
+    "grams": 200
+}
+
+
+### 8. POST - Ongeldige OrderId
+POST {{baseUrl}}/api/ordershares
+Content-Type: application/json
+
+{
+    "orderId": 999,
+    "memberId": 1,
+    "grams": 200
+}
+
+
+### 9. POST - Ongeldige MemberId
+POST {{baseUrl}}/api/ordershares
+Content-Type: application/json
+
+{
+    "orderId": {{createTestOrder.response.body.$.id}},
+    "memberId": 999,
+    "grams": 200
+}
+
+
+### 10. POST - Ongeldige Grams
+POST {{baseUrl}}/api/ordershares
+Content-Type: application/json
+
+{
+    "orderId": {{createTestOrder.response.body.$.id}},
+    "memberId": 2,
+    "grams": -100
+}
+
+
+### 11. PUT - Niet-bestaand aandeel
+PUT {{baseUrl}}/api/ordershares/999
+Content-Type: application/json
+
+{
+    "grams": 500
+}
+
+
+### 12. DELETE - Aandeel verwijderen
+DELETE {{baseUrl}}/api/ordershares/{{createShare.response.body.$.id}}
+
+
+### 13. GET - Verwijderd aandeel controleren
+GET {{baseUrl}}/api/ordershares/{{createShare.response.body.$.id}}
+
+
+### 14. GET - TotalGrams na DELETE
+GET {{baseUrl}}/api/grouporders/{{createTestOrder.response.body.$.id}}
+
+
+### 15. DELETE - Testbestelling opruimen
+DELETE {{baseUrl}}/api/grouporders/{{createTestOrder.response.body.$.id}}
+
+
+### 16. DELETE - Niet-bestaand aandeel
+DELETE {{baseUrl}}/api/ordershares/999
