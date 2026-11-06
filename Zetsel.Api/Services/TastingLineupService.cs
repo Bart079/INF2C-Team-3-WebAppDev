@@ -24,6 +24,45 @@ public class TastingLineupService : ITastingLineupService
         var lineup = await _lineups.GetByIdAsync(id);
         return lineup is null ? null : ToDto(lineup);
     }
+    
+    public async Task<TastingLineupDto> CreateAsync(CreateTastingLineupDto dto)
+    {
+        var lineup = new TastingLineup
+        {
+            TastingId = dto.TastingId,
+            BeanId = dto.BeanId,
+            Position = dto.Position
+        };
+
+        _lineups.Add(lineup);
+        await _lineups.SaveChangesAsync();
+
+        return ToDto(lineup);
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var lineup = await _lineups.GetByIdAsync(id);
+        if (lineup is null) return false;
+
+        _lineups.Delete(lineup);
+        await _lineups.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<TastingLineupDto?> UpdateAsync(int id, UpdateTastingLineupDto dto)
+    {
+        var lineup = await _lineups.GetByIdAsync(id);
+        if (lineup is null) return null;
+
+        lineup.TastingId = dto.TastingId;
+        lineup.BeanId = dto.BeanId;
+        lineup.Position = dto.Position;
+        await _lineups.SaveChangesAsync();
+        return ToDto(lineup);
+    }
+
 
     internal static TastingLineupDto ToDto(TastingLineup lineup) => new()
     {

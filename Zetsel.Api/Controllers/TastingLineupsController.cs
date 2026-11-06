@@ -25,4 +25,25 @@ public class TastingLineupsController : ControllerBase
         var lineup = await _lineups.GetByIdAsync(id);
         return lineup is null ? NotFound() : Ok(lineup);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<TastingLineupDto>> Create(CreateTastingLineupDto dto)
+    {
+        var created = await _lineups.CreateAsync(dto);
+        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var deleted = await _lineups.DeleteAsync(id);
+        return deleted ? NoContent() : NotFound();
+    }
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<TastingLineupDto>> Update(int id, UpdateTastingLineupDto dto)
+    {
+        var updated = await _lineups.UpdateAsync(id, dto);
+        return updated is null ? NotFound() : Ok(updated);
+    }
+
 }

@@ -25,4 +25,25 @@ public class TastingsController : ControllerBase
         var tasting = await _tastings.GetByIdAsync(id);
         return tasting is null ? NotFound() : Ok(tasting);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<TastingDto>> Create(CreateTastingDto dto)
+    {
+        var created = await _tastings.CreateAsync(dto);
+        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+    }
+
+        [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var deleted = await _tastings.DeleteAsync(id);
+        return deleted ? NoContent() : NotFound();
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<TastingDto>> Update(int id, UpdateTastingDto dto)
+    {
+        var updated = await _tastings.UpdateAsync(id, dto);
+        return updated is null ? NotFound() : Ok(updated);
+    }   
 }

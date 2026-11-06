@@ -25,4 +25,24 @@ public class TastingSignupsController : ControllerBase
         var signup = await _signups.GetByIdAsync(id);
         return signup is null ? NotFound() : Ok(signup);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<TastingSignupDto>> Create(CreateTastingSignupDto dto)
+    {
+        var created = await _signups.CreateAsync(dto);
+        return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+    }
+    
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var deleted = await _signups.DeleteAsync(id);
+        return deleted ? NoContent() : NotFound();
+    }
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<TastingSignupDto>> Update(int id, UpdateTastingSignupDto dto)
+    {
+        var updated = await _signups.UpdateAsync(id, dto);
+        return updated is null ? NotFound() : Ok(updated);
+    }
 }
