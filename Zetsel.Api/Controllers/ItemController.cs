@@ -6,11 +6,11 @@ namespace Zetsel.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class grindersScalesController : ControllerBase
+public class ItemController : ControllerBase
 {
     private readonly IItemService _items;
 
-    public grindersScalesController(IItemService items)
+    public ItemController(IItemService items)
     {
         _items = items;
     }
