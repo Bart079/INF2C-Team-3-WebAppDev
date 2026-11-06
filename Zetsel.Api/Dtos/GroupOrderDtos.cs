@@ -12,7 +12,7 @@ public record GroupOrderDto
     public int TotalGrams { get; init; }
 }
 
-// Gegevens voor een nieuwe bestelling
+// Gegevens voor een nieuwe order
 public record CreateGroupOrderDto
 {
     public int BeanId { get; init; }
@@ -21,7 +21,7 @@ public record CreateGroupOrderDto
     public DateOnly ClosingDate { get; init; }
 }
 
-// Gegevens voor het aanpassen van een bestelling
+// Gegevens voor het aanpassen van een order
 public record UpdateGroupOrderDto
 {
     public int MinimumGrams { get; init; }

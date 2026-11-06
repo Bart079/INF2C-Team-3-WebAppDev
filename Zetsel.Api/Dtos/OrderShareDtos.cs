@@ -9,7 +9,7 @@ public record OrderShareDto
     public int Grams { get; init; }
 }
 
-// Gegevens voor een nieuw aandeel
+// Gegevens voor een nieuw share
 public record CreateOrderShareDto
 {
     public int OrderId { get; init; }
@@ -17,7 +17,7 @@ public record CreateOrderShareDto
     public int Grams { get; init; }
 }
 
-// Gegevens voor het aanpassen van een aandeel
+// Gegevens voor het aanpassen van een share
 public record UpdateOrderShareDto
 {
     public int Grams { get; init; }
