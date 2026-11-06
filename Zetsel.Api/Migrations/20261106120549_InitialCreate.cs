@@ -101,8 +101,8 @@ namespace Zetsel.Api.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ItemId = table.Column<int>(type: "INTEGER", nullable: false),
                     MemberId = table.Column<int>(type: "INTEGER", nullable: false),
-                    StartedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    EndedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    StartedAt = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    EndsAt = table.Column<DateOnly>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -304,7 +304,7 @@ namespace Zetsel.Api.Migrations
                 table: "ItemHolds",
                 column: "ItemId",
                 unique: true,
-                filter: "\"EndedAt\" IS NULL");
+                filter: "\"EndsAt\" IS NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemHolds_MemberId",

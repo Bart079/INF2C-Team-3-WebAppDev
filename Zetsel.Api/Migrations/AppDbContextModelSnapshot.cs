@@ -129,7 +129,7 @@ namespace Zetsel.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("EndedAt")
+                    b.Property<DateOnly>("EndsAt")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ItemId")
@@ -138,14 +138,14 @@ namespace Zetsel.Api.Migrations
                     b.Property<int>("MemberId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("StartedAt")
+                    b.Property<DateOnly>("StartedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ItemId")
                         .IsUnique()
-                        .HasFilter("\"EndedAt\" IS NULL");
+                        .HasFilter("\"EndsAt\" IS NULL");
 
                     b.HasIndex("MemberId");
 

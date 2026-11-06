@@ -11,8 +11,8 @@ using Zetsel.Api.Data;
 namespace Zetsel.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20261105152519_datatoevoegen")]
-    partial class datatoevoegen
+    [Migration("20261106120549_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,6 +117,10 @@ namespace Zetsel.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Items");
@@ -128,7 +132,7 @@ namespace Zetsel.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("EndedAt")
+                    b.Property<DateOnly>("EndsAt")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ItemId")
@@ -137,14 +141,14 @@ namespace Zetsel.Api.Migrations
                     b.Property<int>("MemberId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("StartedAt")
+                    b.Property<DateOnly>("StartedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ItemId")
                         .IsUnique()
-                        .HasFilter("\"EndedAt\" IS NULL");
+                        .HasFilter("\"EndsAt\" IS NULL");
 
                     b.HasIndex("MemberId");
 
