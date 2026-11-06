@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:5172
+
+### GET - Alle Group Orders
+GET {{baseUrl}}/api/grouporders
+
+### GET - Group Order met ID 1
+GET {{baseUrl}}/api/grouporders/1
+
+### GET - Group Order met ID 2
+GET {{baseUrl}}/api/grouporders/2
+
+### GET - Group Order met ID 3
+GET {{baseUrl}}/api/grouporders/3
+
+### GET - Niet-bestaande Group Order (404)
+GET {{baseUrl}}/api/grouporders/999

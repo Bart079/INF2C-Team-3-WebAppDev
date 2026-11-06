@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:5172
+
+### GET - Alle OrderShares
+GET {{baseUrl}}/api/ordershares
+
+### GET - OrderShare met ID 1
+GET {{baseUrl}}/api/ordershares/1
+
+### GET - OrderShare met ID 2
+GET {{baseUrl}}/api/ordershares/2
+
+### GET - Niet-bestaande OrderShare (404)
+GET {{baseUrl}}/api/ordershares/999
