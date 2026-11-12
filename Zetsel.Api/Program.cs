@@ -21,6 +21,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(sqlite.ToString()));
 
 builder.Services.AddControllers();
+
+var frontendUrl = builder.Configuration["Frontend:Url"]
+    ?? throw new InvalidOperationException(
+        "Missing configuration value Frontend:Url");
+
+builder.Services.AddCors(options =>
+    options.AddDefaultPolicy(policy =>
+        policy.WithOrigins(frontendUrl)
+              .AllowAnyHeader()
+              .AllowAnyMethod()));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IBeanService, BeanService>();
 builder.Services.AddScoped<IMemberService, MemberService>();
@@ -39,6 +49,7 @@ var app = builder.Build();
 // Eerst 'dotnet ef database update' uitvoeren, daarna kun je de API starten.
 await SeedData.InitializeAsync(app);
 
+app.UseCors();
 app.MapControllers();
 app.MapGet("/", () => "Zetsel API is running");
 
