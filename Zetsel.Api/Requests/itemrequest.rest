@@ -1,0 +1,28 @@
+@baseUrl = http://localhost:5172
+
+### Get all item requests
+GET {{baseUrl}}/api/itemrequest
+
+### Get one item request
+GET {{baseUrl}}/api/itemrequest/1
+
+### Create an item request
+POST {{baseUrl}}/api/itemrequest
+Content-Type: application/json
+
+{
+  "itemId": 1,
+  "memberId": 1
+}
+
+### Delete an item request
+DELETE {{baseUrl}}/api/itemrequest/1
+
+### Update an item request
+PUT {{baseUrl}}/api/itemrequest/1
+Content-Type: application/json
+
+{
+    "itemId": 1,
+    "memberId": 1
+}

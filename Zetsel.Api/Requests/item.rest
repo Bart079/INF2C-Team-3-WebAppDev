@@ -1,0 +1,42 @@
+@baseUrl = http://localhost:5172
+
+### Get all items
+GET {{baseUrl}}/api/item
+
+### Get one item
+GET {{baseUrl}}/api/item/1
+
+### Create an item
+POST {{baseUrl}}/api/item
+Content-Type: application/json
+
+{
+  "name": "testing",
+  "kind": "handgrinder",
+  "condition": "new",
+  "status": "available",
+  "Brand": "testing",
+  "Description": "testing",
+  "Instructions": "testing",
+  "image": "testing",
+  "isoutofservice": false
+}
+
+### Delete an item
+DELETE {{baseUrl}}/api/item/3
+
+### Update an item
+PUT {{baseUrl}}/api/item/1
+Content-Type: application/json
+
+{
+    "name": "updated item",
+    "kind": "updated kind",
+    "condition": "updated condition",
+    "status": "updated status",
+    "Brand": "updated brand",
+    "Description": "updated description",
+    "Instructions": "updated instructions",
+    "image": "updated image",
+    "isoutofservice": true
+}

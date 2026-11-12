@@ -1,0 +1,33 @@
+@baseUrl = http://localhost:5172
+
+### Get all beans
+GET {{baseUrl}}/api/beans
+
+### Get one bean
+GET {{baseUrl}}/api/beans/1
+
+### Create a bean
+POST {{baseUrl}}/api/beans
+Content-Type: application/json
+
+{
+    "name": "testing",
+    "roaster": "henk",
+    "origin": "testing",
+    "roastlevel": "testing",
+    "freshnessweeks": 1
+}
+### Delete a bean
+DELETE {{baseUrl}}/api/beans/4
+
+### Update a bean
+PUT {{baseUrl}}/api/beans/1
+Content-Type: application/json
+
+{
+    "name": "updated bean",
+    "roaster": "updated roaster",
+    "origin": "updated origin",
+    "roastlevel": "updated roastlevel",
+    "freshnessweeks": 2
+}

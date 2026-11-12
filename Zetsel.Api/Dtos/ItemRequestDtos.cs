@@ -11,3 +11,22 @@ public record ItemRequestDto
     public DateTime RequestedAt { get; init; } // Opslaan als UTC.
     public string Status { get; init; } = "Open";
 }
+public record CreateItemRequestDto
+{
+    public int ItemId { get; init; }
+
+    public int MemberId { get; init; }
+
+    public DateTime RequestedAt { get; init; } // Opslaan als UTC.
+    public string Status { get; init; } = "Open";
+}
+
+public record UpdateItemRequestDto
+{
+    public int ItemId { get; init; }
+
+    public int MemberId { get; init; }
+
+    public DateTime RequestedAt { get; init; } // Opslaan als UTC.
+    public string Status { get; init; } = "Open";
+}
