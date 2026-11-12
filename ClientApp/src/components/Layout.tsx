@@ -11,7 +11,6 @@ export function Layout() {
         <nav>
           <Link to="/">Zetsel</Link>
           <Link to="/orders">Orders</Link>
-          <Link to="/shelf">Shelf</Link>
           <Link to="/tastings">Tastings</Link>
           <Link to="/grindersScales">Grinders & Scales</Link>
             {user ? (
