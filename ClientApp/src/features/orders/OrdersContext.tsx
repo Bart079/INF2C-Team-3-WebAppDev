@@ -21,6 +21,16 @@ export function OrdersProvider({ children }: { children: ReactNode }) {
     setOrders(current => [...(current ?? []), order]);
   }
 
+  function updateOrder(updatedOrder: Order) {
+    setOrders(current =>
+      current?.map(order =>
+        order.id === updatedOrder.id
+          ? { ...order, ...updatedOrder }
+          : order
+      ) ?? []
+    );
+  }
+
   function saveShare(orderId: number, username: string, grams: number) {
     if (!Number.isInteger(grams) || grams <= 0) return;
 
@@ -46,7 +56,14 @@ export function OrdersProvider({ children }: { children: ReactNode }) {
 
   return (
     <OrdersContext.Provider
-      value={{ orders, loading, error, addOrder, saveShare }}
+      value={{
+        orders,
+        loading,
+        error,
+        addOrder,
+        updateOrder,
+        saveShare
+      }}
     >
       {children}
     </OrdersContext.Provider>

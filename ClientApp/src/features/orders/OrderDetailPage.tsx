@@ -3,11 +3,12 @@ import { useAuth } from "../../auth/AuthContext";
 import { OrderCard } from "../../components/OrderCard";
 import { OrderShareForm } from "../../components/OrderShareForm";
 import { useOrders } from "./OrdersContext";
+import { EditOrderForm } from "../../components/EditOrderForm";
 import "../../css/group_Orders.css";
 
 export function OrderDetailPage() {
   const { id } = useParams();
-  const { orders, loading, error, saveShare } = useOrders();
+  const { orders, loading, error, saveShare, updateOrder } = useOrders();
   const { user } = useAuth();
 
   const order = orders.find(item => item.id === Number(id));
@@ -23,6 +24,14 @@ export function OrderDetailPage() {
       {!loading && !error && order && (
         <div className="order_detail_layout">
           <OrderCard order={order} showDetailsButton={false} detailed />
+
+          {order.status === "Open" && user?.username === order.startedBy && (
+            <EditOrderForm
+              key={order.id}
+              order={order}
+              onUpdated={updateOrder}
+            />
+          )}
 
           {order.status === "Open" && (
             user ? (
