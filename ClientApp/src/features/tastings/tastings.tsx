@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import type { Tasting, TastingBean, TastingSignup } from "../../types/tasting";
+import { useFetch } from "../../hooks/useFetch";
+import * as tastingsApi from "../../api/Tastings";
 import { UpcomingTastings } from "../../components/UpcomingTastings";
 import { hasRole } from "../../auth/roles";
 import { useAuth } from "../../auth/AuthContext";
@@ -9,46 +9,12 @@ import "../../css/tastings.css";
 
 
 export function TastingsPage() {
-    const [tastings, setTastings] = useState<Tasting[]>([]);
-    const [beans, setBeans] = useState<TastingBean[]>([]);
-    const [signups, setSignups] = useState<TastingSignup[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
+    const { data, loading, error } = useFetch(tastingsApi.getAll, []);
+    const tastings = data?.tastings ?? [];
+    const beans = data?.beans ?? [];
+    const signups = data?.signups ?? [];
     const { user } = useAuth();
     const isHost = hasRole(user, "host");
-    
-
-    useEffect(() => {
-        async function loadTastings() {
-            try {
-                const [tastingsResponse, beansResponse, signupsResponse] = await Promise.all([
-                    fetch("/upcoming_tastings.json"),
-                    fetch("/beans.json"),
-                    fetch("/signups.json"),
-                ]);
-
-                if (!tastingsResponse.ok || !beansResponse.ok || !signupsResponse.ok) {
-                    throw new Error("Could not load tasting data.");
-                }
-
-                const [tastingsData, beansData, signupsData] = await Promise.all([
-                    tastingsResponse.json(),
-                    beansResponse.json(),
-                    signupsResponse.json(),
-                ]);
-                setTastings(tastingsData);
-                setBeans(beansData);
-                setSignups(signupsData);
-            } catch (err) {
-                console.error(err);
-                setError("Could not load tastings.");
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        loadTastings();
-    }, []);
 
     if (loading) {
         return <p>Loading tastings...</p>;
@@ -71,8 +37,6 @@ export function TastingsPage() {
                     <Link to="/my-hosted-tastings">My Hosted Tastings</Link>
                     </p>
                 )}
-                
-                
 
                 <p className="text boxedintro">
                 Here you can find upcoming tastings.

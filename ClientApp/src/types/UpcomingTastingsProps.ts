@@ -1,4 +1,5 @@
-import type { Tasting, TastingBean, TastingSignup } from "../types/tasting";
+import type { Tasting, TastingBean } from "./tasting";
+import type { TastingSignup } from "./TastingSignups";
 
 export type UpcomingTastingsProps = {
   tastings: Tasting[];
