@@ -4,15 +4,54 @@ import { OrderCard } from "../../components/OrderCard";
 import { OrderShareForm } from "../../components/OrderShareForm";
 import { useOrders } from "./OrdersContext";
 import { EditOrderForm } from "../../components/EditOrderForm";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import * as groupOrdersApi from "../../api/GroupOrders";
 import "../../css/group_Orders.css";
 
 export function OrderDetailPage() {
   const { id } = useParams();
-  const { orders, loading, error, saveShare, updateOrder } = useOrders();
+  const { orders, loading, error, saveShare, updateOrder, removeOrder } = useOrders();
   const { user } = useAuth();
 
   const order = orders.find(item => item.id === Number(id));
   const ownShare = order?.shares?.find(share => share.username === user?.username)?.grams ?? 0;
+
+
+  const navigate = useNavigate();
+
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+
+  async function handleDelete() {
+    if (!order || deleting) return;
+
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this group order?"
+    );
+
+    if (!confirmed) return;
+
+    setDeleting(true);
+    setDeleteError(null);
+
+    try {
+      await groupOrdersApi.remove(order.id);
+
+      removeOrder(order.id);
+
+      navigate("/orders");
+    } catch (err) {
+      setDeleteError(
+        err instanceof Error
+          ? err.message
+          : "Could not delete group order."
+      );
+    } finally {
+      setDeleting(false);
+    }
+  }
+
 
   return (
     <section className="order_details">
@@ -25,7 +64,8 @@ export function OrderDetailPage() {
         <div className="order_detail_layout">
           <OrderCard order={order} showDetailsButton={false} detailed />
 
-          {order.status === "Open" && user?.username === order.startedBy && (
+          {/* PUT – Group Order wijzigen */}
+          {order.status === "Open" && user && (
             <EditOrderForm
               key={order.id}
               order={order}
@@ -33,6 +73,24 @@ export function OrderDetailPage() {
             />
           )}
 
+          {/* DELETE – Group Order verwijderen */}
+          {user?.username === order.startedBy && (
+            <div>
+              <button
+                type="button"
+                onClick={handleDelete}
+                disabled={deleting}
+              >
+                {deleting ? "Deleting..." : "Delete Order"}
+              </button>
+
+              {deleteError && (
+                <p role="alert">{deleteError}</p>
+              )}
+            </div>
+          )}
+
+          {/* OrderShares */}
           {order.status === "Open" && (
             user ? (
               <OrderShareForm
