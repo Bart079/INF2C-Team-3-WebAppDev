@@ -125,6 +125,20 @@
     align-self: flex-start;
 }
 
+.order_actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order_card_delete {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #b48d62;
+}
+
 .form_error { color: #8a2020; }
 
 @media (max-width: 720px) {
