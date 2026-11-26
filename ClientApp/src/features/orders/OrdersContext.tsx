@@ -31,6 +31,12 @@ export function OrdersProvider({ children }: { children: ReactNode }) {
     );
   }
 
+  function removeOrder(id: number) {
+    setOrders(current =>
+      current?.filter(order => order.id !== id) ?? []
+    );
+  }
+
   function saveShare(orderId: number, username: string, grams: number) {
     if (!Number.isInteger(grams) || grams <= 0) return;
 
@@ -62,6 +68,7 @@ export function OrdersProvider({ children }: { children: ReactNode }) {
         error,
         addOrder,
         updateOrder,
+        removeOrder,
         saveShare
       }}
     >

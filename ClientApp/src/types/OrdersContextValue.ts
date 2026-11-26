@@ -7,4 +7,5 @@ export type OrdersContextValue = {
   addOrder: (order: Order) => void;
   saveShare: (orderId: number, username: string, grams: number) => void;
   updateOrder: (order: Order) => void;
+  removeOrder: (id: number) => void;
 };
