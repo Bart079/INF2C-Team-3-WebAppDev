@@ -6,4 +6,5 @@ export type OrdersContextValue = {
   error: string | null;
   addOrder: (order: Order) => void;
   saveShare: (orderId: number, username: string, grams: number) => void;
+  updateOrder: (order: Order) => void;
 };
