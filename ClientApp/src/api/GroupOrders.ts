@@ -103,3 +103,13 @@ export async function update(id: number, order: UpdateGroupOrder): Promise<Order
 
   return toOrder(updatedOrder, beans, members);
 }
+
+export async function remove(id: number): Promise<void> {
+  const response = await fetch(`${baseUrl}/api/grouporders/${id}`, {
+    method: "DELETE"
+  });
+
+  if (!response.ok) {
+    throw await errorFromResponse(response);
+  }
+}
