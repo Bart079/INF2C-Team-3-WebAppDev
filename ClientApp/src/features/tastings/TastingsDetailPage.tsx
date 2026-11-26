@@ -1,54 +1,17 @@
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import type { Tasting, TastingBean, TastingSignup } from "../../types/tasting";
+import { useFetch } from "../../hooks/useFetch";
+import * as tastingsApi from "../../api/Tastings";
 
 export function TastingsDetailPage() {
   const { id } = useParams();
-  const [tastings, setTastings] = useState<Tasting[]>([]);
-  const [beans, setBeans] = useState<TastingBean[]>([]);
-  const [signups, setSignups] = useState<TastingSignup[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const { data, loading, error } = useFetch(
+    () => tastingsApi.getById(Number(id)),
+    [id],
+  );
+  const tasting = data?.tasting;
+  const beans = data?.beans ?? [];
+  const signups = data?.signups ?? [];
 
-  useEffect(() => {
-    async function loadTastingData() {
-      try {
-        const [tastingsResponse, beansResponse, signupsResponse] =
-          await Promise.all([
-            fetch("/upcoming_tastings.json"),
-            fetch("/beans.json"),
-            fetch("/signups.json"),
-          ]);
-
-        if (
-          !tastingsResponse.ok ||
-          !beansResponse.ok ||
-          !signupsResponse.ok
-        ) {
-          throw new Error("Could not load tasting data.");
-        }
-
-        const [tastingsData, beansData, signupsData] = await Promise.all([
-          tastingsResponse.json() as Promise<Tasting[]>,
-          beansResponse.json() as Promise<TastingBean[]>,
-          signupsResponse.json() as Promise<TastingSignup[]>,
-        ]);
-
-        setTastings(tastingsData);
-        setBeans(beansData);
-        setSignups(signupsData);
-      } catch (err) {
-        console.error(err);
-        setError("Could not load tasting details.");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    void loadTastingData();
-  }, []);
-
-  const tasting = tastings.find((item) => item.id === Number(id));
   const confirmedSignups = signups.filter(
     (signup) =>
       signup.tastingId === tasting?.id && signup.status === "confirmed",

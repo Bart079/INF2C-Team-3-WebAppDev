@@ -1,3 +1,5 @@
+import type { TastingSignup } from "./TastingSignups";
+
 export type Tasting = {
   id: number;
   hostId: number;
@@ -11,12 +13,6 @@ export type Tasting = {
     beanId: number;
     position: number;
   }[];
-};
-
-export type TastingSignup = {
-  tastingId: number;
-  memberId: number;
-  status: "confirmed" | "waiting";
 };
 
 export type TastingBean = {
