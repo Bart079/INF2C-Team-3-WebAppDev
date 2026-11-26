@@ -2,6 +2,7 @@ import type { Order } from "../types/Order";
 import type { GroupOrderResponse } from "../types/GroupOrderResponse";
 import type { BeanResponse } from "../types/BeanResponse";
 import type { MemberResponse } from "../types/MemberResponse";
+import type { CreateGroupOrder } from "../types/CreateGroupOrder";
 
 import { baseUrl, errorFromResponse } from "./http";
 
@@ -52,4 +53,29 @@ export async function getById(id: number): Promise<Order> {
   ]);
 
   return toOrder(order, beans, members);
+}
+
+export async function create(
+  order: CreateGroupOrder
+): Promise<Order> {
+  const response = await fetch(`${baseUrl}/api/grouporders`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(order)
+  });
+
+  if (!response.ok) {
+    throw await errorFromResponse(response);
+  }
+
+  const createdOrder = await response.json() as GroupOrderResponse;
+
+  const [beansResponse, membersResponse] = await Promise.all([
+    get<BeanResponse[]>("/api/beans"),
+    get<MemberResponse[]>("/api/members")
+  ]);
+
+  return toOrder(createdOrder, beansResponse, membersResponse);
 }
