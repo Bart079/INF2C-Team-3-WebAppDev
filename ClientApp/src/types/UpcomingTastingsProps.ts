@@ -12,5 +12,8 @@ export type UpcomingTastingsProps = {
   onSignup: (tastingId: number) => Promise<void>;
   signingUpTastingId: number | null;
   signupFeedback: Record<number, SignupFeedback>;
+  onConfirmKey: (tastingId: number) => Promise<void>;
+  confirmingKeyTastingId: number | null;
+  keyFeedback: Record<number, string>;
 };
 

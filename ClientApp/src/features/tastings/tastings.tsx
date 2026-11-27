@@ -23,6 +23,8 @@ export function TastingsPage() {
     const [signupFeedback, setSignupFeedback] = useState<
         Record<number, SignupFeedback>
     >({});
+    const [confirmingKeyTastingId, setConfirmingKeyTastingId] = useState<number | null>(null);
+    const [keyFeedback, setKeyFeedback] = useState<Record<number, string>>({});
 
     async function handleSignup(tastingId: number) {
         if (!user) {
@@ -59,6 +61,54 @@ export function TastingsPage() {
             }));
         } finally {
             setSigningUpTastingId(null);
+        }
+    }
+
+    async function handleConfirmKey(tastingId: number) {
+        const tasting = tastings.find((item) => item.id === tastingId);
+        if (!user || !hasRole(user, "committee") || !tasting) {
+            return;
+        }
+
+        setConfirmingKeyTastingId(tastingId);
+        setKeyFeedback((current) => {
+            const next = { ...current };
+            delete next[tastingId];
+            return next;
+        });
+
+        try {
+            await tastingsApi.update(tastingId, {
+                hostId: tasting.hostId,
+                date: tasting.date,
+                time: tasting.time,
+                capacity: tasting.capacity,
+                cancelled: tasting.cancelled,
+                keyStatus: "available",
+            });
+
+            setData((current) =>
+                current
+                    ? {
+                          ...current,
+                          tastings: current.tastings.map((item) =>
+                              item.id === tastingId
+                                  ? { ...item, keyStatus: "available" }
+                                  : item,
+                          ),
+                      }
+                    : current,
+            );
+        } catch (err) {
+            setKeyFeedback((current) => ({
+                ...current,
+                [tastingId]:
+                    err instanceof Error
+                        ? err.message
+                        : "Could not confirm the key for this tasting.",
+            }));
+        } finally {
+            setConfirmingKeyTastingId(null);
         }
     }
 
@@ -113,6 +163,9 @@ export function TastingsPage() {
                 onSignup={handleSignup}
                 signingUpTastingId={signingUpTastingId}
                 signupFeedback={signupFeedback}
+                onConfirmKey={handleConfirmKey}
+                confirmingKeyTastingId={confirmingKeyTastingId}
+                keyFeedback={keyFeedback}
             />
         </div>
     );

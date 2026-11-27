@@ -11,6 +11,9 @@ export function UpcomingTastings({
   onSignup,
   signingUpTastingId,
   signupFeedback,
+  onConfirmKey,
+  confirmingKeyTastingId,
+  keyFeedback,
 }: UpcomingTastingsProps) {
   const { user } = useAuth();
   const committee = hasRole(user, "committee");
@@ -34,6 +37,7 @@ export function UpcomingTastings({
             signup.tastingId === tasting.id && signup.memberId === user?.id,
         );
         const feedback = signupFeedback[tasting.id];
+        const keyError = keyFeedback[tasting.id];
 
         return (
           <article className="card" key={tasting.id}>
@@ -69,7 +73,15 @@ export function UpcomingTastings({
             {committee && !tasting.cancelled && (
               <>
                 {tasting.keyStatus !== "available" && (
-                  <button type="button">I will bring the key</button>
+                  <button
+                    type="button"
+                    disabled={confirmingKeyTastingId === tasting.id}
+                    onClick={() => void onConfirmKey(tasting.id)}
+                  >
+                    {confirmingKeyTastingId === tasting.id
+                      ? "Confirming..."
+                      : "I will bring the key"}
+                  </button>
                 )}
                 <button type="button">Cancel tasting</button>
               </>
@@ -100,6 +112,7 @@ export function UpcomingTastings({
             {feedback && (
               <p role="alert">{feedback.message}</p>
             )}
+            {keyError && <p role="alert">{keyError}</p>}
             <br />
              <br />
 
