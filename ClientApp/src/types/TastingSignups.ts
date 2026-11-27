@@ -4,4 +4,5 @@ export type TastingSignup = {
   memberId: number;
   status: string;
   signedUpAt: string;
+  queuePosition: number | null;
 };

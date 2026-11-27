@@ -1,9 +1,11 @@
 import { Link, useParams } from "react-router";
+import { useAuth } from "../../auth/AuthContext";
 import { useFetch } from "../../hooks/useFetch";
 import * as tastingsApi from "../../api/Tastings";
 
 export function TastingsDetailPage() {
   const { id } = useParams();
+  const { user } = useAuth();
   const { data, loading, error } = useFetch(
     () => tastingsApi.getById(Number(id)),
     [id],
@@ -11,6 +13,10 @@ export function TastingsDetailPage() {
   const tasting = data?.tasting;
   const beans = data?.beans ?? [];
   const signups = data?.signups ?? [];
+  const userSignup = signups.find(
+    (signup) =>
+      signup.tastingId === tasting?.id && signup.memberId === user?.id,
+  );
 
   const confirmedSignups = signups.filter(
     (signup) =>
@@ -44,6 +50,18 @@ export function TastingsDetailPage() {
           <p>Date: {tasting.date}</p>
           <p>Time: {tasting.time}</p>
           <p>Capacity: {tasting.capacity}</p>
+          {user && (
+            <p>
+              Your participation:{" "}
+              {userSignup
+                ? userSignup.status === "waiting"
+                  ? `On the waiting list${userSignup.queuePosition === null ? "" : ` — position ${userSignup.queuePosition}`}`
+                  : userSignup.status === "confirmed"
+                    ? "Confirmed"
+                    : userSignup.status
+                : "You are not signed up."}
+            </p>
+          )}
           <p>
             Available spots:{" "}
             {Math.max(0, tasting.capacity - confirmedSignups.length)}

@@ -38,6 +38,25 @@ function toTasting(raw: TastingResponse, lineups: TastingLineup[]): Tasting {
       .map(({ id, beanId, position }) => ({ id, beanId, position })),
   };
 }
+export type TastingData = {
+  hostId: number;
+  date: string;
+  time: string;
+  capacity: number;
+  cancelled: boolean;
+  keyStatus: "available" | "unavailable" | "awaiting";
+};
+
+function toRequestBody(data: TastingData) {
+  return {
+    hostId: data.hostId,
+    date: data.date,
+    time: data.time,
+    capacity: data.capacity,
+    cancelled: data.cancelled,
+    keyStatus: data.keyStatus,
+  };
+}
 
 export async function getAll(): Promise<{
   tastings: Tasting[];
@@ -75,4 +94,39 @@ export async function getById(id: number): Promise<{
     beans,
     signups,
   };
+}
+
+export async function create(data: TastingData): Promise<Tasting> {
+  const response = await fetch(`${baseUrl}/api/tastings`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(toRequestBody(data)),
+  });
+  if (!response.ok) {
+    throw await errorFromResponse(response);
+  }
+  const raw: TastingResponse = await response.json();
+  return toTasting(raw, []);
+}
+
+export async function remove(id: number): Promise<void> {
+  const response = await fetch(`${baseUrl}/api/tastings/${id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    throw await errorFromResponse(response);
+  }
+}
+
+export async function update(id: number, data: TastingData): Promise<Tasting> {
+  const response = await fetch(`${baseUrl}/api/tastings/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(toRequestBody(data)),
+  });
+  if (!response.ok) {
+    throw await errorFromResponse(response);
+  }
+  const raw: TastingResponse = await response.json();
+  return toTasting(raw, []);
 }

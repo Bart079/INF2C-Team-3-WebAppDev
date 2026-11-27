@@ -1,10 +1,25 @@
+import { useState } from "react";
 import { Link } from "react-router";
 import { useAuth } from "../auth/AuthContext";
 import { hasRole } from "../auth/roles";
 import type { UpcomingTastingsProps } from "../types/UpcomingTastingsProps";
 
 
-export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsProps) {
+export function UpcomingTastings({
+  tastings,
+  beans,
+  signups,
+  onSignup,
+  signingUpTastingId,
+  signupFeedback,
+  onConfirmKey,
+  confirmingKeyTastingId,
+  keyFeedback,
+  onCancelTasting,
+  cancellingTastingId,
+}: UpcomingTastingsProps) {
+  const [confirmingCancellationTastingId, setConfirmingCancellationTastingId] =
+    useState<number | null>(null);
   const { user } = useAuth();
   const committee = hasRole(user, "committee");
   const beanNames = new Map(beans.map((bean) => [bean.id, bean.name]));
@@ -22,6 +37,12 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
           (signup) =>
             signup.tastingId === tasting.id && signup.status === "confirmed",
         );
+        const userSignup = signups.find(
+          (signup) =>
+            signup.tastingId === tasting.id && signup.memberId === user?.id,
+        );
+        const feedback = signupFeedback[tasting.id];
+        const keyError = keyFeedback[tasting.id];
 
         return (
           <article className="card" key={tasting.id}>
@@ -57,18 +78,79 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
             {committee && !tasting.cancelled && (
               <>
                 {tasting.keyStatus !== "available" && (
-                  <button type="button">I will bring the key</button>
+                  <button
+                    type="button"
+                    disabled={confirmingKeyTastingId === tasting.id}
+                    onClick={() => void onConfirmKey(tasting.id)}
+                  >
+                    {confirmingKeyTastingId === tasting.id
+                      ? "Confirming..."
+                      : "I will bring the key"}
+                  </button>
                 )}
-                <button type="button">Cancel tasting</button>
+                {confirmingCancellationTastingId === tasting.id ? (
+                  <div>
+                    <p>Are you sure you want to cancel this tasting?</p>
+                    <button
+                      type="button"
+                      disabled={cancellingTastingId !== null}
+                      onClick={() => void onCancelTasting(tasting.id)}
+                    >
+                      {cancellingTastingId === tasting.id
+                        ? "Cancelling..."
+                        : "Yes, cancel"}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={cancellingTastingId !== null}
+                      onClick={() => setConfirmingCancellationTastingId(null)}
+                    >
+                      No
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={
+                      cancellingTastingId !== null ||
+                      confirmingKeyTastingId === tasting.id
+                    }
+                    onClick={() =>
+                      setConfirmingCancellationTastingId(tasting.id)
+                    }
+                  >
+                    Cancel tasting
+                  </button>
+                )}
               </>
             )}
             {user ? (
-              <button type="button">I want to participate </button>
+              userSignup ? (
+                <p role="status">
+                  {userSignup.status === "waiting"
+                    ? `You are on the waiting list${userSignup.queuePosition === null ? "." : ` at position ${userSignup.queuePosition}.`}`
+                    : "Your participation is confirmed."}
+                </p>
+              ) : (
+                <button
+                  type="button"
+                  disabled={signingUpTastingId === tasting.id}
+                  onClick={() => void onSignup(tasting.id)}
+                >
+                  {signingUpTastingId === tasting.id
+                    ? "Signing up..."
+                    : "I want to participate"}
+                </button>
+              )
             ) : (
               <p>
                 To participate, you need to <Link to="/login">log in</Link>.
               </p>
             )}
+            {feedback && (
+              <p role="alert">{feedback.message}</p>
+            )}
+            {keyError && <p role="alert">{keyError}</p>}
             <br />
              <br />
 
