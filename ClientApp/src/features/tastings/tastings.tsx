@@ -4,17 +4,63 @@ import * as tastingsApi from "../../api/Tastings";
 import { UpcomingTastings } from "../../components/UpcomingTastings";
 import { hasRole } from "../../auth/roles";
 import { useAuth } from "../../auth/AuthContext";
+import { useState } from "react";
+import * as tastingSignupsApi from "../../api/TastingSignups";
+import type { SignupFeedback } from "../../types/UpcomingTastingsProps";
+
 import "../../css/styles.css";
 import "../../css/tastings.css";
 
 
 export function TastingsPage() {
-    const { data, loading, error } = useFetch(tastingsApi.getAll, []);
+    const { data, loading, error, setData } = useFetch(tastingsApi.getAll, []);
     const tastings = data?.tastings ?? [];
     const beans = data?.beans ?? [];
     const signups = data?.signups ?? [];
     const { user } = useAuth();
     const isHost = hasRole(user, "host");
+    const [signingUpTastingId, setSigningUpTastingId] = useState<number | null>(null);
+    const [signupFeedback, setSignupFeedback] = useState<
+        Record<number, SignupFeedback>
+    >({});
+
+    async function handleSignup(tastingId: number) {
+        if (!user) {
+            return;
+        }
+
+        setSigningUpTastingId(tastingId);
+        setSignupFeedback((current) => {
+            const next = { ...current };
+            delete next[tastingId];
+            return next;
+        });
+
+        try {
+            const signup = await tastingSignupsApi.create({
+                tastingId,
+                memberId: user.id,
+            });
+
+            setData((current) =>
+                current
+                    ? { ...current, signups: [...current.signups, signup] }
+                    : current,
+            );
+        } catch (err) {
+            setSignupFeedback((current) => ({
+                ...current,
+                [tastingId]: {
+                    message:
+                        err instanceof Error
+                            ? err.message
+                            : "Could not sign up for this tasting.",
+                },
+            }));
+        } finally {
+            setSigningUpTastingId(null);
+        }
+    }
 
     if (loading) {
         return <p>Loading tastings...</p>;
@@ -64,6 +110,9 @@ export function TastingsPage() {
                 tastings={tastings}
                 beans={beans}
                 signups={signups}
+                onSignup={handleSignup}
+                signingUpTastingId={signingUpTastingId}
+                signupFeedback={signupFeedback}
             />
         </div>
     );

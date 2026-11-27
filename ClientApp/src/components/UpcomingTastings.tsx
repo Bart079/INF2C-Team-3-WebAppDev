@@ -4,7 +4,14 @@ import { hasRole } from "../auth/roles";
 import type { UpcomingTastingsProps } from "../types/UpcomingTastingsProps";
 
 
-export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsProps) {
+export function UpcomingTastings({
+  tastings,
+  beans,
+  signups,
+  onSignup,
+  signingUpTastingId,
+  signupFeedback,
+}: UpcomingTastingsProps) {
   const { user } = useAuth();
   const committee = hasRole(user, "committee");
   const beanNames = new Map(beans.map((bean) => [bean.id, bean.name]));
@@ -22,6 +29,11 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
           (signup) =>
             signup.tastingId === tasting.id && signup.status === "confirmed",
         );
+        const userSignup = signups.find(
+          (signup) =>
+            signup.tastingId === tasting.id && signup.memberId === user?.id,
+        );
+        const feedback = signupFeedback[tasting.id];
 
         return (
           <article className="card" key={tasting.id}>
@@ -63,11 +75,30 @@ export function UpcomingTastings({ tastings, beans, signups }: UpcomingTastingsP
               </>
             )}
             {user ? (
-              <button type="button">I want to participate </button>
+              userSignup ? (
+                <p role="status">
+                  {userSignup.status === "waiting"
+                    ? `You are on the waiting list${userSignup.queuePosition === null ? "." : ` at position ${userSignup.queuePosition}.`}`
+                    : "Your participation is confirmed."}
+                </p>
+              ) : (
+                <button
+                  type="button"
+                  disabled={signingUpTastingId === tasting.id}
+                  onClick={() => void onSignup(tasting.id)}
+                >
+                  {signingUpTastingId === tasting.id
+                    ? "Signing up..."
+                    : "I want to participate"}
+                </button>
+              )
             ) : (
               <p>
                 To participate, you need to <Link to="/login">log in</Link>.
               </p>
+            )}
+            {feedback && (
+              <p role="alert">{feedback.message}</p>
             )}
             <br />
              <br />
