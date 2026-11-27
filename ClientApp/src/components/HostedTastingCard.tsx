@@ -10,11 +10,14 @@ export function HostedTastingCard({
   beans,
   signups,
   onSaveLineup,
+  onCancelTasting,
+  cancellingTastingId,
 }: HostedTastingCardProps) {
   const [editingLineup, setEditingLineup] = useState(false);
   const [draftLineup, setDraftLineup] = useState<TastingLineupEditItem[]>([]);
   const [savingLineup, setSavingLineup] = useState(false);
   const [lineupError, setLineupError] = useState<string | null>(null);
+  const [confirmingCancellation, setConfirmingCancellation] = useState(false);
   const beanNames = new Map(beans.map((bean) => [bean.id, bean.name]));
   const sortedLineup = tasting.lineup
     .slice()
@@ -201,7 +204,34 @@ export function HostedTastingCard({
           <button type="button" onClick={startEditingLineup}>
             Line-up aanpassen
           </button>
-          <button type="button">Tasting annuleren</button>
+          {confirmingCancellation ? (
+            <div>
+              <p>Weet je zeker dat je deze tasting wilt annuleren?</p>
+              <button
+                type="button"
+                disabled={cancellingTastingId !== null}
+                onClick={() => void onCancelTasting(tasting.id)}
+              >
+                {cancellingTastingId === tasting.id
+                  ? "Annuleren..."
+                  : "Ja, annuleren"}
+              </button>
+              <button
+                type="button"
+                disabled={cancellingTastingId !== null}
+                onClick={() => setConfirmingCancellation(false)}
+              >
+                Nee
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setConfirmingCancellation(true)}
+            >
+              Tasting annuleren
+            </button>
+          )}
         </>
       )}
     </article>

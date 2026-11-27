@@ -25,6 +25,11 @@ export function TastingsPage() {
     >({});
     const [confirmingKeyTastingId, setConfirmingKeyTastingId] = useState<number | null>(null);
     const [keyFeedback, setKeyFeedback] = useState<Record<number, string>>({});
+    const [cancellingTastingId, setCancellingTastingId] = useState<number | null>(null);
+    const [cancellationFeedback, setCancellationFeedback] = useState<{
+        type: "success" | "error";
+        message: string;
+    } | null>(null);
 
     async function handleSignup(tastingId: number) {
         if (!user) {
@@ -112,6 +117,54 @@ export function TastingsPage() {
         }
     }
 
+    async function handleCancelTasting(tastingId: number) {
+        const tasting = tastings.find((item) => item.id === tastingId);
+        if (!user || !hasRole(user, "committee") || !tasting) {
+            return;
+        }
+
+        setCancellingTastingId(tastingId);
+        setCancellationFeedback(null);
+
+        try {
+            await tastingsApi.update(tastingId, {
+                hostId: tasting.hostId,
+                date: tasting.date,
+                time: tasting.time,
+                capacity: tasting.capacity,
+                cancelled: true,
+                keyStatus: tasting.keyStatus,
+            });
+
+            setData((current) =>
+                current
+                    ? {
+                          ...current,
+                          tastings: current.tastings.map((item) =>
+                              item.id === tastingId
+                                  ? { ...item, cancelled: true }
+                                  : item,
+                          ),
+                      }
+                    : current,
+            );
+            setCancellationFeedback({
+                type: "success",
+                message: "Tasting cancelled.",
+            });
+        } catch (err) {
+            setCancellationFeedback({
+                type: "error",
+                message:
+                    err instanceof Error
+                        ? err.message
+                        : "Could not cancel this tasting.",
+            });
+        } finally {
+            setCancellingTastingId(null);
+        }
+    }
+
     if (loading) {
         return <p>Loading tastings...</p>;
     }
@@ -156,6 +209,12 @@ export function TastingsPage() {
                 <Link to="/create-tastings">here</Link>
             </p>
 
+            {cancellationFeedback && (
+                <p role={cancellationFeedback.type === "error" ? "alert" : "status"}>
+                    {cancellationFeedback.message}
+                </p>
+            )}
+
             <UpcomingTastings
                 tastings={tastings}
                 beans={beans}
@@ -166,6 +225,8 @@ export function TastingsPage() {
                 onConfirmKey={handleConfirmKey}
                 confirmingKeyTastingId={confirmingKeyTastingId}
                 keyFeedback={keyFeedback}
+                onCancelTasting={handleCancelTasting}
+                cancellingTastingId={cancellingTastingId}
             />
         </div>
     );

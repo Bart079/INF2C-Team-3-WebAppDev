@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router";
 import { useAuth } from "../auth/AuthContext";
 import { hasRole } from "../auth/roles";
@@ -14,7 +15,11 @@ export function UpcomingTastings({
   onConfirmKey,
   confirmingKeyTastingId,
   keyFeedback,
+  onCancelTasting,
+  cancellingTastingId,
 }: UpcomingTastingsProps) {
+  const [confirmingCancellationTastingId, setConfirmingCancellationTastingId] =
+    useState<number | null>(null);
   const { user } = useAuth();
   const committee = hasRole(user, "committee");
   const beanNames = new Map(beans.map((bean) => [bean.id, bean.name]));
@@ -83,7 +88,40 @@ export function UpcomingTastings({
                       : "I will bring the key"}
                   </button>
                 )}
-                <button type="button">Cancel tasting</button>
+                {confirmingCancellationTastingId === tasting.id ? (
+                  <div>
+                    <p>Are you sure you want to cancel this tasting?</p>
+                    <button
+                      type="button"
+                      disabled={cancellingTastingId !== null}
+                      onClick={() => void onCancelTasting(tasting.id)}
+                    >
+                      {cancellingTastingId === tasting.id
+                        ? "Cancelling..."
+                        : "Yes, cancel"}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={cancellingTastingId !== null}
+                      onClick={() => setConfirmingCancellationTastingId(null)}
+                    >
+                      No
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={
+                      cancellingTastingId !== null ||
+                      confirmingKeyTastingId === tasting.id
+                    }
+                    onClick={() =>
+                      setConfirmingCancellationTastingId(tasting.id)
+                    }
+                  >
+                    Cancel tasting
+                  </button>
+                )}
               </>
             )}
             {user ? (

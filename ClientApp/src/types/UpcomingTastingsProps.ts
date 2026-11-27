@@ -15,5 +15,7 @@ export type UpcomingTastingsProps = {
   onConfirmKey: (tastingId: number) => Promise<void>;
   confirmingKeyTastingId: number | null;
   keyFeedback: Record<number, string>;
+  onCancelTasting: (tastingId: number) => Promise<void>;
+  cancellingTastingId: number | null;
 };
 

@@ -1,4 +1,5 @@
 import { useAuth } from "../../auth/AuthContext";
+import { useState } from "react";
 import { HostedTastingCard } from "../../components/HostedTastingCard";
 import { useFetch } from "../../hooks/useFetch";
 import * as tastingsApi from "../../api/Tastings";
@@ -11,6 +12,11 @@ import "../../css/tastings.css";
 export function MyHostedTastingsPage() {
   const { user } = useAuth();
   const { data, loading, error, setData } = useFetch(tastingsApi.getAll, []);
+  const [cancellingTastingId, setCancellingTastingId] = useState<number | null>(null);
+  const [cancellationFeedback, setCancellationFeedback] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
   async function saveLineup(
     tastingId: number,
@@ -88,6 +94,50 @@ export function MyHostedTastingsPage() {
     }
   }
 
+  async function cancelTasting(tastingId: number) {
+    const tasting = data?.tastings.find((item) => item.id === tastingId);
+    if (!user || !tasting || tasting.hostId !== user.id) {
+      return;
+    }
+
+    setCancellingTastingId(tastingId);
+    setCancellationFeedback(null);
+
+    try {
+      await tastingsApi.update(tastingId, {
+        hostId: tasting.hostId,
+        date: tasting.date,
+        time: tasting.time,
+        capacity: tasting.capacity,
+        cancelled: true,
+        keyStatus: tasting.keyStatus,
+      });
+
+      setData((current) =>
+        current
+          ? {
+              ...current,
+              tastings: current.tastings.map((item) =>
+                item.id === tastingId ? { ...item, cancelled: true } : item,
+              ),
+            }
+          : current,
+      );
+      setCancellationFeedback({
+        type: "success",
+        message: "Tasting cancelled.",
+      });
+    } catch (err) {
+      setCancellationFeedback({
+        type: "error",
+        message:
+          err instanceof Error ? err.message : "Could not cancel this tasting.",
+      });
+    } finally {
+      setCancellingTastingId(null);
+    }
+  }
+
   if (loading) {
     return <p>Loading your tastings...</p>;
   }
@@ -111,6 +161,11 @@ export function MyHostedTastingsPage() {
   return (
     <main>
       <h1>My Hosted Tastings</h1>
+      {cancellationFeedback && (
+        <p role={cancellationFeedback.type === "error" ? "alert" : "status"}>
+          {cancellationFeedback.message}
+        </p>
+      )}
 
       {myTastings.length === 0 ? (
         <p>You have not hosted any upcoming tastings.</p>
@@ -123,6 +178,8 @@ export function MyHostedTastingsPage() {
               beans={data?.beans ?? []}
               signups={data?.signups ?? []}
               onSaveLineup={saveLineup}
+              onCancelTasting={cancelTasting}
+              cancellingTastingId={cancellingTastingId}
             />
           ))}
         </div>

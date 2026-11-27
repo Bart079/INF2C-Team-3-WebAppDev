@@ -38,4 +38,6 @@ export type HostedTastingCardProps = {
     tastingId: number,
     lineup: TastingLineupSaveItem[],
   ) => Promise<void>;
+  onCancelTasting: (tastingId: number) => Promise<void>;
+  cancellingTastingId: number | null;
 };
