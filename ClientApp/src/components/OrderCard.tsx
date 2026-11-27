@@ -1,11 +1,13 @@
 import { Link } from "react-router";
-import type { OrderCard } from "../types/OrderCard";
+import type { OrderCard as OrderCardProps } from "../types/OrderCard";
 
 export function OrderCard({
   order,
   showDetailsButton = true,
-  detailed = false
-}: OrderCard) {
+  detailed = false,
+  onDelete,
+  deleting = false
+}: OrderCardProps) {
   return (
     <article className={detailed ? "card order_detail_card" : "card"}>
       <h3>{order.bean}</h3>
@@ -69,6 +71,18 @@ export function OrderCard({
         <Link to={`/orders/${order.id}`} className="button-link">
           View Order
         </Link>
+      )}
+
+      {detailed && onDelete && (
+        <div className="order_card_delete">
+          <button
+            type="button"
+            onClick={onDelete}
+            disabled={deleting}
+          >
+            {deleting ? "Deleting..." : "Delete Order"}
+          </button>
+        </div>
       )}
     </article>
   );

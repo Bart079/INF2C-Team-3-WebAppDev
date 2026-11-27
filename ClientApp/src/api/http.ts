@@ -8,7 +8,12 @@ if (!baseUrl) {
 
 export async function errorFromResponse(response: Response): Promise<Error> {
   try {
-    const problem: { title?: string } = await response.json();
+    const problem: { title?: string; message?: string } =
+      await response.json();
+
+    if (problem.message) {
+      return new Error(problem.message);
+    }
 
     if (problem.title) {
       return new Error(problem.title);

@@ -4,4 +4,6 @@ export type OrderCard = {
   order: Order;
   showDetailsButton?: boolean;
   detailed?: boolean;
+  onDelete?: () => void;
+  deleting?: boolean;
 };
