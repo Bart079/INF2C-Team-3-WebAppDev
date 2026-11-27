@@ -20,8 +20,22 @@ export type TastingBean = {
   name: string;
 };
 
+export type TastingLineupEditItem = {
+  id: number | null;
+  beanId: number | "";
+};
+
+export type TastingLineupSaveItem = {
+  id: number | null;
+  beanId: number;
+};
+
 export type HostedTastingCardProps = {
   tasting: Tasting;
   beans: TastingBean[];
   signups: TastingSignup[];
+  onSaveLineup: (
+    tastingId: number,
+    lineup: TastingLineupSaveItem[],
+  ) => Promise<void>;
 };
